@@ -2,23 +2,64 @@ package ar.edu.unq;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import container.ContainerTanque;
+import container.*;
 
 class ContainerDryTestCase {
 	
-	private ContainerTanque container1;
+	private ContainerDry containerD;
+	private ContainerDry container;
+	private BLEspecial blEspecial;
+	private BL bl1;
+	private BL bl2;
+	
+	@BeforeEach
+	public void setUp() {
+		bl1 = new BL();
+		
+		bl1.enlistar("Agua", 500d);
+		bl1.enlistar("Aceite de Oliva", 100d);
+		bl1.enlistar("Gasolina", 400d);
+		
+		bl2 = new BL();
+		
+		bl2.enlistar("Agua", 500d);
+		bl2.enlistar("Aceite de Oliva", 100d);
+		bl2.enlistar("Gasolina", 400d);
+		
+		blEspecial = new BLEspecial();
+		blEspecial.agregarBL(bl1);
+		blEspecial.agregarBL(bl2);
+		
+		container = new ContainerDry("azul1234567", 26d, 22d, 20d, bl1);
+		
+		containerD = new ContainerDry("azul1234567", 26d, 22d, 20d, blEspecial);
+		
+	}
 	
 	@Test
-	void testContainerTanqueCreación() {
+	void testContainerDryCreación() {
 		
-		container1 = new ContainerTanque("azul1234567", 26d, 22d, 20d);
+		assertEquals("azul1234567", containerD.getId());
+		assertEquals(26d, containerD.getAncho());
+		assertEquals(22d, containerD.getLargo());
+		assertEquals(20d, containerD.getAltura());
+	}
+	
+	@Test
+	void testContainerDryPesoTotal() {
 		
-		assertEquals("azul1234567", container1.getId());
-		assertEquals(26d, container1.getAncho());
-		assertEquals(22d, container1.getLargo());
-		assertEquals(20d, container1.getAltura());
+		assertEquals(1000d, container.getPesoTotal());
+		
+	}
+	
+	@Test
+	void testContainerDryDesconsolidadoPesoTotal() {
+		
+		assertEquals(2000d, containerD.getPesoTotal());
+		
 	}
 
 }

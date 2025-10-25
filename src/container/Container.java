@@ -18,19 +18,18 @@ public abstract class Container {
 		return id;
 	}
 
-
 	public double getAncho() {
 		return ancho;
 	}
-
 
 	public double getLargo() {
 		return largo;
 	}
 
-
 	public double getAltura() {
 		return altura;
 	}
-
+	
+	public abstract double getPesoTotal();
+	
 }

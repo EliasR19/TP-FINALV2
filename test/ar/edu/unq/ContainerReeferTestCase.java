@@ -5,12 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import container.BL;
 import container.ContainerReefer;
 
 class ContainerReeferTestCase {
 	
 	private ContainerReefer container;
-	private  BL bl;
+	private BL bl;
 	
 	@BeforeEach
 	public void setUp() {
@@ -36,7 +37,7 @@ class ContainerReeferTestCase {
 	@Test
 	void testContainerReeferPesoTotal() {
 		
-		assertEquals(1000d, container.pesoTotal());
+		assertEquals(1000d, container.getPesoTotal());
 		
 		
 	}
