@@ -11,9 +11,12 @@ public class BLEspecial implements BillOfLading {
 		blEspecial.add(bl);
 	}
 	
-	@Override
 	public double getPesoTotal() {
 		return blEspecial.stream().mapToDouble(bl -> bl.getPesoTotal()).sum();
+	}
+
+	public boolean esEspecial() {
+		return true;
 	}
 	
 }

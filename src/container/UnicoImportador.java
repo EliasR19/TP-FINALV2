@@ -18,4 +18,8 @@ public abstract class UnicoImportador extends Container{
 		return bl.getPesoTotal();
 	}
 	
+	public boolean tieneBLEspecial() {
+		return false;
+	}
+	
 }
