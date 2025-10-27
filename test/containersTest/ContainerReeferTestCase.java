@@ -1,4 +1,4 @@
-package ar.edu.unq;
+package containersTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +21,7 @@ class ContainerReeferTestCase {
 		bl.enlistar("Fruta Congelada", 100d);
 		bl.enlistar("Pescado", 400d);
 		
-		container = new ContainerReefer("azul1234567", 26d, 22d, 20d, bl);
+		container = new ContainerReefer("azul1234567", 26d, 22d, 20d, bl, 20d);
 		
 	}
 	
