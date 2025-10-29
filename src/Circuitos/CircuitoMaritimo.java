@@ -1,5 +1,7 @@
 package Circuitos;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
@@ -28,22 +30,22 @@ public class CircuitoMaritimo {
 	}
 	
 	
-	public double tiempoRecorridoEntre(TerminalPrueba a, TerminalPrueba b) {
+	public double tiempoRecorridoEntre(TerminalPrueba origen, TerminalPrueba destino) {
 		//Por ahora se supone que las dos terminales , a y b, estan en el circuito, más adelante se debe agregar verificación.
 		//FIX LATER
 		//HACER IMPLEMENTACION MÁS PROLIJA.
 		double tiempoTotal = 0;
-		TerminalPrueba terminalActual = a;
-		if(a == b) {
+		TerminalPrueba terminalActual = origen;
+		if(origen == destino) {
 			return tramos.stream().mapToDouble(t -> t.getRecorrido()).sum();
 		}
 			
 		int tramo = 0;
 		Tramo t = tramos.get(tramo);
 		
-		while(terminalActual != b) {
-			if(terminalActual != b && t.getOrigen() == terminalActual ) {
-				System.out.println("actual: " + terminalActual.getName());
+		while(terminalActual != destino) {
+			if(t.getOrigen() == terminalActual ) {
+			//	System.out.println("actual: " + terminalActual.getName());
 				tiempoTotal = tiempoTotal + t.getRecorrido();
 				terminalActual = t.getDestino();
 			}
@@ -64,4 +66,9 @@ public class CircuitoMaritimo {
 		}
 		return null;
 	}
+
+	public boolean contiene(TerminalPrueba origen, TerminalPrueba destino) {
+		return terminalesDelCircuito().contains(origen) && terminalesDelCircuito().contains(destino);
+	}
+
 }

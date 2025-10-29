@@ -1,6 +1,9 @@
 package Circuitos;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +29,17 @@ public class TerminalPrueba {
 		//Buscar linea que contenga un circuito que contenga 't' como origen de algun Viaje.
 	}
 	
-	public void asignarViaje(Buque b, LocalDateTime fecSalida, CircuitoMaritimo c) {
-		b.asignarViaje(new Viaje(fecSalida, this, c));
+	public void asignarViaje(Buque b,CircuitoMaritimo c) {
+		b.asignarViaje(new Viaje(b.getFecSalida(), this, c));
+	}
+
+	public void asignarFecSalidaBuqe(Buque bA, LocalDateTime fecSalida) {
+		//Se supone que el buque esta dentro de la terminal
+		bA.setFecSalida(fecSalida);
+	}
+	
+	// Punto 4
+	public double duracionRecorridoEntre(LineaNaviera naviera, TerminalPrueba destino) {
+		return naviera.duracionEntre(this, destino);
 	}
 }

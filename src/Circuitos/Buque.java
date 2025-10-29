@@ -11,7 +11,7 @@ public class Buque {
 	}
 	
 	public LocalDateTime getFecSalida() {
-		return viaje.getFecInicio();
+		return fecSalida;
 	}
 
 	public void asignarViaje(Viaje viaje) {
@@ -20,7 +20,10 @@ public class Buque {
 	}
 	
 	public void cronograma() {
-		viaje.fecArribos();
+		viaje.createCronograma();
+		for(Cronograma c : viaje.getCronograma()) {
+			c.getEntero();
+		}
 	}
 	
 }

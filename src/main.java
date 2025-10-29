@@ -36,13 +36,18 @@ public class main {
 		Buque bA = new Buque();
 		Buque bB = new Buque();
 		lineaA.agregarBuque(bA);
-		lineaA.agregarBuque(bB);
+		//lineaA.agregarBuque(bB);
 		
-		Brasil.asignarViaje(bB, LocalDateTime.of(LocalDate.now(), LocalTime.of(1, 0)), circuitoA);
-		España.asignarViaje(bA, LocalDateTime.of(LocalDate.of(2025, 10, 30), LocalTime.of(15, 0)), circuitoA);
 		
+		lineaA.salidaBuque(bA, circuitoA, LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)));
+		//lineaA.salidaBuque(bB, circuitoA, LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)));
+		
+		System.out.println(bA.getFecSalida());
+		
+		//Argentina.asignarViaje(bB, circuitoA);
+		Argentina.asignarViaje(bA, circuitoA);
 		lineaA.recorridos();
-		
+		System.out.println(lineaA.duracionEntre(Argentina, Brasil) + " Horas");
 		
 		/*
 		System.out.println(circuitoA.tiempoRecorridoEntre(España, Argentina));
@@ -51,7 +56,8 @@ public class main {
 		}
 		*/
 		
-
+		
+		//A partir de los buques que tiene el circuito, y sus fechas de salida, determina el cronograma
 		
 		
 		
