@@ -6,9 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
-import naviera.CircuitoMaritimo;
-import naviera.Naviera;
-import terminal.Terminal;
+import Naviera.*;
+import Terminal.*;
 
 class navieraTestCase {
 
@@ -41,8 +40,8 @@ class navieraTestCase {
 	
 	@Test
 	void testUnaNavieraTieneVariosCircuitosMaritimos() {
-		terminal1 = new Terminal();
-		terminal2 = new Terminal();
+		terminal1 = new Terminal("A");
+		terminal2 = new Terminal("B");
 		circuitoM = new CircuitoMaritimo(terminal1, terminal2);
 		circuitoMM = new CircuitoMaritimo(terminal2, terminal1);
 		
@@ -54,5 +53,6 @@ class navieraTestCase {
 		assertEquals(2, naviera.cantidadDeCircuitos());
 		
 	}
+
 
 }
