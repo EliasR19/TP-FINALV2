@@ -1,4 +1,4 @@
-package Circuitos;
+package Naviera;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LineaNaviera {
+import Circuitos.Viaje;
+import Terminal.Terminal;
+import buque.Buque;
+
+public class Naviera {
 	private List<Buque> buques = new ArrayList<Buque>();
 	private List<CircuitoMaritimo> circuitos = new ArrayList<CircuitoMaritimo>();
 	
@@ -30,7 +34,7 @@ public class LineaNaviera {
 		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(bA,fecSalida);
 	}
 	
-	public double duracionEntre(TerminalPrueba origen, TerminalPrueba destino) {
+	public double duracionEntre(Terminal origen, Terminal destino) {
 		
 		//La terminal destino debe estar dentro de algun circuito de esta Naviera. HACER VERIFICACION
 		//FIX LATER
@@ -44,7 +48,7 @@ public class LineaNaviera {
 //		return totalRecorrido;
 	}
 	
-	private CircuitoMaritimo circuitoCon(TerminalPrueba origen, TerminalPrueba destino) {
+	private CircuitoMaritimo circuitoCon(Terminal origen, Terminal destino) {
 		//Devuelve un Circuito que contenga las dos terminales dadas
 		for(CircuitoMaritimo c : circuitos) {
 			if(c.contiene(origen, destino)) {

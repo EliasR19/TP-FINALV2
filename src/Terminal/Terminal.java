@@ -1,4 +1,4 @@
-package Circuitos;
+package Terminal;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,16 +7,19 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TerminalPrueba {
+import Naviera.Naviera;
+import buque.Buque;
+
+public class Terminal {
 	
-	public TerminalPrueba(String name) {
+	public Terminal(String name) {
 		super();
 		this.name = name;
 	}
 	private String name;
-	private List<LineaNaviera> lineas = new ArrayList<LineaNaviera>();
+	private List<Naviera> lineas = new ArrayList<Naviera>();
 	
-	public void agregarLiena(LineaNaviera l) {
+	public void agregarLiena(Naviera l) {
 		lineas.add(l);
 	}
 
@@ -25,7 +28,7 @@ public class TerminalPrueba {
 	}
 	
 
-	public void exportarCarga(TerminalPrueba t) {
+	public void exportarCarga(Terminal t) {
 		//Buscar linea que contenga un circuito que contenga 't' como origen de algun Viaje.
 	}
 	
@@ -36,7 +39,7 @@ public class TerminalPrueba {
 	}
 	
 	// Punto 4
-	public double duracionRecorridoEntre(LineaNaviera naviera, TerminalPrueba destino) {
+	public double duracionRecorridoEntre(Naviera naviera, Terminal destino) {
 		return naviera.duracionEntre(this, destino);
 	}
 }

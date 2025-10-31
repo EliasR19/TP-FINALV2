@@ -1,8 +1,11 @@
-package Circuitos;
+package buque;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import Circuitos.Cronograma;
+import Circuitos.Viaje;
 
 public class Buque {
 	private Viaje viaje;

@@ -8,16 +8,16 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Circuitos.CircuitoMaritimo;
-import Circuitos.TerminalPrueba;
 import Circuitos.Tramo;
+import Naviera.CircuitoMaritimo;
+import Terminal.Terminal;
 
 public class CircuitoTest {
 	
 	
-	TerminalPrueba t1;
-	TerminalPrueba t2;
-	TerminalPrueba t3;
+	Terminal t1;
+	Terminal t2;
+	Terminal t3;
 	Tramo tA;
 	Tramo tB;
 	Tramo tC;
@@ -26,9 +26,9 @@ public class CircuitoTest {
 	
 	@BeforeEach
 	public void setup() {
-		t1 = new TerminalPrueba("Terminal 1");
-		t2 = new TerminalPrueba("Terminal 2");
-		t3 = new TerminalPrueba("Terminal 3");
+		t1 = new Terminal("Terminal 1");
+		t2 = new Terminal("Terminal 2");
+		t3 = new Terminal("Terminal 3");
 		
 		//tA = new Tramo(t1, t2, 10d);
 		//tB = new Tramo(t2, t3, 30d);

@@ -2,11 +2,13 @@ package Circuitos;
 
 import java.time.LocalDateTime;
 
+import Terminal.Terminal;
+
 public class Cronograma {
-	TerminalPrueba origen, destino;
+	Terminal origen, destino;
 	LocalDateTime salida, llegada;
 	
-	public Cronograma(TerminalPrueba origen, TerminalPrueba destino, LocalDateTime salida, LocalDateTime llegada){
+	public Cronograma(Terminal origen, Terminal destino, LocalDateTime salida, LocalDateTime llegada){
 		this.destino = destino;
 		this.origen = origen;
 		this.salida = salida;
@@ -14,11 +16,11 @@ public class Cronograma {
 		
 	}
 
-	public TerminalPrueba getOrigen() {
+	public Terminal getOrigen() {
 		return origen;
 	}
 
-	public TerminalPrueba getDestino() {
+	public Terminal getDestino() {
 		return destino;
 	}
 

@@ -4,15 +4,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import Naviera.CircuitoMaritimo;
+import Terminal.Terminal;
+
 public class Viaje {
 	
 	private CircuitoMaritimo circuito;
-	private TerminalPrueba origen;
+	private Terminal origen;
 	private LocalDateTime fecInicio;
 	private List<Cronograma> cronograma;
 	
 	
-	public Viaje(LocalDateTime fecInicio, TerminalPrueba origen, CircuitoMaritimo circuito) {
+	public Viaje(LocalDateTime fecInicio, Terminal origen, CircuitoMaritimo circuito) {
 		super();
 		this.fecInicio = fecInicio;
 		this.origen = origen;
@@ -44,7 +47,7 @@ public class Viaje {
 //	}
 	
 	public void createCronograma() {
-		TerminalPrueba actual = origen; 
+		Terminal actual = origen; 
 		Tramo tramoAcutal = circuito.tramoConOrigen(origen);
 		LocalDateTime salidaTime = fecInicio; 
 		for(int x = 0; x < circuito.getTramos().size(); x++) {

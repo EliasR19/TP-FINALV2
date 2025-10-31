@@ -7,20 +7,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import Circuitos.Buque;
-import Circuitos.CircuitoMaritimo;
-import Circuitos.LineaNaviera;
-import Circuitos.TerminalPrueba;
 import Circuitos.Tramo;
+import Naviera.CircuitoMaritimo;
+import Naviera.Naviera;
+import Terminal.Terminal;
+import buque.Buque;
 
 public class main {
 
 	public static void main(String[] args) {
-		TerminalPrueba Argentina = new TerminalPrueba("Argentina");
-		TerminalPrueba Brasil = new TerminalPrueba("Brasil");
-		TerminalPrueba España = new TerminalPrueba("España");
+		Terminal Argentina = new Terminal("Argentina");
+		Terminal Brasil = new Terminal("Brasil");
+		Terminal España = new Terminal("España");
 		
-		LineaNaviera lineaA = new LineaNaviera();
+		Naviera lineaA = new Naviera();
 		
 		CircuitoMaritimo circuitoA = new CircuitoMaritimo(Argentina, España);
 		lineaA.agregarCircuito(circuitoA);
@@ -39,7 +39,7 @@ public class main {
 		//lineaA.agregarBuque(bB);
 		
 		
-		for(TerminalPrueba t : circuitoA.terminalesDelCircuito()) {
+		for(Terminal t : circuitoA.terminalesDelCircuito()) {
 			System.out.println(t.getName());
 		}
 		

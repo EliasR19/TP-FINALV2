@@ -3,23 +3,25 @@ package Circuitos;
 import java.time.LocalTime;
 import java.time.Period;
 
+import Terminal.Terminal;
+
 public class Tramo {
-	private TerminalPrueba origen;
-	private TerminalPrueba destino;
+	private Terminal origen;
+	private Terminal destino;
 	
 	private double duracion; // expresado en HORAS
 	
 	
-	public Tramo(TerminalPrueba origen, TerminalPrueba destino, double duracion) {
+	public Tramo(Terminal origen, Terminal destino, double duracion) {
 		this.origen = origen;
 		this.destino = destino;
 		this.duracion = duracion;
 	}
 	
-	public TerminalPrueba getOrigen() {
+	public Terminal getOrigen() {
 		return origen;
 	}
-	public TerminalPrueba getDestino() {
+	public Terminal getDestino() {
 		return destino;
 	}
 	
