@@ -6,7 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
-import Naviera.*;
+import naviera.CircuitoMaritimo;
+import naviera.*;
 import Terminal.*;
 
 class navieraTestCase {

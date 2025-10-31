@@ -1,4 +1,4 @@
-package Naviera;
+package naviera;
 
 import java.util.ArrayList;
 import java.util.List;

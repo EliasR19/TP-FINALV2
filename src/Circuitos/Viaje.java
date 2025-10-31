@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import Naviera.CircuitoMaritimo;
+import naviera.CircuitoMaritimo;
 import Terminal.Terminal;
 
 public class Viaje {

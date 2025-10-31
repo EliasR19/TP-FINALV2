@@ -8,8 +8,9 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-import Naviera.Naviera;
+import naviera.*;
 import buque.Buque;
+
 
 public class Terminal {
 	

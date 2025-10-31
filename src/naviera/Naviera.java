@@ -1,4 +1,4 @@
-package Naviera;
+package naviera;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

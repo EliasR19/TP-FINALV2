@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Circuitos.Tramo;
-import Naviera.CircuitoMaritimo;
+import naviera.*;
 import Terminal.Terminal;
 
 public class CircuitoTest {
