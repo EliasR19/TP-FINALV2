@@ -18,4 +18,8 @@ public class ContainerDry extends Container{
 		return bl.getPesoTotal();
 	}
 	
+	public boolean tieneBLEspecial() {
+		return bl.esEspecial();
+	}
+	
 }

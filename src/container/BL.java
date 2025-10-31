@@ -20,6 +20,10 @@ public class BL implements BillOfLading {
 		}
 		return pesoTotal;
 	}
+
+	public boolean esEspecial() {
+		return false;
+	}
 		
 }
 	

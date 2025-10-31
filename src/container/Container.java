@@ -31,5 +31,15 @@ public abstract class Container {
 	}
 	
 	public abstract double getPesoTotal();
+
+	public double capacidad() {
+		 return ancho * largo * altura;
+	}
+
+	public boolean EsRefeer() {
+		return false;
+	}
+
+	public abstract boolean tieneBLEspecial();
 	
 }
