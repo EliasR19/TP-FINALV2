@@ -7,13 +7,13 @@ public class Tramo {
 	private TerminalPrueba origen;
 	private TerminalPrueba destino;
 	
-	private double recorrido; // expresado en HORAS
+	private double duracion; // expresado en HORAS
 	
 	
-	public Tramo(TerminalPrueba origen, TerminalPrueba destino, double recorrido) {
+	public Tramo(TerminalPrueba origen, TerminalPrueba destino, double duracion) {
 		this.origen = origen;
 		this.destino = destino;
-		this.recorrido = recorrido;
+		this.duracion = duracion;
 	}
 	
 	public TerminalPrueba getOrigen() {
@@ -23,8 +23,8 @@ public class Tramo {
 		return destino;
 	}
 	
-	public double getRecorrido() { //En horas
-		return recorrido;
+	public double getDuracion() { //En horas
+		return duracion;
 	}
 
 	

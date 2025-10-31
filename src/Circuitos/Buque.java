@@ -1,10 +1,19 @@
 package Circuitos;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Buque {
 	private Viaje viaje;
 	private LocalDateTime fecSalida;
+	
+	//Cambiar en el merge
+	private List<Container> carga;
+	
+	public Buque() {
+		carga = new ArrayList<Container>();
+	}
 	
 	public void setFecSalida(LocalDateTime fecSalida) {
 		this.fecSalida = fecSalida;

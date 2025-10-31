@@ -22,15 +22,15 @@ public class main {
 		
 		LineaNaviera lineaA = new LineaNaviera();
 		
-		CircuitoMaritimo circuitoA = new CircuitoMaritimo();
+		CircuitoMaritimo circuitoA = new CircuitoMaritimo(Argentina, España);
 		lineaA.agregarCircuito(circuitoA);
 		
-		Tramo z1 = new Tramo(Argentina, Brasil, 4);
-		Tramo z2 = new Tramo(Brasil, España, 20);
-		Tramo z3 = new Tramo(España, Argentina, 22.3d);
-		circuitoA.agregarTramo(z1);
-		circuitoA.agregarTramo(z2);
-		circuitoA.agregarTramo(z3);
+		//Tramo z1 = new Tramo(Argentina, Brasil, 4);
+		//Tramo z2 = new Tramo(Brasil, España, 20);
+		//Tramo z3 = new Tramo(España, Argentina, 22.3d);
+		circuitoA.agregarTramo(Argentina, Brasil, 4);
+		circuitoA.agregarTramo(Brasil, España, 20);
+		circuitoA.agregarTramo(España, Argentina, 22.3d);
 		
 		
 		Buque bA = new Buque();
@@ -39,13 +39,19 @@ public class main {
 		//lineaA.agregarBuque(bB);
 		
 		
+		for(TerminalPrueba t : circuitoA.terminalesDelCircuito()) {
+			System.out.println(t.getName());
+		}
+		
+		
 		lineaA.salidaBuque(bA, circuitoA, LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)));
 		//lineaA.salidaBuque(bB, circuitoA, LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)));
 		
 		System.out.println(bA.getFecSalida());
 		
 		//Argentina.asignarViaje(bB, circuitoA);
-		Argentina.asignarViaje(bA, circuitoA);
+		lineaA.asignarViaje(bA, circuitoA);
+		
 		lineaA.recorridos();
 		System.out.println(lineaA.duracionEntre(Argentina, Brasil) + " Horas");
 		

@@ -25,18 +25,13 @@ public class LineaNaviera {
 	}
 	
 	
-	public void recorridos() {
-		for(Buque b : buques) {
-			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
-			b.cronograma();
-			System.out.println("\n");
-		}
-	}
 	
 	public void salidaBuque(Buque bA, CircuitoMaritimo circuito,LocalDateTime fecSalida) {
 		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(bA,fecSalida);
 	}
+	
 	public double duracionEntre(TerminalPrueba origen, TerminalPrueba destino) {
+		
 		//La terminal destino debe estar dentro de algun circuito de esta Naviera. HACER VERIFICACION
 		//FIX LATER
 		return this.circuitoCon(origen, destino).tiempoRecorridoEntre(origen, destino);
@@ -48,7 +43,9 @@ public class LineaNaviera {
 //		}
 //		return totalRecorrido;
 	}
+	
 	private CircuitoMaritimo circuitoCon(TerminalPrueba origen, TerminalPrueba destino) {
+		//Devuelve un Circuito que contenga las dos terminales dadas
 		for(CircuitoMaritimo c : circuitos) {
 			if(c.contiene(origen, destino)) {
 				return c;
@@ -58,7 +55,19 @@ public class LineaNaviera {
 	}
 	
 	
+	public void asignarViaje(Buque b,CircuitoMaritimo c) {
+		//Asigna un viaje a un buque
+		b.asignarViaje(new Viaje(b.getFecSalida(), c.getOrigen(), c));
+	}
 	
 	
+	
+	public void recorridos() {
+		for(Buque b : buques) {
+			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
+			b.cronograma();
+			System.out.println("\n");
+		}
+	}
 	
 }

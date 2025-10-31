@@ -50,9 +50,9 @@ public class Viaje {
 		for(int x = 0; x < circuito.getTramos().size(); x++) {
 			
 			if(tramoAcutal.getOrigen() == actual) {
-				cronograma.add(new Cronograma(tramoAcutal.getOrigen(), tramoAcutal.getDestino(), salidaTime, salidaTime.plusHours((long) tramoAcutal.getRecorrido())));
+				cronograma.add(new Cronograma(tramoAcutal.getOrigen(), tramoAcutal.getDestino(), salidaTime, salidaTime.plusHours((long) tramoAcutal.getDuracion())));
 			}
-			salidaTime = salidaTime.plusHours((long) tramoAcutal.getRecorrido());
+			salidaTime = salidaTime.plusHours((long) tramoAcutal.getDuracion());
 			tramoAcutal = circuito.tramoConOrigen(tramoAcutal.getDestino());
 			actual = tramoAcutal.getOrigen();
 		}

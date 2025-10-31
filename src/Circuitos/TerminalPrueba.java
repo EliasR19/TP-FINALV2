@@ -29,9 +29,6 @@ public class TerminalPrueba {
 		//Buscar linea que contenga un circuito que contenga 't' como origen de algun Viaje.
 	}
 	
-	public void asignarViaje(Buque b,CircuitoMaritimo c) {
-		b.asignarViaje(new Viaje(b.getFecSalida(), this, c));
-	}
 
 	public void asignarFecSalidaBuqe(Buque bA, LocalDateTime fecSalida) {
 		//Se supone que el buque esta dentro de la terminal
