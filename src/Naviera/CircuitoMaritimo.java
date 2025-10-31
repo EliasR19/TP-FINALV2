@@ -1,24 +1,28 @@
 package Naviera;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
 import Circuitos.Tramo;
-import Terminal.Terminal;
+import Terminal.*;
 
 public class CircuitoMaritimo {
-	private List<Tramo> tramos = new ArrayList<Tramo>();
+	
 	private Terminal origen;
 	private Terminal destino;
-
+	private List<Tramo> tramos = new ArrayList<Tramo>();
 	
-	public CircuitoMaritimo(Terminal origen, Terminal destino) {
-		this.origen = origen;
-		this.destino = destino;
+	public CircuitoMaritimo(Terminal terminalOrigen, Terminal terminalDestino) {
+		this.origen = terminalOrigen;
+		this.destino = terminalDestino;
+	}
+
+	public Terminal getTerminalOrigen() {
+		return origen;
+	}
+
+	public Terminal getTerminalDestino() {
+		return destino;
 	}
 	
 	
