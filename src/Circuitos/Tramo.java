@@ -3,7 +3,7 @@ package Circuitos;
 import java.time.LocalTime;
 import java.time.Period;
 
-import Terminal.Terminal;
+import terminal.Terminal;
 
 public class Tramo {
 	private Terminal origen;

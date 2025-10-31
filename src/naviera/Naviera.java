@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Circuitos.Viaje;
-import Terminal.Terminal;
+import terminal.Terminal;
 import buque.Buque;
 
 public class Naviera {
@@ -22,7 +22,7 @@ public class Naviera {
 		return buques;
 	}
 	
-	public List<CircuitoMaritimo> getcircuitosMaritimos(){
+	public List<CircuitoMaritimo> getCircuitosMaritimos(){
 		return circuitos;
 	}
 
@@ -51,9 +51,7 @@ public class Naviera {
 	public void agregarBuque(Buque b) {
 		buques.add(b);
 	}
-	public void agregarCircuito(CircuitoMaritimo c) {
-		circuitos.add(c);
-	}
+	
 	
 	
 	public void establecerSalida(Buque b, LocalDateTime fecSalida) {

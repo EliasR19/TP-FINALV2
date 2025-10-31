@@ -10,6 +10,7 @@ import Circuitos.Viaje;
 import container.Container;
 
 public class Buque {
+	
 	private Viaje viaje;
 	private LocalDateTime fecSalida;
 	

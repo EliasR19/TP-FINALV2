@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import naviera.CircuitoMaritimo;
-import Terminal.Terminal;
+import terminal.Terminal;
 
 public class Viaje {
 	

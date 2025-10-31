@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Circuitos.Tramo;
-import Terminal.*;
+import terminal.*;
 
 public class CircuitoMaritimo {
 	

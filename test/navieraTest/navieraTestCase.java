@@ -6,23 +6,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
-import naviera.CircuitoMaritimo;
 import naviera.*;
-import Terminal.*;
+import terminal.*;
 
 class navieraTestCase {
 
 	private Naviera naviera;
-	private Buque buque1;
-	private Buque buque2;
-	private Terminal terminal1;
-	private Terminal terminal2;
-	private CircuitoMaritimo circuitoM;
-	private CircuitoMaritimo circuitoMM;
+	private Buque buque1, buque2;
+	private Terminal terminal1, terminal2;
+	private CircuitoMaritimo circuitoM, circuitoMM;
 	
 	@BeforeEach
 	public void setUp() {
 		naviera = new Naviera();
+		terminal1 = new Terminal("A");
+		terminal2 = new Terminal("B");
 	}
 	
 	@Test
@@ -41,8 +39,7 @@ class navieraTestCase {
 	
 	@Test
 	void testUnaNavieraTieneVariosCircuitosMaritimos() {
-		terminal1 = new Terminal("A");
-		terminal2 = new Terminal("B");
+		
 		circuitoM = new CircuitoMaritimo(terminal1, terminal2);
 		circuitoMM = new CircuitoMaritimo(terminal2, terminal1);
 		

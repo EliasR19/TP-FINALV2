@@ -10,17 +10,13 @@ import org.junit.jupiter.api.Test;
 
 import Circuitos.Tramo;
 import naviera.*;
-import Terminal.Terminal;
+import terminal.Terminal;
 
 public class CircuitoTest {
 	
 	
-	Terminal t1;
-	Terminal t2;
-	Terminal t3;
-	Tramo tA;
-	Tramo tB;
-	Tramo tC;
+	Terminal t1, t2, t3;
+	Tramo tA, tB, tC;
 	
 	CircuitoMaritimo cA;
 	

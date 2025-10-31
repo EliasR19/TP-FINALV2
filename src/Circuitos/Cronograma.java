@@ -2,7 +2,7 @@ package Circuitos;
 
 import java.time.LocalDateTime;
 
-import Terminal.Terminal;
+import terminal.Terminal;
 
 public class Cronograma {
 	Terminal origen, destino;

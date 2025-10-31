@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import Circuitos.Tramo;
-import Naviera.CircuitoMaritimo;
-import Naviera.Naviera;
-import Terminal.Terminal;
+import naviera.CircuitoMaritimo;
+import naviera.Naviera;
+import terminal.Terminal;
 import buque.Buque;
 
 public class main {
@@ -23,7 +23,7 @@ public class main {
 		Naviera lineaA = new Naviera();
 		
 		CircuitoMaritimo circuitoA = new CircuitoMaritimo(Argentina, España);
-		lineaA.agregarCircuito(circuitoA);
+		lineaA.agregarCircuitoMaritimo(circuitoA);
 		
 		//Tramo z1 = new Tramo(Argentina, Brasil, 4);
 		//Tramo z2 = new Tramo(Brasil, España, 20);
