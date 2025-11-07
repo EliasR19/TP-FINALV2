@@ -53,9 +53,10 @@ class TerminalTestCase {
 	@Test
 	void testLaTerminalTieneEstaUbicadaEn200X100Y() {
 		UbicacionGeografica ubicacion = terminal.getUbicacion();
-		assertEquals(200, ubicacion.getX());
-		assertEquals(100, ubicacion.getY());
+		assertEquals(200, ubicacion.getLatitud());
+		assertEquals(100, ubicacion.getLongitud());
 	}
+
 
 	@Test
 	void testGenerarOrdenExp() {

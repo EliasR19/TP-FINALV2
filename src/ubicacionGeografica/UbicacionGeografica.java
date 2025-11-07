@@ -1,27 +1,27 @@
 package ubicacionGeografica;
 
 public class UbicacionGeografica {
-	private int x;
-	private int y;
+	private int latitud;
+	private int longitud;
 	
-	public UbicacionGeografica(int x, int y) {
-		this.x = x;
-		this.y = y;
+	public UbicacionGeografica(int latitud, int longitud) {
+		this.latitud = latitud;
+		this.longitud = longitud;
 	}
 
-	public int getX() {
-		return x;
+	public int getLatitud() {
+		return latitud;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setLatitud(int x) {
+		this.latitud = x;
 	}
 
-	public int getY() {
-		return y;
+	public int getLongitud() {
+		return longitud;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setLongitud(int y) {
+		this.longitud = y;
 	}
 }
