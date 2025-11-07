@@ -1,6 +1,8 @@
 package serviciosTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,12 +12,12 @@ import container.BLEspecial;
 import container.ContainerDry;
 import container.ContainerReefer;
 import container.ContainerTanque;
-import servicios.ServicioLavado;
-import servicios.ServicioPesado;
 import servicios.ServicioDesconsolidado;
 import servicios.ServicioElectricidad;
+import servicios.ServicioLavado;
+import servicios.ServicioPesado;
 
-class ServiciosParaContainerTanqueTestCase {
+class ServiciosContainersTestCase {
 	
 	private ContainerTanque containerT;
 	private ContainerDry containerDS;
@@ -23,6 +25,7 @@ class ServiciosParaContainerTanqueTestCase {
 	private ContainerReefer containerR;
 	private BL bl;
 	private BLEspecial blE;
+	private LocalDateTime inicio, fin;
 	private ServicioLavado servicioLavado;
 	private ServicioElectricidad servicioElectricidad;
 	private ServicioPesado servicioPesado;
@@ -34,8 +37,11 @@ class ServiciosParaContainerTanqueTestCase {
 		bl = new BL();
 		blE = new BLEspecial();
 		
+		inicio = LocalDateTime.of(2025, 11, 7, 8, 0);
+        fin = LocalDateTime.of(2025, 11, 7, 10, 0);
+		
 		servicioLavado = new ServicioLavado(100d);
-		servicioElectricidad = new ServicioElectricidad(1000d);
+		servicioElectricidad = new ServicioElectricidad(100d, inicio, fin);
 		servicioPesado = new ServicioPesado(5000d);
 		servicioDesconsolidado = new ServicioDesconsolidado(3000d);
 		
@@ -81,7 +87,7 @@ class ServiciosParaContainerTanqueTestCase {
 	@Test
 	void testUnContainerReeferRecibeElServicioElectricidadConElPrecioCorrespondiente() {
 		
-		assertEquals(1d, servicioElectricidad.servicioPara(containerR));
+		assertEquals(200d, servicioElectricidad.servicioPara(containerR));
 		
 	}
 	
