@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BooleanSupplier;
-
 import naviera.*;
+import ubicacionGeografica.UbicacionGeografica;
 import buque.Buque;
 import clientes.*;
 import container.Container;
@@ -20,7 +19,8 @@ import empresasTransportistas.*;
 
 public class Terminal {
 	
-	private String name;
+	private String nombre;
+	private UbicacionGeografica ubicacion;
 	private List<Naviera> lineas;
 	private List<Container> cargas;
 	private List<EmpresaTransportista> empresasTransportistas;
@@ -28,8 +28,9 @@ public class Terminal {
 	//private Map<OrdenImp, LocalDateTime> ordenesImp;
 	private List<Shipper> shippers;
 	
-	public Terminal(String name) {
-		this.name = name;
+	public Terminal(String nombre, UbicacionGeografica ubicacion) {
+		this.nombre = nombre;
+		this.ubicacion = ubicacion;
 		this.lineas = new ArrayList<Naviera>();
 		this.cargas = new ArrayList<Container>();
 		this.empresasTransportistas = new ArrayList<EmpresaTransportista>();
@@ -41,8 +42,8 @@ public class Terminal {
 		lineas.add(l);
 	}
 
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
 	
 
@@ -70,6 +71,10 @@ public class Terminal {
 		
 	public void exportarCarga(Terminal t) {
 		//Buscar linea que contenga un circuito que contenga 't' como origen de algun Viaje.
+	}
+
+	public UbicacionGeografica getUbicacion() {
+		return ubicacion;
 	}
 	
 }
