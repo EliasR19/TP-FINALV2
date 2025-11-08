@@ -3,7 +3,7 @@ package buque;
 public class Outbound implements Fase {
 
 	@Override
-	public void actualizarPosicion(Buque buque, double latitud, double longitud, double distanciaRestante) {
+	public void actualizarPosicion(Buque buque, double distanciaRestante) {
 		if(distanciaRestante == 0) {
 	        buque.setFase(new Arrived());
 	    } else if(distanciaRestante <= 50) {

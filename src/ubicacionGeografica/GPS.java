@@ -38,10 +38,15 @@ public class GPS extends UbicacionGeografica {
 	    double factor      		 = factores[2];
 	    double distanciaRestante = factores[3];
 		
-	    setLatitud(getLatitud() + metrosNorte * factor / 111000);
-	    setLongitud(getLongitud() + metrosEste * factor / (111000 * Math.cos(Math.toRadians(getLatitud()))));
-		
-		
-	    buque.actualizarPosicion(getLatitud(), getLongitud(), distanciaRestante);
+	    if (factor >= 1.0) { // Si llega al destino o nos vamos a pasar de él, tomamos directamente los datos del destino 
+	    					// (que seria que se mueve menos metros de lo max que puede avanzar en un minuto, lo necesario solamante)
+	    	setLatitud(destino.getLatitud());
+	    	setLongitud(destino.getLongitud());
+	    	}   else { // Sino, se avanza de forma proporcional
+	    			setLatitud(getLatitud() + metrosNorte * factor / 111000); 
+	    			setLongitud(getLongitud() + metrosEste * factor / (111000 * Math.cos(Math.toRadians(getLatitud()))));
+	    		}
+		buque.actualizarPosicion(distanciaRestante); // Se le avisa al buque de los cambios
+	    }
+
 	}
-}

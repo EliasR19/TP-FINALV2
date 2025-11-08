@@ -7,12 +7,14 @@ import terminal.Terminal;
 public class Cronograma {
 	Terminal origen, destino;
 	LocalDateTime salida, llegada;
+	boolean llegoADestino;
 	
 	public Cronograma(Terminal origen, Terminal destino, LocalDateTime salida, LocalDateTime llegada){
 		this.destino = destino;
 		this.origen = origen;
 		this.salida = salida;
 		this.llegada = llegada;
+		this.llegoADestino = false;
 		
 	}
 
@@ -34,6 +36,10 @@ public class Cronograma {
 
 	public void getEntero() {
 		System.out.println(origen.getNombre() + " --> " + destino.getNombre() + " | salida: " + salida +" | llegada: " + llegada);
+	}
+
+	public boolean getLlegoADestino() {
+		return llegoADestino;
 	}
 	
 	

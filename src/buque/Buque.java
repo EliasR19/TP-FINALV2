@@ -22,7 +22,6 @@ public class Buque {
 	
 	public Buque() {
 		carga = new ArrayList<Container>();
-		gps = new GPS(0, 0, this);
 		fase = new Outbound();
 	}
 	
@@ -36,6 +35,7 @@ public class Buque {
 
 	public void asignarViaje(Viaje viaje) {
 		this.viaje = viaje;
+		this.gps = new GPS(0, 0, this);
 		
 	}
 	
@@ -51,11 +51,11 @@ public class Buque {
 	}
 
 	public Terminal getDestinoActual() {
-		return viaje.getDestinoActual(LocalDateTime.now());
+		return viaje.getDestinoActual();
 	}
 	
-	public void actualizarPosicion(double latitud, double longitud, double distanciaRestante) {
-	    fase.actualizarPosicion(this, latitud, longitud, distanciaRestante);
+	public void actualizarPosicion(double distanciaRestante) {
+	    fase.actualizarPosicion(this, distanciaRestante);
 	}
 
 
