@@ -76,7 +76,6 @@ public class Terminal {
 
 	public void mandarMailConsignees() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 }

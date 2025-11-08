@@ -7,17 +7,20 @@ import org.junit.jupiter.api.Test;
 
 import Circuitos.*;
 import terminal.Terminal;
+import ubicacionGeografica.UbicacionGeografica;
 
 public class TramoTest {
 	
-	Terminal t1;
-	Terminal t2;
+	UbicacionGeografica u1, u2;
+	Terminal t1, t2;
 	Tramo tA;
 	
 	@BeforeEach
 	public void setup() {
-		t1 = new Terminal("Terminal 1");
-		t2 = new Terminal("Terminal 2");
+		u1 = new UbicacionGeografica(-23, -25);
+		u2 = new UbicacionGeografica(-22.91, -43.17);
+		t1 = new Terminal("Argentina", u1);
+		t2 = new Terminal("Brasil", u2);
 		
 		tA = new Tramo(t1, t2, 10d);
 		

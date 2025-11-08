@@ -78,4 +78,8 @@ public class Buque {
 		destino.mandarMailConsignees();
 	}
 
+	public boolean estaEnFaseArrived() {
+		return fase.estaEnFaseArrived();
+	}
+
 }

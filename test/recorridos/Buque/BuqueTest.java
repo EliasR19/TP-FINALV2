@@ -95,6 +95,7 @@ public class BuqueTest {
 		}
 		assertEquals(-22.91, buque.getGPS().getLatitud());
 		assertEquals(-43.17, buque.getGPS().getLongitud());
+		assertTrue(buque.estaEnFaseArrived());
 	}
 
 }

@@ -24,4 +24,9 @@ public class Outbound implements Fase {
 		return false;
 	}
 
+	@Override
+	public boolean estaEnFaseArrived() {
+		return false;
+	}
+
 }

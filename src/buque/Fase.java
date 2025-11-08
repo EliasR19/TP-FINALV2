@@ -10,4 +10,6 @@ public interface Fase {
 
 	boolean estaEnFaseInbound();
 
+	boolean estaEnFaseArrived();
+
 }
