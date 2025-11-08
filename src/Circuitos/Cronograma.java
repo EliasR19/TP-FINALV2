@@ -33,7 +33,7 @@ public class Cronograma {
 	}
 
 	public void getEntero() {
-		System.out.println(origen.getName() + " --> " + destino.getName() + " | salida: " + salida +" | llegada: " + llegada);
+		System.out.println(origen.getNombre() + " --> " + destino.getNombre() + " | salida: " + salida +" | llegada: " + llegada);
 	}
 	
 	

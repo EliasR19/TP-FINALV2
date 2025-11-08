@@ -65,11 +65,16 @@ public class Viaje {
 		return cronograma;
 	}
 
-	
-
-
-
 	public LocalDateTime getFecInicio() {
 		return fecInicio;
+	}
+	
+	public Terminal getDestinoActual(LocalDateTime ahora) {
+		for (Cronograma c : cronograma) {
+			if (ahora.isBefore(c.getLlegada())) {
+				return c.getDestino();
+			}
+		}
+		return origen; // Ya llegó a todos los destinos
 	}
 }
