@@ -62,14 +62,37 @@ public class BuqueTest {
 	}
 	
 	@Test
+	void testUnBuqueCuandoNoEstaA50MetrosOMenosDeLaTerminalAunNoPasaALaSiguienteFase() {
+		assertEquals(0, buque.getGPS().getLatitud());
+		assertEquals(0, buque.getGPS().getLongitud());
+		
+		for (int i = 0; i < 7113 ; i++) { 
+			buque.getGPS().actualizarPosicionPorUnMinuto();
+		}
+		assertEquals(50689.38652158723, buque.getGPS().getDistanciaRestante());
+		assertTrue(buque.estaEnFaseOutbound()); // Aún está por arriba de los 50kms
+	}
+	
+	@Test
+	void testUnBuqueCuandoEstaA50MetrosOMenosDeLaTerminalPasaALaSiguienteFase() {
+		assertEquals(0, buque.getGPS().getLatitud());
+		assertEquals(0, buque.getGPS().getLongitud());
+		
+		for (int i = 0; i < 7114 ; i++) { 
+			buque.getGPS().actualizarPosicionPorUnMinuto();
+		}
+		assertEquals(49948.46292897436, buque.getGPS().getDistanciaRestante());
+		assertTrue(buque.estaEnFaseInbound());
+	}
+	
+	@Test
 	void testUnBuqueLlegaAlDestino() {
 		assertEquals(0, buque.getGPS().getLatitud());
 		assertEquals(0, buque.getGPS().getLongitud());
 		
-		for (int i = 0; i < 6500 ; i++) {
+		for (int i = 0; i < 7609 ; i++) { // El buque debe viajar 7609 minutos para llegar al destino
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
-		
 		assertEquals(-22.91, buque.getGPS().getLatitud());
 		assertEquals(-43.17, buque.getGPS().getLongitud());
 	}

@@ -49,8 +49,8 @@ public class Buque {
 		return viaje.getDestinoActual();
 	}
 	
-	public void actualizarPosicion(double distanciaRestante) {
-	    fase.actualizarPosicion(this, distanciaRestante);
+	public void actualizarPosicion(double distanciaRestante, Terminal destino) {
+	    fase.actualizarPosicion(this, distanciaRestante, destino);
 	}
 
 
@@ -61,4 +61,21 @@ public class Buque {
 	public Viaje getViaje() {
 		return viaje;
 	}
+
+	public Fase getFase() {
+		return fase;
+	}
+
+	public boolean estaEnFaseOutbound() {
+		return fase.estaEnFaseOutbound();
+	}
+
+	public boolean estaEnFaseInbound() {
+		return fase.estaEnFaseInbound();
+	}
+
+	public void avisarSobreInminenteArribo(Terminal destino) {
+		destino.mandarMailConsignees();
+	}
+
 }

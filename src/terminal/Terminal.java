@@ -1,10 +1,7 @@
 package terminal;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +72,11 @@ public class Terminal {
 
 	public UbicacionGeografica getUbicacion() {
 		return ubicacion;
+	}
+
+	public void mandarMailConsignees() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
