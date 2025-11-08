@@ -3,9 +3,7 @@ package recorridos.Buque;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +17,8 @@ import ubicacionGeografica.*;
 public class BuqueTest {
 	private UbicacionGeografica u1, u2;
 	private Terminal t1, t2;
+	private CircuitoMaritimo circuitoA;
+	private LocalDateTime fechaSalida;
 	private Buque buque;
 	private Naviera n1;
 
@@ -30,13 +30,17 @@ public class BuqueTest {
 		t2 = new Terminal("Brasil", u2);
 		buque = new Buque();
 		n1 = new Naviera();
-		CircuitoMaritimo circuitoA = new CircuitoMaritimo(t1, t2);
-		LocalDateTime fechaSalida = LocalDateTime.of(2025, 11, 8, 10, 0);
-		
-		n1.agregarCircuitoMaritimo(circuitoA);
+		circuitoA = new CircuitoMaritimo(t1, t2);
+		fechaSalida = LocalDateTime.of(2025, 11, 8, 10, 0);
 		circuitoA.agregarTramo(t1, t2, 10);
+		n1.agregarCircuitoMaritimo(circuitoA);
 		n1.agregarBuque(buque);
 		n1.asignarViaje(buque, circuitoA, fechaSalida);
+	}
+	
+	@Test
+	void test1() {
+		assertEquals(1, circuitoA.cantidadDeTramos());
 	}
 	
 	@Test

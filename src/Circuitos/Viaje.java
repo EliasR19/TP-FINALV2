@@ -47,20 +47,21 @@ public class Viaje {
 //	}
 	
 	public void createCronograma() {
-		Terminal actual = origen; 
-		Tramo tramoAcutal = circuito.tramoConOrigen(origen);
+		Tramo tramoActual = circuito.tramoConOrigen(origen);
 		LocalDateTime salidaTime = fecInicio; 
-		for(int x = 0; x < circuito.getTramos().size(); x++) {
-			
-			if(tramoAcutal.getOrigen() == actual) {
-				cronograma.add(new Cronograma(tramoAcutal.getOrigen(), tramoAcutal.getDestino(), salidaTime, salidaTime.plusHours((long) tramoAcutal.getDuracion())));
-			}
-			salidaTime = salidaTime.plusHours((long) tramoAcutal.getDuracion());
-			tramoAcutal = circuito.tramoConOrigen(tramoAcutal.getDestino());
-			actual = tramoAcutal.getOrigen();
+		
+		while (tramoActual != null) {
+			cronograma.add(new Cronograma(tramoActual.getOrigen(),
+		   			  tramoActual.getDestino(),
+		   			  salidaTime,
+		   			  salidaTime.plusHours((long) tramoActual.getDuracion())));
+
+			salidaTime = salidaTime.plusHours((long) tramoActual.getDuracion());
+			tramoActual = circuito.tramoConOrigen(tramoActual.getDestino());
 		}
 		
 	}
+	
 	public List<Cronograma> getCronograma(){
 		return cronograma;
 	}

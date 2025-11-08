@@ -39,12 +39,7 @@ public class Buque {
 		
 	}
 	
-	public void cronograma() {
-		viaje.createCronograma();
-		for(Cronograma c : viaje.getCronograma()) {
-			c.getEntero();
-		}
-	}
+
 
 	public GPS getGPS() {
 		return gps;
@@ -61,5 +56,9 @@ public class Buque {
 
 	public void setFase(Fase nuevaFase) {
 		this.fase = nuevaFase;
+	}
+
+	public Viaje getViaje() {
+		return viaje;
 	}
 }

@@ -79,7 +79,9 @@ public class Naviera {
 	public void asignarViaje(Buque buque, CircuitoMaritimo circuito, LocalDateTime fechaSalida) {
 		//Asigna un viaje a un buque
 		buque.setFecSalida(fechaSalida);
-		buque.asignarViaje(new Viaje(fechaSalida, circuito.getOrigen(), circuito));
+		Viaje viaje = new Viaje(fechaSalida, circuito.getOrigen(), circuito);
+		viaje.createCronograma();
+		buque.asignarViaje(viaje);
 		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(buque, fechaSalida);
 	}
 	
@@ -88,7 +90,7 @@ public class Naviera {
 	public void recorridos() {
 		for(Buque b : buques) {
 			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
-			b.cronograma();
+			b.getViaje().getCronograma();
 			System.out.println("\n");
 		}
 	}

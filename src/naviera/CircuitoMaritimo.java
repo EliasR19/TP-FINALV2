@@ -10,11 +10,12 @@ public class CircuitoMaritimo {
 	
 	private Terminal origen;
 	private Terminal destino;
-	private List<Tramo> tramos = new ArrayList<Tramo>();
+	private List<Tramo> tramos;
 	
 	public CircuitoMaritimo(Terminal terminalOrigen, Terminal terminalDestino) {
 		this.origen = terminalOrigen;
 		this.destino = terminalDestino;
+		this.tramos = new ArrayList<Tramo>();
 	}
 
 	public Terminal getTerminalOrigen() {
@@ -26,11 +27,10 @@ public class CircuitoMaritimo {
 	}
 	
 	
-	public void agregarTramo(Terminal tOrigen, Terminal TDestino, double duracion) {
+	public void agregarTramo(Terminal tOrigen, Terminal tDestino, double duracion) {
 		// FIX LATER que no haya dos tramos con el mismo origen/destino
-		tramos.add(new Tramo(tOrigen, TDestino, duracion));
-		
-		
+		Tramo tramo = new Tramo(tOrigen, tDestino, duracion);
+		tramos.add(tramo);
 		//A - B    B - B2   B2- C   C - A
 	}
 	
@@ -84,7 +84,7 @@ public class CircuitoMaritimo {
 	
 	public Tramo tramoConOrigen(Terminal t) {
 		for(Tramo t1 : tramos) {
-			if(t1.getOrigen() == t) {
+			if(t1.getOrigen().getNombre().equals(t.getNombre())) {
 				return t1;
 			}
 		}
@@ -100,6 +100,10 @@ public class CircuitoMaritimo {
 	
 	public Terminal getOrigen() {
 		return origen;
+	}
+
+	public int cantidadDeTramos() {
+		return tramos.size();
 	}
 
 }

@@ -10,7 +10,6 @@ import buque.Buque;
 public class GPS extends UbicacionGeografica {
 
 	private Buque buque;
-	private UbicacionGeografica destino; 
 	
 	public GPS(int latitud, int longitud, Buque buque) {
 		super(latitud, longitud);
@@ -40,8 +39,8 @@ public class GPS extends UbicacionGeografica {
 		
 	    if (factor >= 1.0) { // Si llega al destino o nos vamos a pasar de él, tomamos directamente los datos del destino 
 	    					// (que seria que se mueve menos metros de lo max que puede avanzar en un minuto, lo necesario solamante)
-	    	setLatitud(destino.getLatitud());
-	    	setLongitud(destino.getLongitud());
+	    	setLatitud(buque.getDestinoActual().getUbicacion().getLatitud());
+	    	setLongitud(buque.getDestinoActual().getUbicacion().getLongitud());
 	    	}   else { // Sino, se avanza de forma proporcional
 	    			setLatitud(getLatitud() + metrosNorte * factor / 111000); 
 	    			setLongitud(getLongitud() + metrosEste * factor / (111000 * Math.cos(Math.toRadians(getLatitud()))));
