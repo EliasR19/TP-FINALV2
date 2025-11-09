@@ -2,15 +2,14 @@ package buque;
 
 import terminal.Terminal;
 
-public class Arrived extends Fase {
+public class Departing extends Fase {
 
-	@Override
 	public void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	public boolean estaEnFaseArrived() {
+	boolean estaEnFaseDeparting() {
 		return true;
 	}
 

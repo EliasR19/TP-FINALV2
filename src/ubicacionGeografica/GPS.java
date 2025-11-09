@@ -13,8 +13,9 @@ public class GPS extends UbicacionGeografica {
 	private Buque buque;
 	private double distanciaRestante;
 	private boolean timerIniciado;
+	private Timer timer;
 	
-	public GPS(int latitud, int longitud, Buque buque) {
+	public GPS(double latitud, double longitud, Buque buque) {
 		super(latitud, longitud);
 		this.buque = buque;
 		this.distanciaRestante = 0;
@@ -25,11 +26,13 @@ public class GPS extends UbicacionGeografica {
 		return timerIniciado;
 	}
 	
-	public void iniciarTimer() {
+	public void iniciarTimer(Terminal terminal) {
 		
 		timerIniciado = true;
+		super.setLatitud(terminal.getUbicacion().getLatitud());
+		super.setLongitud(terminal.getUbicacion().getLongitud());
 		
-		Timer timer = new Timer();
+		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 actualizarPosicionPorUnMinuto();
@@ -69,6 +72,11 @@ public class GPS extends UbicacionGeografica {
 
 	public double getDistanciaRestante() {
 		return distanciaRestante;
+	}
+
+	public void apagarTimer() {
+		timer.cancel();
+        timerIniciado = false;
 	}
 
 	}

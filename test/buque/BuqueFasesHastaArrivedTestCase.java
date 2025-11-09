@@ -20,7 +20,7 @@ public class BuqueFasesHastaArrivedTestCase {
 	private CircuitoMaritimo circuitoA;
 	private LocalDateTime fechaSalida;
 	private Buque buque;
-	private Naviera n1;
+	private Naviera n1; 
 
 	@BeforeEach
 	public void setUp() {
@@ -39,61 +39,45 @@ public class BuqueFasesHastaArrivedTestCase {
 	}
 	
 	@Test
-	void test1() {
-		assertEquals(1, circuitoA.cantidadDeTramos());
-	}
-	
-	@Test
 	void testUnBuqueTieneUnGPSQueLeDiceSuPosicion() {
-		assertEquals(0, buque.getGPS().getLatitud());
-		assertEquals(0, buque.getGPS().getLongitud());
+		assertEquals(-23, buque.getGPS().getLatitud());
+		assertEquals(-25, buque.getGPS().getLongitud());
 	}
 	
 	@Test
 	void testUnBuqueAvanzaYElGPSCuandoPasaUnMinutoLeDiceSuPosicionYSabeSuFaseActual() {
-		assertEquals(0, buque.getGPS().getLatitud());
-		assertEquals(0, buque.getGPS().getLongitud());
-		
 		buque.getGPS().actualizarPosicionPorUnMinuto();
 		
-		assertEquals(-0.003125141325200915, buque.getGPS().getLatitud());
-		assertEquals(-0.005888797521152724, buque.getGPS().getLongitud());
+		assertEquals(-22.9999641273093, buque.getGPS().getLatitud());
+		assertEquals(-25.00724229574184, buque.getGPS().getLongitud());
 		assertTrue(buque.estaEnFaseOutbound());
 		assertFalse(buque.estaEnFaseInbound()); // Con esto dejamos en claro que solo
 		assertFalse(buque.estaEnFaseArrived()); // tendrá una fase a la vez
-		
+		assertFalse(buque.estaEnFaseWorking());
+		assertFalse(buque.estaEnFaseDeparting());
 	}
 	
 	@Test
 	void testUnBuqueCuandoNoEstaA50MetrosOMenosDeLaTerminalAunNoPasaALaSiguienteFase() {
-		assertEquals(0, buque.getGPS().getLatitud());
-		assertEquals(0, buque.getGPS().getLongitud());
-		
-		for (int i = 0; i < 7113 ; i++) { 
+		for (int i = 0; i < 2443 ; i++) { 
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
-		assertEquals(50689.38652158723, buque.getGPS().getDistanciaRestante());
+		assertEquals(50103.45619089812, buque.getGPS().getDistanciaRestante());
 		assertTrue(buque.estaEnFaseOutbound()); // Aún está por arriba de los 50kms
 	}
 	
 	@Test
 	void testUnBuqueCuandoEstaA50MetrosOMenosDeLaTerminalPasaALaSiguienteFase() {
-		assertEquals(0, buque.getGPS().getLatitud());
-		assertEquals(0, buque.getGPS().getLongitud());
-		
-		for (int i = 0; i < 7114 ; i++) { 
+		for (int i = 0; i < 2444 ; i++) { 
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
-		assertEquals(49948.46292897436, buque.getGPS().getDistanciaRestante());
+		assertEquals(49363.46944096873, buque.getGPS().getDistanciaRestante());
 		assertTrue(buque.estaEnFaseInbound());
 	}
 	
 	@Test
 	void testUnBuqueLlegaAlDestino() {
-		assertEquals(0, buque.getGPS().getLatitud());
-		assertEquals(0, buque.getGPS().getLongitud());
-		
-		for (int i = 0; i < 7609 ; i++) { // El buque debe viajar 7609 minutos para llegar al destino
+		for (int i = 0; i < 2511 ; i++) { // El buque debe viajar 2511 minutos para llegar al destino
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
 		assertEquals(-22.91, buque.getGPS().getLatitud());

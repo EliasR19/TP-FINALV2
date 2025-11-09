@@ -18,7 +18,7 @@ import empresasTransportistas.Camion;
 import empresasTransportistas.Chofer;
 import terminal.Terminal;
 import ubicacionGeografica.UbicacionGeografica;
-
+ 
 class TerminalTestCase {
 	
 	private UbicacionGeografica ubicacionTerminal;

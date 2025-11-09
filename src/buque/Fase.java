@@ -2,14 +2,28 @@ package buque;
 
 import terminal.Terminal;
 
-public interface Fase {
+public abstract class Fase {
 
-	void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino);
+	abstract void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino);
 
-	boolean estaEnFaseOutbound();
+	boolean estaEnFaseOutbound() {
+		return false;
+	}
 
-	boolean estaEnFaseInbound();
+	boolean estaEnFaseInbound() {
+		return false;
+	}
 
-	boolean estaEnFaseArrived();
+	boolean estaEnFaseArrived() {
+		return false;
+	}
 
+	boolean estaEnFaseWorking() {
+		return false;
+	}
+
+	boolean estaEnFaseDeparting() {
+		return false;
+	}
+	
 }

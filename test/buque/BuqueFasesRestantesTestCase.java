@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import container.BL;
+import container.BillOfLading;
+import container.ContainerTanque;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
@@ -21,6 +24,8 @@ public class BuqueFasesRestantesTestCase {
 	private LocalDateTime fechaSalida;
 	private Buque buque;
 	private Naviera n1;
+	private BL bl1, bl2;
+	private ContainerTanque container1, container2;
 
 	@BeforeEach
 	public void setUp() {
@@ -37,14 +42,45 @@ public class BuqueFasesRestantesTestCase {
 		n1.agregarBuque(buque);
 		n1.asignarViaje(buque, circuitoA, fechaSalida);
 		
-		for (int i = 0; i < 7609 ; i++) { // El buque debe viajar 7609 minutos para llegar al destino
-			buque.getGPS().actualizarPosicionPorUnMinuto();
-		}
+		bl1 = new BL();
+		bl1.enlistar("Agua", 500d);
+		bl1.enlistar("Aceite de Oliva", 100d);
+		bl1.enlistar("Gasolina", 400d);
+		
+		bl2 = new BL();
+		bl2.enlistar("Agua", 500d);
+		bl2.enlistar("Aceite de Oliva", 100d);
+		bl2.enlistar("Gasolina", 400d);
+		
+		container1 = new ContainerTanque("azul1234567", 26d, 22d, 20d, bl1);
+		buque.subirCarga(container1);
+		
+		container2 = new ContainerTanque("azul1234568", 26d, 22d, 20d, bl2);
+		t2.guardarContainer(container2);
+
+		// Seteamos que el buque ya está en el destino
+		buque.getGPS().setLatitud(-22.91);
+		buque.getGPS().setLongitud(-43.17);
 	}
 	
 	@Test
-	void testUnBuquePasaALaFaseWorkingMedianteLaTerminal() {
+	void testUnBuqueTieneCargaDe() {
+		assertTrue(buque.tieneCargaDe(container1));
+		assertEquals(1, buque.cargaTotal());
+	}
+	
+	
+	@Test
+	void testUnBuquePasaALaFaseWorkingMedianteLaTerminalSoloSiEstaEnLaFaseArrived() {
+		buque.setFase(new Arrived());
 		t2.darOrdenDeInicio(buque);
+		
+		assertTrue(buque.tieneCargaDe(container2));
+		assertFalse(buque.tieneCargaDe(container1));
+		
+		assertTrue(t1.tieneContainer(container1));
+		assertFalse(t1.tieneContainer(container2));
+		
 	}
 	
 	@Test

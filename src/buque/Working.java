@@ -2,16 +2,18 @@ package buque;
 
 import terminal.Terminal;
 
-public class Arrived extends Fase {
+public class Working extends Fase {
 
 	@Override
 	public void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino) {
-		// TODO Auto-generated method stub
-		
+		buque.getGPS().apagarTimer();
+		buque.realizarDescargaYCarga(destino);
 	}
 
-	public boolean estaEnFaseArrived() {
+	public boolean estaEnFaseWorking() {
 		return true;
 	}
+
+
 
 }

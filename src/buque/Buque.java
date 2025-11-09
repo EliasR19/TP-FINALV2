@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import Circuitos.Cronograma;
 import Circuitos.Viaje;
 import container.Container;
 import terminal.Terminal;
@@ -16,13 +15,12 @@ public class Buque {
 	private Viaje viaje;
 	private LocalDateTime fecSalida;
 	private GPS gps;
-	
-	//Cambiar en el merge
 	private List<Container> carga;
 	
 	public Buque() {
 		carga = new ArrayList<Container>();
 		fase = new Outbound();
+		gps = new GPS(0, 0, this);
 	}
 	
 	public void setFecSalida(LocalDateTime fecSalida) {
@@ -35,11 +33,7 @@ public class Buque {
 
 	public void asignarViaje(Viaje viaje) {
 		this.viaje = viaje;
-		this.gps = new GPS(0, 0, this);
-		
 	}
-	
-
 
 	public GPS getGPS() {
 		return gps;
@@ -85,12 +79,60 @@ public class Buque {
 	public void iniciarViaje() {
 		if (LocalDateTime.now().isEqual(fecSalida)) {
 			System.out.println("Buque iniciando viaje hacia la Terminal " + this.getDestinoActual().getNombre());
-			getGPS().iniciarTimer();
+			getGPS().iniciarTimer(viaje.getDestinoActual());
 		}else if (LocalDateTime.now().isBefore(fecSalida)){
 			System.out.println("Aún falta para iniciar el viaje");
 		}else if (LocalDateTime.now().isAfter(fecSalida)){
 			System.out.println("Se deberá arreglar un nuevo cronograma por atraso antes de salir");
 		}
+	}
+
+	public void subirCarga(Container container) {
+		carga.add(container);
+	}
+
+	public boolean tieneCargaDe(Container container) {
+		return carga.contains(container);
+	}
+
+	public int cargaTotal() {
+		return carga.size();
+	}
+
+	public void iniciarFaseWorking() {
+		this.setFase(new Working());
+	}
+
+	public void realizarDescargaYCarga(Terminal destino) { // Como no se contempla el proceso de carga y descarga 
+														   // dejamos que se descargan todos los del buque y se
+														   // cargan todos de la terminal
+		destino.recibirCarga(carga, this);
+	}
+
+	public void recibirCarga(List<Container> containers) {
+		for(Container c : containers) {
+			this.subirCarga(c);
+		}
+	}
+
+	public void partidaHabilitada(Terminal terminal) {
+		this.setFase(new Departing());
+		gps.iniciarTimer(terminal);
+		
+	}
+
+	public void asignarDatosParaElViaje(LocalDateTime fechaSalida, Terminal origen) {
+		this.setFecSalida(fechaSalida);
+		gps.setLatitud(origen.getUbicacion().getLatitud());
+		gps.setLongitud(origen.getUbicacion().getLongitud());
+	}
+
+	public boolean estaEnFaseWorking() {
+		return fase.estaEnFaseWorking();
+	}
+
+	public boolean estaEnFaseDeparting() {
+		return fase.estaEnFaseDeparting();
 	}
 
 }

@@ -19,7 +19,7 @@ public class Terminal {
 	private String nombre;
 	private UbicacionGeografica ubicacion;
 	private List<Naviera> lineas;
-	private List<Container> cargas;
+	private List<Container> containers;
 	private List<EmpresaTransportista> empresasTransportistas;
 	private Map<OrdenExp, LocalDateTime> ordenesExp;
 	//private Map<OrdenImp, LocalDateTime> ordenesImp;
@@ -29,7 +29,7 @@ public class Terminal {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.lineas = new ArrayList<Naviera>();
-		this.cargas = new ArrayList<Container>();
+		this.containers = new ArrayList<Container>();
 		this.empresasTransportistas = new ArrayList<EmpresaTransportista>();
 		this.ordenesExp = new HashMap<OrdenExp, LocalDateTime>();
 		this.shippers = new ArrayList<Shipper>();
@@ -76,6 +76,26 @@ public class Terminal {
 
 	public void mandarMailConsignees() {
 		// TODO Auto-generated method stub
+	}
+
+	public void darOrdenDeInicio(Buque buque) {
+		buque.iniciarFaseWorking();
+	}
+
+	public void guardarContainer(Container container) {
+		containers.add(container);
+	}
+
+	public boolean tieneContainer(Container container) {
+		return containers.contains(container);
+	}
+
+	public void recibirCarga(List<Container> carga, Buque buque) {
+		for(Container c : carga) {
+			this.guardarContainer(c);
+		}
+		buque.recibirCarga(containers);
+		buque.partidaHabilitada(this);
 	}
 	
 }
