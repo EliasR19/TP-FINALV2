@@ -1,5 +1,6 @@
-package recorridos.Buque;
+package buque;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,13 +9,12 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import buque.Buque;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
 import ubicacionGeografica.*;
 
-public class BuqueTest {
+public class BuqueFasesHastaArrivedTestCase {
 	private UbicacionGeografica u1, u2;
 	private Terminal t1, t2;
 	private CircuitoMaritimo circuitoA;
@@ -50,14 +50,17 @@ public class BuqueTest {
 	}
 	
 	@Test
-	void testUnBuqueAvanzaYElGPSCuandoPasaUnMinutoLeDiceSuPosicion() {
+	void testUnBuqueAvanzaYElGPSCuandoPasaUnMinutoLeDiceSuPosicionYSabeSuFaseActual() {
 		assertEquals(0, buque.getGPS().getLatitud());
 		assertEquals(0, buque.getGPS().getLongitud());
 		
 		buque.getGPS().actualizarPosicionPorUnMinuto();
 		
-		assertTrue(buque.getGPS().getLatitud() != 0);
-		assertTrue(buque.getGPS().getLongitud() != 0);
+		assertEquals(-0.003125141325200915, buque.getGPS().getLatitud());
+		assertEquals(-0.005888797521152724, buque.getGPS().getLongitud());
+		assertTrue(buque.estaEnFaseOutbound());
+		assertFalse(buque.estaEnFaseInbound()); // Con esto dejamos en claro que solo
+		assertFalse(buque.estaEnFaseArrived()); // tendrá una fase a la vez
 		
 	}
 	
@@ -97,5 +100,19 @@ public class BuqueTest {
 		assertEquals(-43.17, buque.getGPS().getLongitud());
 		assertTrue(buque.estaEnFaseArrived());
 	}
-
+	
+	@Test
+	void testElGPSDelBuqueNoSeActivaHastaQueEsteNoParte() {
+		assertFalse(buque.getGPS().getTimerIniciado());
+	}
+	
+	@Test
+	void testElGPSDelBuqueEmpiezaAFuncionarCuandoElBuqueParte() { // Esto sería para mostrar lo del timer, ya que eso
+																  // lo hace de forma automatica y no se puede mostrar 
+																  // en los test sino (solo el hecho de que se activa)
+		
+		buque.setFecSalida(LocalDateTime.now()); // Solo para que corra el test
+		buque.iniciarViaje();
+		assertTrue(buque.getGPS().getTimerIniciado());
+	}
 }

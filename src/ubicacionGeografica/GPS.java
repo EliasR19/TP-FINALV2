@@ -12,14 +12,23 @@ public class GPS extends UbicacionGeografica {
 
 	private Buque buque;
 	private double distanciaRestante;
+	private boolean timerIniciado;
 	
 	public GPS(int latitud, int longitud, Buque buque) {
 		super(latitud, longitud);
 		this.buque = buque;
 		this.distanciaRestante = 0;
+		this.timerIniciado = false;
+	}
+	
+	public boolean getTimerIniciado() {
+		return timerIniciado;
 	}
 	
 	public void iniciarTimer() {
+		
+		timerIniciado = true;
+		
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {

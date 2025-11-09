@@ -82,4 +82,15 @@ public class Buque {
 		return fase.estaEnFaseArrived();
 	}
 
+	public void iniciarViaje() {
+		if (LocalDateTime.now().isEqual(fecSalida)) {
+			getGPS().iniciarTimer();
+			System.out.println("Buque iniciando viaje hacia la Terminal " + this.getDestinoActual().getNombre());
+		}else if (LocalDateTime.now().isBefore(fecSalida)){
+			System.out.println("Aún falta para iniciar el viaje");
+		}else {
+			System.out.println("Se deberá arreglar un nuevo cronograma por atraso antes de salir");
+		}
+	}
+
 }
