@@ -19,20 +19,13 @@ public class PuertoDestino extends Filtro{
 		this.destino = destino;
 	}
 	
-	
-	/*
-	 * @Override public List<List<Tramo>> buscar(Terminal terminal) { return
-	 * terminal.getViajes().stream().filter(v -> this.cumpleCondicion(v, terminal)).
-	 * map(v -> v.getCircutio().getTramos()).collect(Collectors.toList());
-	 * 
-	 * }
-	 */
+
 
 
 
 
 	@Override
-	public boolean cumpleCondicion(Viaje v, Terminal terminal) {
+	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
 		return v.tieneDestino(destino);
 	}
 

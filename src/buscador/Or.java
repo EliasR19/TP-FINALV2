@@ -1,8 +1,5 @@
 package buscador;
 
-import java.util.List;
-
-import Circuitos.Tramo;
 import Circuitos.Viaje;
 import terminal.Terminal;
 

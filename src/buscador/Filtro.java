@@ -14,7 +14,7 @@ public abstract class Filtro {
 				map(v -> v.getCircutio().getTramos()).collect(Collectors.toList());
 	}
 	
-	public abstract boolean cumpleCondicion(Viaje v, Terminal terminal);
+	protected abstract boolean cumpleCondicion(Viaje v, Terminal terminal);
 	
 	
 	

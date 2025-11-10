@@ -26,7 +26,7 @@ public class FiltroCompuesto extends Filtro{
 		List<List<Tramo>> result = new ArrayList<>();
 		
 		for(Viaje v : terminal.getViajes()) {
-			if(op.cumpleCondicion(v, terminal, f1, f2)) {
+			if(this.cumpleCondicion(v, terminal)) {
 				
 				result.add(v.getCircutio().getTramos());
 			}
@@ -37,9 +37,8 @@ public class FiltroCompuesto extends Filtro{
 
 	
 	@Override
-	public boolean cumpleCondicion(Viaje v, Terminal terminal) {
+	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
 		return op.cumpleCondicion(v, terminal, f1, f2);
-
 	}
 
 	
