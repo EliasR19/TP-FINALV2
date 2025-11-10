@@ -65,11 +65,25 @@ public class Viaje {
 		return cronograma;
 	}
 
-	
-
-
-
 	public LocalDateTime getFecInicio() {
 		return fecInicio;
+	}
+	
+	public CircuitoMaritimo getCircutio() {
+		return circuito;
+	}
+	
+	public boolean tieneDestino(Terminal terminal) {	
+		return circuito.contiene(origen, terminal);
+
+	}
+	
+	public boolean tieneDestinoYLlegada(LocalDateTime llegada,  Terminal destino) {
+		for(Cronograma c : cronograma) {
+			if(c.getDestino() == destino && c.getLlegada().equals(llegada)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

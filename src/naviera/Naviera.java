@@ -63,6 +63,11 @@ public class Naviera {
 	public void salidaBuque(Buque bA, CircuitoMaritimo circuito,LocalDateTime fecSalida) {
 		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(bA,fecSalida);
 	}
+	public void asignarViaje(Buque b,CircuitoMaritimo c) {
+		//Asigna un viaje a un buque
+		b.asignarViaje(new Viaje(b.getFecSalida(), c.getOrigen(), c));
+	}
+	
 	
 	public double duracionEntre(Terminal origen, Terminal destino) {
 		
@@ -88,11 +93,6 @@ public class Naviera {
 		return null; //Error , no estan las terminales en este circuito.
 	}
 	
-	
-	public void asignarViaje(Buque b,CircuitoMaritimo c) {
-		//Asigna un viaje a un buque
-		b.asignarViaje(new Viaje(b.getFecSalida(), c.getOrigen(), c));
-	}
 	
 	
 	

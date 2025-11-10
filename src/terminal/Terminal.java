@@ -10,7 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BooleanSupplier;
+import java.util.stream.Collectors;
 
+import Circuitos.Viaje;
 import naviera.*;
 import buque.Buque;
 import clientes.*;
@@ -71,5 +73,18 @@ public class Terminal {
 	public void exportarCarga(Terminal t) {
 		//Buscar linea que contenga un circuito que contenga 't' como origen de algun Viaje.
 	}
+	
+	public List<Naviera> getNavieras(){
+		return lineas;
+	}
+	
+	public List<Viaje> getViajes(){
+		for(Naviera n : lineas) {
+			return n.getBuques().stream().map(b -> b.getViaje()).collect(Collectors.toList());
+		}
+		
+		return null;
+	}
+	
 	
 }

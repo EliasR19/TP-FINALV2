@@ -40,4 +40,8 @@ public class Buque {
 			c.getEntero();
 		}
 	}
+	
+	public Viaje getViaje() {
+		return viaje;
+	}
 }
