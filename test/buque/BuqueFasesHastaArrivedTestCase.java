@@ -43,7 +43,7 @@ public class BuqueFasesHastaArrivedTestCase {
 		assertEquals(-23, buque.getGPS().getLatitud());
 		assertEquals(-25, buque.getGPS().getLongitud());
 	}
-	
+	 
 	@Test
 	void testUnBuqueAvanzaYElGPSCuandoPasaUnMinutoLeDiceSuPosicionYSabeSuFaseActual() {
 		buque.getGPS().actualizarPosicionPorUnMinuto();

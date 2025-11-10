@@ -71,41 +71,21 @@ public class BuqueFasesRestantesTestCase {
 	
 	
 	@Test
-	void testUnBuquePasaALaFaseWorkingMedianteLaTerminalSoloSiEstaEnLaFaseArrived() {
-		buque.setFase(new Arrived());
+	void testUnBuquePasaALaFaseWorkingMedianteLaTerminalSoloSiEstaEnLaFaseArrivedYRealizaLaDescargaYCarga() {
+		buque.setFase(new Arrived()); // Seteamos que arrivó para que pueda pasar a la siguiente fase
 		t2.darOrdenDeInicio(buque);
 		
+		assertTrue(buque.estaEnFaseWorking());
+
 		assertTrue(buque.tieneCargaDe(container2));
 		assertFalse(buque.tieneCargaDe(container1));
 		
-		assertTrue(t1.tieneContainer(container1));
-		assertFalse(t1.tieneContainer(container2));
-		
+
+		assertTrue(t2.tieneContainer(container1));
+		assertFalse(t2.tieneContainer(container2));
 	}
 	
-	@Test
-	void testUnBuqueTieneUnGPSQueLeDiceSuPosicion() {
-		
-	}
 	
-	@Test
-	void testUnBuqueAvanzaYElGPSCuandoPasaUnMinutoLeDiceSuPosicionYSabeSuFaseActual() {
-		
-	}
-	
-	@Test
-	void testUnBuqueCuandoNoEstaA50MetrosOMenosDeLaTerminalAunNoPasaALaSiguienteFase() {
-		
-	}
-	
-	@Test
-	void testUnBuqueCuandoEstaA50MetrosOMenosDeLaTerminalPasaALaSiguienteFase() {
-		
-	}
-	
-	@Test
-	void testUnBuqueLlegaAlDestino() {
-		
-	}
+
 
 }

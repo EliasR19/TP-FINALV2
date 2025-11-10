@@ -100,19 +100,26 @@ public class Buque {
 	}
 
 	public void iniciarFaseWorking() {
-		this.setFase(new Working());
+		if (fase.estaEnFaseArrived()) {
+			this.setFase(new Working());
+		}
 	}
 
 	public void realizarDescargaYCarga(Terminal destino) { // Como no se contempla el proceso de carga y descarga 
 														   // dejamos que se descargan todos los del buque y se
 														   // cargan todos de la terminal
-		destino.recibirCarga(carga, this);
+		List<Container> cargaParaLaTerminal = new ArrayList<>(carga);
+		
+		this.bajarCargas(cargaParaLaTerminal);
+		destino.recibirCarga(cargaParaLaTerminal, this);
+		
 	}
 
-	public void recibirCarga(List<Container> containers) {
-		for(Container c : containers) {
-			this.subirCarga(c);
+	private void bajarCargas(List<Container> cargas) {
+		for (Container c : cargas) {
+			this.bajarCarga(c);
 		}
+		
 	}
 
 	public void partidaHabilitada(Terminal terminal) {
@@ -133,6 +140,16 @@ public class Buque {
 
 	public boolean estaEnFaseDeparting() {
 		return fase.estaEnFaseDeparting();
+	}
+
+	public void bajarCarga(Container c) {
+		carga.remove(c);
+	}
+
+	public void recibirCargas(List<Container> cargas) {
+		for(Container c : cargas) {
+			this.subirCarga(c);
+		}
 	}
 
 }

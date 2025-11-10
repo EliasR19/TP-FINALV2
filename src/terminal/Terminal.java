@@ -80,6 +80,7 @@ public class Terminal {
 
 	public void darOrdenDeInicio(Buque buque) {
 		buque.iniciarFaseWorking();
+		buque.realizarDescargaYCarga(this);
 	}
 
 	public void guardarContainer(Container container) {
@@ -91,11 +92,28 @@ public class Terminal {
 	}
 
 	public void recibirCarga(List<Container> carga, Buque buque) {
+		List<Container> cargaParaElBuque = new ArrayList<>(this.getContainers());
+		
 		for(Container c : carga) {
 			this.guardarContainer(c);
 		}
-		buque.recibirCarga(containers);
-		buque.partidaHabilitada(this);
+		
+		this.darCargas(cargaParaElBuque);
+		buque.recibirCargas(cargaParaElBuque);
+	}
+
+	private void darCargas(List<Container> cargas) {
+		for(Container c : cargas) {
+			this.darCarga(c);
+		}
+	}
+
+	private List<Container> getContainers() {
+		return containers;
+	}
+
+	public void darCarga(Container c) {
+		containers.remove(c);
 	}
 	
 }
