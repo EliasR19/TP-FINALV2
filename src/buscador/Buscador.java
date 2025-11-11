@@ -7,20 +7,17 @@ import Circuitos.*;
 import terminal.Terminal;
 	
 public class Buscador {
-	private List<Filtro> filtros;
+	private Filtro filtro;
 	private Terminal terminal; // Terminal de Origen. Desde donde se busca.
 	
 	
 	public Buscador(Terminal terminal) {
-		this.filtros = new ArrayList<>();
 		this.terminal = terminal;
 	}
 	
 	public List<List<Tramo>> buscar(){
 		List<List<Tramo>> ts = new ArrayList<>();
-		for(Filtro f: filtros) {
-			ts.addAll(f.buscar(terminal));
-		}
+			ts.addAll(filtro.buscar(terminal));
 		return ts;
 	}
 
@@ -28,6 +25,6 @@ public class Buscador {
 
 
 	public void agregarFiltro(Filtro f) {
-		filtros.add(f);
+		filtro = f;
 	}
 }
