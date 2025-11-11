@@ -10,9 +10,11 @@ import container.BL;
 import container.Container;
 import container.ContainerTanque;
 import terminal.Terminal;
+import ubicacionGeografica.UbicacionGeografica;
 
 class ShipperTestCase {
 
+	private UbicacionGeografica u1, u2;
 	private Terminal origen, destino;
 	private Shipper shipper;
 	private Container carga;
@@ -20,8 +22,10 @@ class ShipperTestCase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		origen = new Terminal("A");
-		destino = new Terminal("B");
+		u1 = new UbicacionGeografica(-23, -25);
+		u2 = new UbicacionGeografica(-22.91, -43.17);
+		origen = new Terminal("Argentina", u1);
+		destino = new Terminal("Brasil", u2);
 		shipper = new Shipper();
 		
 		// se crea un BL 

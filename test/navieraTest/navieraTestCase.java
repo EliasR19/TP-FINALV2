@@ -8,19 +8,23 @@ import org.junit.jupiter.api.Test;
 import buque.Buque;
 import naviera.*;
 import terminal.*;
+import ubicacionGeografica.UbicacionGeografica;
 
 class navieraTestCase {
 
 	private Naviera naviera;
 	private Buque buque1, buque2;
+	private UbicacionGeografica u1, u2;
 	private Terminal terminal1, terminal2;
 	private CircuitoMaritimo circuitoM, circuitoMM;
 	
 	@BeforeEach
 	public void setUp() {
 		naviera = new Naviera();
-		terminal1 = new Terminal("A");
-		terminal2 = new Terminal("B");
+		u1 = new UbicacionGeografica(-23, -25);
+		u2 = new UbicacionGeografica(-22.91, -43.17);
+		terminal1 = new Terminal("Argentina", u1);
+		terminal2 = new Terminal("Brasil", u2);
 	}
 	
 	@Test

@@ -17,9 +17,11 @@ import container.ContainerTanque;
 import empresasTransportistas.Camion;
 import empresasTransportistas.Chofer;
 import terminal.Terminal;
-
+import ubicacionGeografica.UbicacionGeografica;
+ 
 class TerminalTestCase {
 	
+	private UbicacionGeografica ubicacionTerminal;
 	private Terminal terminal;
 	private Shipper shipper;
 	private Container carga;
@@ -30,9 +32,10 @@ class TerminalTestCase {
 	private LocalDateTime turno;
 	
 	
-	@BeforeEach
-	void setUp() throws Exception {
-		terminal = new Terminal("A");
+		@BeforeEach
+		void setUp() throws Exception {
+		ubicacionTerminal = new UbicacionGeografica(200, 100);
+		terminal = new Terminal("A", ubicacionTerminal);
 		shipper = new Shipper();
 		buque = new Buque();
 		camion = new Camion();
@@ -46,6 +49,14 @@ class TerminalTestCase {
 		
 		carga = new ContainerTanque("azul1234567", 26d, 22d, 20d, bl);
 	}
+	
+	@Test
+	void testLaTerminalTieneEstaUbicadaEn200X100Y() {
+		UbicacionGeografica ubicacion = terminal.getUbicacion();
+		assertEquals(200, ubicacion.getLatitud());
+		assertEquals(100, ubicacion.getLongitud());
+	}
+
 
 	@Test
 	void testGenerarOrdenExp() {

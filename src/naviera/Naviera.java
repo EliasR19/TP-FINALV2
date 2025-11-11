@@ -27,7 +27,6 @@ public class Naviera {
 	}
 
 
-
 	public boolean tieneBuque(Buque buque) {
 		return buques.contains(buque);
 	}
@@ -50,18 +49,6 @@ public class Naviera {
 	}
 	public void agregarBuque(Buque b) {
 		buques.add(b);
-	}
-	
-	
-	
-	public void establecerSalida(Buque b, LocalDateTime fecSalida) {
-		b.setFecSalida(fecSalida);
-	}
-	
-	
-	
-	public void salidaBuque(Buque bA, CircuitoMaritimo circuito,LocalDateTime fecSalida) {
-		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(bA,fecSalida);
 	}
 	
 	public double duracionEntre(Terminal origen, Terminal destino) {
@@ -89,9 +76,13 @@ public class Naviera {
 	}
 	
 	
-	public void asignarViaje(Buque b,CircuitoMaritimo c) {
+	public void asignarViaje(Buque buque, CircuitoMaritimo circuito, LocalDateTime fechaSalida) {
 		//Asigna un viaje a un buque
-		b.asignarViaje(new Viaje(b.getFecSalida(), c.getOrigen(), c));
+		buque.asignarDatosParaElViaje(fechaSalida, circuito.getOrigen());
+		Viaje viaje = new Viaje(fechaSalida, circuito.getOrigen(), circuito);
+		viaje.createCronograma();
+		buque.asignarViaje(viaje);
+		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(buque, fechaSalida);
 	}
 	
 	
@@ -99,7 +90,7 @@ public class Naviera {
 	public void recorridos() {
 		for(Buque b : buques) {
 			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
-			b.cronograma();
+			b.getViaje().getCronograma();
 			System.out.println("\n");
 		}
 	}

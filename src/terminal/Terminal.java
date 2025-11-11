@@ -1,17 +1,13 @@
 package terminal;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BooleanSupplier;
-
 import naviera.*;
+import ubicacionGeografica.UbicacionGeografica;
 import buque.Buque;
 import clientes.*;
 import container.Container;
@@ -20,18 +16,20 @@ import empresasTransportistas.*;
 
 public class Terminal {
 	
-	private String name;
+	private String nombre;
+	private UbicacionGeografica ubicacion;
 	private List<Naviera> lineas;
-	private List<Container> cargas;
+	private List<Container> containers;
 	private List<EmpresaTransportista> empresasTransportistas;
 	private Map<OrdenExp, LocalDateTime> ordenesExp;
 	//private Map<OrdenImp, LocalDateTime> ordenesImp;
 	private List<Shipper> shippers;
 	
-	public Terminal(String name) {
-		this.name = name;
+	public Terminal(String nombre, UbicacionGeografica ubicacion) {
+		this.nombre = nombre;
+		this.ubicacion = ubicacion;
 		this.lineas = new ArrayList<Naviera>();
-		this.cargas = new ArrayList<Container>();
+		this.containers = new ArrayList<Container>();
 		this.empresasTransportistas = new ArrayList<EmpresaTransportista>();
 		this.ordenesExp = new HashMap<OrdenExp, LocalDateTime>();
 		this.shippers = new ArrayList<Shipper>();
@@ -41,8 +39,8 @@ public class Terminal {
 		lineas.add(l);
 	}
 
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
 	
 
@@ -70,6 +68,52 @@ public class Terminal {
 		
 	public void exportarCarga(Terminal t) {
 		//Buscar linea que contenga un circuito que contenga 't' como origen de algun Viaje.
+	}
+
+	public UbicacionGeografica getUbicacion() {
+		return ubicacion;
+	}
+
+	public void mandarMailConsignees() {
+		// TODO Auto-generated method stub
+	}
+
+	public void darOrdenDeInicio(Buque buque) {
+		buque.iniciarFaseWorking();
+		buque.realizarDescargaYCarga(this);
+	}
+
+	public void guardarContainer(Container container) {
+		containers.add(container);
+	}
+
+	public boolean tieneContainer(Container container) {
+		return containers.contains(container);
+	}
+
+	public void recibirCarga(List<Container> carga, Buque buque) {
+		List<Container> cargaParaElBuque = new ArrayList<>(this.getContainers());
+		
+		for(Container c : carga) {
+			this.guardarContainer(c);
+		}
+		
+		this.darCargas(cargaParaElBuque);
+		buque.recibirCargas(cargaParaElBuque);
+	}
+
+	private void darCargas(List<Container> cargas) {
+		for(Container c : cargas) {
+			this.darCarga(c);
+		}
+	}
+
+	private List<Container> getContainers() {
+		return containers;
+	}
+
+	public void darCarga(Container c) {
+		containers.remove(c);
 	}
 	
 }

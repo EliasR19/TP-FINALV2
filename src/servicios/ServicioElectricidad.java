@@ -1,17 +1,28 @@
 package servicios;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import container.Container;
 
 public class ServicioElectricidad extends Servicio{
 
-	public ServicioElectricidad(double precioFijo) {
+	private LocalDateTime inicio;
+	private LocalDateTime fin;
+	
+	public ServicioElectricidad(double precioFijo, LocalDateTime inicio, LocalDateTime fin) {
 		super(precioFijo);
+		this.inicio = inicio;
+		this.fin = fin;
 	}
 
 	@Override
 	public double servicioPara(Container container) {
 		if (container.EsRefeer()) {
-			return 1d;
+			Duration duracion = Duration.between(inicio, fin);
+			long horasTranscurridas = duracion.toHours();
+			
+			return horasTranscurridas * this.getPrecioFijo();
 		}
 		return 0d;
 	}
