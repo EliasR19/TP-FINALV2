@@ -78,4 +78,14 @@ public class Viaje {
 	    }
 	    return origen; // Ya llegó a todos los destinos
 	}
+
+
+
+	public void confirmarLlegada(Terminal destino) {
+		 for (Cronograma c : cronograma) {
+		        if (c.getDestino().getNombre().equals(destino.getNombre())) {
+		            c.confirmarLlegada();
+		        }
+		 }
+	}
 }

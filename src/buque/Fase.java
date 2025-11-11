@@ -25,5 +25,5 @@ public abstract class Fase {
 	boolean estaEnFaseDeparting() {
 		return false;
 	}
-	
+
 }

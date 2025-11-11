@@ -5,7 +5,7 @@ import terminal.Terminal;
 public class Tramo {
 	private Terminal origen;
 	private Terminal destino;
-	private double duracion; // expresado en HORAS
+	private double duracion; // expresado en MINUTOS
 	
 	public Tramo(Terminal origen, Terminal destino, double duracion) {
 		this.origen = origen;
@@ -20,7 +20,7 @@ public class Tramo {
 		return destino;
 	}
 	
-	public double getDuracion() { //En horas
+	public double getDuracion() { //En minutos
 		return duracion;
 	}
 

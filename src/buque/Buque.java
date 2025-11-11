@@ -102,6 +102,8 @@ public class Buque {
 	public void iniciarFaseWorking() {
 		if (fase.estaEnFaseArrived()) {
 			this.setFase(new Working());
+		}else {
+			System.out.println("El Buque aún no se encuentra en la Terminal");
 		}
 	}
 
@@ -150,6 +152,10 @@ public class Buque {
 		for(Container c : cargas) {
 			this.subirCarga(c);
 		}
+	}
+
+	public void llegoAlDestino(Terminal destino) {
+		viaje.confirmarLlegada(destino);
 	}
 
 }

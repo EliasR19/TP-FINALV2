@@ -115,5 +115,9 @@ public class Terminal {
 	public void darCarga(Container c) {
 		containers.remove(c);
 	}
+
+	public void darOrdenDeDepart(Buque buque) {
+		buque.partidaHabilitada(this);
+	}
 	
 }

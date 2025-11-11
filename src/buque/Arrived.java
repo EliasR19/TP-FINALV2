@@ -6,7 +6,7 @@ public class Arrived extends Fase {
 
 	@Override
 	public void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino) {
-		// En esta fase no realiza nada
+		System.out.println("El buque está en espera del inicio del trabajo de descarga y carga");
 	}
 
 	public boolean estaEnFaseArrived() {
