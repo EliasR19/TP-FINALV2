@@ -21,7 +21,7 @@ public class Terminal {
 	private List<Naviera> lineas;
 	private List<Container> containers;
 	private List<EmpresaTransportista> empresasTransportistas;
-	private Map<OrdenExp, LocalDateTime> ordenesExp;
+	private List<OrdenExp> ordenesExp;
 	//private Map<OrdenImp, LocalDateTime> ordenesImp;
 	private List<Shipper> shippers;
 	
@@ -31,7 +31,7 @@ public class Terminal {
 		this.lineas = new ArrayList<Naviera>();
 		this.containers = new ArrayList<Container>();
 		this.empresasTransportistas = new ArrayList<EmpresaTransportista>();
-		this.ordenesExp = new HashMap<OrdenExp, LocalDateTime>();
+		this.ordenesExp = new ArrayList<OrdenExp>();
 		this.shippers = new ArrayList<Shipper>();
 	}
 	
@@ -57,18 +57,14 @@ public class Terminal {
 	}
 	
 	public void generarOrdenExp(Shipper shipper, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
-		ordenesExp.put(new OrdenExp(shipper, carga, buque, camion, chofer), turno);
-		shippers.add(shipper);
-		
+		ordenesExp.add(new OrdenExp(this, shipper, carga, buque, camion, chofer, turno));
+		shippers.add(shipper);	
 	}
 
 	public Boolean tieneRegistradoSh(Shipper shipper) {
 		return shippers.contains(shipper);
 	}
 		
-	public void exportarCarga(Terminal t) {
-		//Buscar linea que contenga un circuito que contenga 't' como origen de algun Viaje.
-	}
 
 	public UbicacionGeografica getUbicacion() {
 		return ubicacion;
@@ -98,13 +94,13 @@ public class Terminal {
 			this.guardarContainer(c);
 		}
 		
-		this.darCargas(cargaParaElBuque);
+		this.retirarCargas(cargaParaElBuque);
 		buque.recibirCargas(cargaParaElBuque);
 	}
 
-	private void darCargas(List<Container> cargas) {
+	private void retirarCargas(List<Container> cargas) {
 		for(Container c : cargas) {
-			this.darCarga(c);
+			this.retirarCarga(c);
 		}
 	}
 
@@ -112,7 +108,7 @@ public class Terminal {
 		return containers;
 	}
 
-	public void darCarga(Container c) {
+	public void retirarCarga(Container c) {
 		containers.remove(c);
 	}
 	

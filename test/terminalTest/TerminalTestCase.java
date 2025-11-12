@@ -36,10 +36,10 @@ class TerminalTestCase {
 		void setUp() throws Exception {
 		ubicacionTerminal = new UbicacionGeografica(200, 100);
 		terminal = new Terminal("A", ubicacionTerminal);
-		shipper = new Shipper();
+		shipper = new Shipper("Marcos");
 		buque = new Buque();
 		camion = new Camion();
-		chofer = new Chofer();
+		chofer = new Chofer("Maxi");
 		turno = LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0));
 		
 		bl = new BL();

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import Circuitos.Viaje;
+import circuitos.Viaje;
 import container.Container;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;

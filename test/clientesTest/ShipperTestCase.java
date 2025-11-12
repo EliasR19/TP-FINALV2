@@ -26,7 +26,7 @@ class ShipperTestCase {
 		u2 = new UbicacionGeografica(-22.91, -43.17);
 		origen = new Terminal("Argentina", u1);
 		destino = new Terminal("Brasil", u2);
-		shipper = new Shipper();
+		shipper = new Shipper("Marcos");
 		
 		// se crea un BL 
 		bl = new BL();
@@ -39,8 +39,8 @@ class ShipperTestCase {
 	}
 
 	@Test
-	void test() {
-		;
+	void testExportarCarga() {
+		
 	}
 
 }

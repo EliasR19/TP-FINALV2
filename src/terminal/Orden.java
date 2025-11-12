@@ -1,30 +1,40 @@
 package terminal;
 
+import java.time.LocalDateTime;
+
 import buque.Buque;
-import clientes.Shipper;
+import clientes.*;
 import container.Container;
 import empresasTransportistas.Camion;
 import empresasTransportistas.Chofer;
 
 public abstract class Orden {
 	
-	private Shipper shipper;
+	private Terminal terminal;
+	private Cliente cliente;
 	private Container carga;
 	private Buque buque;
 	private Camion camion;
 	private Chofer chofer;
+	private LocalDateTime turno;
 	
-	public Orden(Shipper shipper, Container carga, Buque buque, Camion camion, Chofer chofer) {
+	public Orden(Terminal terminal, Cliente cliente, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
 		
-		this.shipper = shipper;
+		this.terminal = terminal;
+		this.cliente = cliente;
 		this.carga = carga;
 		this.buque = buque;
 		this.camion = camion;
 		this.chofer = chofer;
+		this.turno = turno;
 	}
-
-	public Shipper getShipper() {
-		return shipper;
+	
+	public Terminal getTerminal() {
+		return this.terminal;
+	}
+	
+	public Cliente getCliente() {
+		return this.cliente;
 	}
 
 	public Container getCarga() {
@@ -42,6 +52,20 @@ public abstract class Orden {
 	public Chofer getChofer() {
 		return chofer;
 	}
+
+	public LocalDateTime getTurno() {
+		return turno;
+	}
+
+	public void setTurno(LocalDateTime turno) {
+		this.turno = turno;
+	}
 	
+	public abstract boolean respetaElTurno(LocalDateTime horario);
+	
+
+	public boolean respetaCamionYChofer(Camion camion) {
+		return this.getCamion() == camion && this.getChofer() == camion.getChofer();
+	}
 	
 }

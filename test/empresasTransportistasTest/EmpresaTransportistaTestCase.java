@@ -20,7 +20,7 @@ class EmpresaTransportistaTestCase {
 		
 		empresaT = new EmpresaTransportista();
 		camion = new Camion();
-		chofer = new Chofer();
+		chofer = new Chofer("Maxi");
 		
 		empresaT.registraCamion(camion);
 		empresaT.registraChofer(chofer);

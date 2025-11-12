@@ -1,18 +1,21 @@
 package clientes;
 
-public class Shipper {
+import java.time.LocalDateTime;
 
+import terminal.OrdenExp;
+
+public class Shipper extends Cliente{
 	
-	
-	public Shipper() {
-		
+	public Shipper(String nombre) {
+		super(nombre);
 	}
 	
-	//public void exportar(Container carga, Terminal origen, Terminal destino) {
-		
-		
-		
-	//}
+	public void exportarCarga(OrdenExp orden, LocalDateTime horario) {
+		if(orden.respetaElTurno(horario) && orden.respetaCamionYChofer(orden.getCamion())) {
+			orden.getCamion().descargar();
+			orden.getTerminal().guardarContainer(orden.getCarga());
+		}
+	}
 	
 	
 }
