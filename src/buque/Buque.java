@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import circuitos.Cronograma;
-import circuitos.Viaje;
+import Circuitos.Cronograma;
+import Circuitos.Viaje;
 import container.Container;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;

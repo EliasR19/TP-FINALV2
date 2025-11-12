@@ -2,7 +2,7 @@ package buscador;
 
 import java.time.LocalDateTime;
 
-import circuitos.Viaje;
+import Circuitos.Viaje;
 import terminal.Terminal;
 
 public class FechaLLegada extends Filtro{

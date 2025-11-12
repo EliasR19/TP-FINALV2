@@ -3,8 +3,8 @@ package buscador;
 import java.util.ArrayList;
 import java.util.List;
 
-import circuitos.Tramo;
-import circuitos.Viaje;
+import Circuitos.Tramo;
+import Circuitos.Viaje;
 import terminal.*;
 
 public class FiltroCompuesto extends Filtro{

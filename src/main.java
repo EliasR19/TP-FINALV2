@@ -9,14 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Circuitos.Tramo;
+import Circuitos.Viaje;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
 import ubicacionGeografica.UbicacionGeografica;
 import buque.Buque;
 import buscador.*;
-import circuitos.Tramo;
-import circuitos.Viaje;
 
 public class main {
 
