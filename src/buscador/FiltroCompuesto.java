@@ -37,8 +37,7 @@ public class FiltroCompuesto extends Filtro{
 
 	@Override
 	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
-		// TODO Auto-generated method stub
-		return false;
+		return op.cumpleCondicion(v, terminal, f1, f2);
 	}
 
 	

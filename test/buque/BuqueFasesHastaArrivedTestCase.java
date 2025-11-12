@@ -22,6 +22,7 @@ public class BuqueFasesHastaArrivedTestCase {
 	private Buque buque;
 	private Naviera n1; 
 
+	
 	@BeforeEach
 	public void setUp() {
 		u1 = new UbicacionGeografica(-23, -25);

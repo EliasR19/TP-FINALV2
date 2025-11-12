@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -8,19 +10,21 @@ import java.util.List;
 import java.util.Map;
 
 import Circuitos.Tramo;
+import Circuitos.Viaje;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
+import ubicacionGeografica.UbicacionGeografica;
 import buque.Buque;
 import buscador.*;
 
 public class main {
 
 	public static void main(String[] args) {
-		Terminal Argentina = new Terminal("Argentina");
-		Terminal Brasil = new Terminal("Brasil");
-		Terminal España = new Terminal("España");
-		Terminal China = new Terminal("China");
+		Terminal Argentina = new Terminal("Argentina", new UbicacionGeografica(0, 0));
+		Terminal Brasil = new Terminal("Brasil", new UbicacionGeografica(0, 0));
+		Terminal España = new Terminal("España", new UbicacionGeografica(0, 0));
+		Terminal China = new Terminal("China", new UbicacionGeografica(0, 0));
 		
 		Naviera lineaA = new Naviera();
 		
@@ -52,26 +56,20 @@ public class main {
 		//}
 		
 		
-		lineaA.salidaBuque(bA, circuitoA, LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)));
-		lineaA.salidaBuque(bB, circuitoA, LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)));
+		lineaA.asignarViaje(bA, circuitoA,LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)));
+		lineaA.asignarViaje(bB, circuitoB, LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)));
 		
-		//System.out.println(bA.getFecSalida());
 		
-		//Argentina.asignarViaje(bB, circuitoA);
-		lineaA.asignarViaje(bA, circuitoA);
-		lineaA.asignarViaje(bB, circuitoB);
+		lineaA.showCronogramaBuque();
 		
-		lineaA.recorridos();
-		//System.out.println(lineaA.duracionEntre(Argentina, Brasil) + " Horas");
 		
-		/*
-		System.out.println(circuitoA.tiempoRecorridoEntre(España, Argentina));
-		for (TerminalPrueba tp : circuitoA.terminalesDelCircuito()) {
-			System.out.println(tp.getName());
+		//System.out.println("que" + circuitoA.tiempoRecorridoEntre(España, Argentina));
+		System.out.println("Recorrido: ");
+		for (Terminal tp : circuitoB.terminalesDelCircuito()) {
+			System.out.println(tp.getNombre());
 		}
-		*/
 		
-		
+	
 		//A partir de los buques que tiene el circuito, y sus fechas de salida, determina el cronograma
 		
 		Argentina.agregarLiena(lineaA);
@@ -79,7 +77,7 @@ public class main {
 		
 		
 		//BUSCADOR
-		Terminal Argelia = new Terminal("Argelia");
+		Terminal Argelia = new Terminal("Argelia", new UbicacionGeografica(0, 0));
 		
 		System.out.println("Buscador");
 		Operador Or = new Or();
@@ -94,11 +92,16 @@ public class main {
 		
 		
 		Buscador b = new Buscador(Argentina);
+		And = new And();
+		Filtro fSimple = new FechaLLegada(LocalDateTime.of(LocalDate.of(2025,12,2), LocalTime.of(3, 0)), España);
+		Filtro fSimple2 = new FechaLLegada(LocalDateTime.of(LocalDate.of(2025,12,3), LocalTime.of(9, 0)), China);
 		
-		b.agregarFiltro(fCompuesto2);
+		Filtro fCompuesto = new FiltroCompuesto(And, fSimple, fSimple2);
+		
+		b.agregarFiltro(fSimple);
 		
 		for (List<Tramo> tList : b.buscar()) {
-			tList.forEach(t -> System.out.print("Origen :" + t.getOrigen().getName() + " |Destino :" + t.getDestino().getName() + " - "));
+			tList.forEach(t -> System.out.print("Origen :" + t.getOrigen().getNombre() + " |Destino :" + t.getDestino().getNombre() + " - "));
 			System.out.println();
 		}
 		

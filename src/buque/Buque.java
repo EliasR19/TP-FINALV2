@@ -155,9 +155,13 @@ public class Buque {
 	
 	public void cronograma() {
 		viaje.createCronograma();
+	}
+	
+	public void showCronograma() {
 		for(Cronograma c : viaje.getCronograma()) {
 			c.getEntero();
 		}
 	}
 
+	
 }

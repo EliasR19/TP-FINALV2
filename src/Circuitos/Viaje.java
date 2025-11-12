@@ -48,8 +48,9 @@ public class Viaje {
 	public void createCronograma() {
 		Tramo tramoActual = circuito.tramoConOrigen(origen);
 		LocalDateTime salidaTime = fecInicio; 
+		Terminal primero = tramoActual.getOrigen();
 		
-		while (tramoActual != null) {
+		while (tramoActual.getDestino() != primero) {
 			cronograma.add(new Cronograma(tramoActual.getOrigen(),
 		   			  tramoActual.getDestino(),
 		   			  salidaTime,

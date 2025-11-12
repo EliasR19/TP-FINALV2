@@ -20,10 +20,6 @@ public class PuertoDestino extends Filtro{
 	}
 	
 
-
-
-
-
 	@Override
 	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
 		return v.tieneDestino(destino);
