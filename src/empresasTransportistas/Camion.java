@@ -32,6 +32,4 @@ public class Camion {
 			this.carga = null;
 		}
 	}
-
-	
 }

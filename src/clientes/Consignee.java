@@ -12,6 +12,7 @@ public class Consignee extends Cliente {
 	
 	public void importarCarga(OrdenImp orden, LocalDateTime horario) {
 		if(orden.getTerminal().respetaElTurnoImp(orden, horario) && orden.getTerminal().respetaCamionYChofer(orden)) {
+			orden.getTerminal().llevarCarga(orden.getCamion(), orden.getCarga());
 			orden.getTerminal().retirarCarga(orden.getCarga());
 		}
 	}

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
-import Circuitos.Viaje;
 import naviera.*;
 import ubicacionGeografica.UbicacionGeografica;
 import buque.Buque;
+import circuitos.Viaje;
 import clientes.*;
 import container.Container;
 import empresasTransportistas.*;
@@ -82,6 +83,7 @@ public class Terminal {
 	}
 
 	public boolean respetaElTurnoExp(OrdenExp orden, LocalDateTime horario) {
+		// verifica si el camion llega a dejar la carga en un limite de 3 horas antes o despues del turno.
 		LocalDateTime limiteInferior = orden.getTurno().minusHours(3);
 		LocalDateTime limiteSuperior = orden.getTurno().plusHours(3);
 		return horario.isBefore(limiteInferior) && horario.isAfter(limiteSuperior);
@@ -94,6 +96,30 @@ public class Terminal {
 	
 	public boolean respetaCamionYChofer(Orden orden) {
 		return camiones.contains(orden.getCamion()) && choferes.contains(orden.getChofer());
+	}
+	
+	public void descargar(Camion camion) {
+		camion.descargar();
+		camiones.remove(camion);
+		choferes.remove(camion.getChofer());
+	}
+	
+	public void llevarCarga(Camion camion, Container carga) {
+		camion.setCarga(carga);
+		camiones.remove(camion);
+		choferes.remove(camion.getChofer());
+	}
+	
+	public boolean tieneRegistradoElCamion(Camion camion) {
+		return camiones.contains(camion);
+	}
+	
+	public boolean tieneRegistradoAlChofer(Chofer chofer) {
+		return choferes.contains(chofer);
+	}
+	
+	public int cantidadDeOrdenesExp() {
+		return ordenesExp.size();
 	}
 	
 	public Boolean tieneRegistradoSh(Shipper shipper) {
@@ -123,7 +149,7 @@ public class Terminal {
 	}
 
 	public void recibirCarga(List<Container> carga, Buque buque) {
-		List<Container> cargaParaElBuque = new ArrayList<>(this.getContainers());
+		List<Container> cargaParaElBuque = new ArrayList<Container>(this.getContainers());
 		
 		for(Container c : carga) {
 			this.guardarContainer(c);
@@ -157,6 +183,22 @@ public class Terminal {
 		}
 		
 		return null;
+	}
+
+	public Integer cantidadDeOrdenesImp() {
+		return ordenesImp.size();
+	}
+
+	public Integer cantidadChoferes(Chofer chofer) {
+		return choferes.size();
+	}
+
+	public Integer cantidadCamiones(Camion camion) {
+		return camiones.size();
+	}
+
+	public Boolean tieneRegistradoC(Consignee consignee) {
+		return consignees.contains(consignee);
 	}
 	
 }

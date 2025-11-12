@@ -10,19 +10,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
-import clientes.Shipper;
+import clientes.*;
 import container.BL;
 import container.Container;
 import container.ContainerTanque;
 import empresasTransportistas.Camion;
 import empresasTransportistas.Chofer;
-import terminal.Terminal;
+import terminal.*;
 import ubicacionGeografica.UbicacionGeografica;
  
 class TerminalTestCase {
 	
 	private UbicacionGeografica ubicacionTerminal;
 	private Terminal terminal;
+	private Consignee consignee;
 	private Shipper shipper;
 	private Container carga;
 	private Buque buque;
@@ -64,7 +65,22 @@ class TerminalTestCase {
 		terminal.generarOrdenExp(shipper, carga, buque, camion, chofer, turno);
 		
 		assertTrue(terminal.tieneRegistradoSh(shipper));
+		assertTrue(terminal.tieneRegistradoElCamion(camion));
+		assertTrue(terminal.tieneRegistradoAlChofer(chofer));
+		assertEquals(1, terminal.cantidadDeOrdenesExp());
 		
 	}
-
+	
+	@Test 
+	void testGenerarOrdenImp() {
+		
+		terminal.generarOrdenImp(consignee, carga, buque, camion, chofer, turno);
+		
+		assertTrue(terminal.tieneRegistradoC(consignee));
+		assertTrue(terminal.tieneRegistradoElCamion(camion));
+		assertTrue(terminal.tieneRegistradoAlChofer(chofer));
+		assertEquals(1, terminal.cantidadDeOrdenesImp());
+		
+	}
+	
 }
