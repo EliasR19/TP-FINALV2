@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import Circuitos.Viaje;
 import terminal.Terminal;
 import buque.Buque;
+import circuitos.Viaje;
 
 public class Naviera {
 	
@@ -25,7 +25,6 @@ public class Naviera {
 	public List<CircuitoMaritimo> getCircuitosMaritimos(){
 		return circuitos;
 	}
-
 
 	public boolean tieneBuque(Buque buque) {
 		return buques.contains(buque);
@@ -82,10 +81,10 @@ public class Naviera {
 		Viaje viaje = new Viaje(fechaSalida, circuito.getOrigen(), circuito);
 		viaje.createCronograma();
 		buque.asignarViaje(viaje);
-		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(buque, fechaSalida);
+		//circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(buque, fechaSalida);
 	}
 	
-	
+
 	
 	public void recorridos() {
 		for(Buque b : buques) {

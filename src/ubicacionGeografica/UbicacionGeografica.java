@@ -12,6 +12,7 @@ public class UbicacionGeografica {
 	public double getLatitud() {
 		return latitud;
 	}
+	
 
 	public void setLatitud(double unaLatitud) {
 		this.latitud = unaLatitud;

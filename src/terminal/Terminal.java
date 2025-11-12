@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import naviera.*;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.*;
 import buque.Buque;
 import buscadorMejorCircuito.BuscadorMejorC;
 import clientes.Shipper;

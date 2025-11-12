@@ -27,6 +27,7 @@ public class main {
 		Buque bA;
 		Buque bB ;
 
+	
 
 
 			Argentina = new Terminal("Argentina", new UbicacionGeografica(19,20));
@@ -58,10 +59,19 @@ public class main {
 			lineaA.agregarCircuitoMaritimo(circuitoB);
 			lineaA.agregarBuque(bA);
 			lineaA.agregarBuque(bB);
-		
+
+			
+			//Argentina.asignarViaje(bB, circuitoA);
+			lineaA.asignarViaje(bA, circuitoA, LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)));
+			lineaA.asignarViaje(bB, circuitoB, LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)));
+			
+			//lineaA.showCronogramaBuque();
 			
 			Argentina.agregarLiena(lineaA);
 			
+			
+			System.out.println("total" + circuitoB.terminalesEntre(Argentina, China));
+
 			
 			//System.out.println(lineaA.duracionEntre(Argentina, Brasil) + " Horas");
 			

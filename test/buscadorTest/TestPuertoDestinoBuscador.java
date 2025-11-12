@@ -11,9 +11,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Circuitos.Tramo;
 import buque.Buque;
 import buscador.*;
+import circuitos.Tramo;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;

@@ -3,7 +3,7 @@ package naviera;
 import java.util.ArrayList;
 import java.util.List;
 
-import Circuitos.Tramo;
+import circuitos.Tramo;
 import terminal.*;
 
 public class CircuitoMaritimo {
@@ -59,33 +59,53 @@ public class CircuitoMaritimo {
 		//FIX LATER
 		//HACER IMPLEMENTACION MÁS PROLIJA.
 		if(this.contiene(origen, destino)) {
-		double tiempoTotal = 0;
-		Terminal terminalActual = origen;
-		if(origen == destino) {
-			return tramos.stream().mapToDouble(t -> t.getDuracion()).sum();
+			
+			double tiempoTotal = 0;
+			Terminal terminalActual = origen;
+			if(origen == destino) {
+				return tramos.stream().mapToDouble(t -> t.getDuracion()).sum();
+			}
+				
+			int tramo = 0;
+			Tramo t = tramos.get(tramo);
+			
+			while(terminalActual != destino) {
+				if(t.getOrigen() == terminalActual ) {
+				//	System.out.println("actual: " + terminalActual.getName());
+					tiempoTotal = tiempoTotal + t.getDuracion();
+					terminalActual = t.getDestino();
+				}
+				tramo++;
+				if(tramo == tramos.size()) {
+					tramo = 0;
+				}
+				 t = tramos.get(tramo);
+			}
+			return tiempoTotal;
 		}
+		return -1;
+	}
+	
+	public int terminalesEntre(Terminal origen, Terminal destino) {
+		int count = 0;
+		Terminal terminalActual = origen;
 			
 		int tramo = 0;
 		Tramo t = tramos.get(tramo);
 		
 		while(terminalActual != destino) {
-			if(t.getOrigen() == terminalActual ) {
-			//	System.out.println("actual: " + terminalActual.getName());
-				tiempoTotal = tiempoTotal + t.getDuracion();
-				terminalActual = t.getDestino();
-			}
+			count++;
 			tramo++;
+			terminalActual = t.getDestino();
 			if(tramo == tramos.size()) {
 				tramo = 0;
 			}
 			 t = tramos.get(tramo);
 		}
-		return tiempoTotal;
-		}
-		throw 
-		System.out.println("Alguna de las terminales dadas no pertenece a este circuito.");
-		return null;
+		
+		return count;
 	}
+	
 	
 	public Tramo tramoConOrigen(Terminal t) {
 		for(Tramo t1 : tramos) {
