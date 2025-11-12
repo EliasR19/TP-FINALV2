@@ -8,7 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import circuitos.Tramo;
+import Circuitos.Tramo;
 import naviera.*;
 import terminal.Terminal;
 import ubicacionGeografica.UbicacionGeografica;

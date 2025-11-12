@@ -1,9 +1,8 @@
-package circuitos;
+package Circuitos;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import naviera.CircuitoMaritimo;
 import terminal.Terminal;
 

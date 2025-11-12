@@ -3,7 +3,7 @@ package buscador;
 import java.util.ArrayList;
 import java.util.List;
 
-import circuitos.*;
+import Circuitos.*;
 import terminal.Terminal;
 	
 public class Buscador {
