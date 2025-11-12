@@ -33,16 +33,10 @@ public class UbicacionGeografica {
 	}
 
 	public double[] factorPara(double unaLatitud, double unaLongitud, double avance) {
-		double metrosNorte  = (latitud - unaLatitud) * 111000; // La diferencia de latitud se hace con la diferencia de grados y luego
-															   //  multiplicando por 111000 metros. Si da + es Norte, si da - es Sur
+		double metrosNorte  = this.metrosNorte(unaLatitud);
+		double metrosEste = this.metrosEste(unaLongitud, unaLatitud); 																				   
 		
-		double metrosEste = (longitud - unaLongitud) * 111000 * Math.cos(Math.toRadians(unaLatitud)); // La de longitud es parecida, pero
-																									   // se hace por coseno, ya que se hace
-																									   // más corta cuando es más cerca del
-																									   // polo. Si da + es Este, sino Oeste
-		
-		// Utilizamos pitagoras para calcular la distancia recta en metros entre la posicion actual y hacia el destino
-		double distancia = Math.sqrt(metrosEste*metrosEste + metrosNorte*metrosNorte);
+		double distancia = this.distancia(unaLatitud, unaLongitud);
 		
 		// Hago el avance que puede tener y la divido por la distancia del destino. De esta forma tengo la cantidad suficiente para avanzar
 		// sin pasarnos de la ubicacion de la terminal
@@ -50,4 +44,23 @@ public class UbicacionGeografica {
 		
 		return new double[]{metrosNorte, metrosEste, factor, distancia};
 	}
+
+	private double metrosNorte(double unaLatitud) {
+		return (latitud - unaLatitud) * 111000; // La diferencia de latitud se hace con la diferencia de grados y luego
+	}										    // multiplicando por 111000 metros. Si da + es Norte, si da - es Sur
+	
+	private double metrosEste(double unaLongitud, double unaLatitud) {
+		return (longitud - unaLongitud) * 111000 * Math.cos(Math.toRadians(unaLatitud)); // La de longitud es parecida, pero
+																						 // se hace por coseno, ya que se hace
+																						 // más corta cuando es más cerca del
+																					     // polo. Si da + es Este, sino Oeste
+	} 
+	
+	private double distancia(double unaLatitud, double unaLongitud) {
+		double metrosNorte  = this.metrosNorte(unaLatitud);
+		double metrosEste = this.metrosEste(unaLongitud, unaLatitud); 
+		
+		return Math.sqrt(metrosEste*metrosEste + metrosNorte*metrosNorte);
+	} // Utilizamos pitagoras para calcular la distancia recta en metros entre la posicion actual y hacia el destino
+	
 }

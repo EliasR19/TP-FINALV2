@@ -45,6 +45,11 @@ public class BuqueFasesHastaArrivedTestCase {
 	}
 	 
 	@Test
+	void testUnBuqueTieneComoDestinoLaT2() {		
+		assertEquals(t2, buque.getDestinoActual());
+	}
+	
+	@Test
 	void testUnBuqueAvanzaYElGPSCuandoPasaUnMinutoLeDiceSuPosicionYSabeSuFaseActual() {
 		buque.getGPS().actualizarPosicionPorUnMinuto();
 		

@@ -109,6 +109,13 @@ public class BuqueFasesRestantesTestCase {
 		assertFalse(buque.estaEnFaseDeparting());
 	}
 	
+	@Test
+	void testUnBuquePasaALaFaseDepartingYSuNuevoDestinoEsLaT3() {
+		t2.darOrdenDeInicio(buque);
+		t2.darOrdenDeDepart(buque);
+		
+		assertEquals(t3, buque.getDestinoActual());
+	}
 	
 
 
