@@ -49,7 +49,7 @@ public class Viaje {
 		Tramo tramoActual = circuito.tramoConOrigen(origen);
 		LocalDateTime salidaTime = fecInicio; 
 		
-		while (tramoActual != null && !(tramoActual.getDestino().equals(origen))) {
+		while (tramoActual != null && !(tramoActual.getDestino().getNombre().equals(origen.getNombre()))) {
 			cronograma.add(new Cronograma(tramoActual.getOrigen(),
 		   			  tramoActual.getDestino(),
 		   			  salidaTime,
