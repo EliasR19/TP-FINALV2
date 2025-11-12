@@ -43,6 +43,7 @@ public class BuqueFasesRestantesTestCase {
 		
 		circuitoA.agregarTramo(t1, t2, 2511);
 		circuitoA.agregarTramo(t2, t3, 10);
+		circuitoA.agregarTramo(t3, t1, 100);
 		
 		n1.agregarCircuitoMaritimo(circuitoA);
 		n1.agregarBuque(buque);
