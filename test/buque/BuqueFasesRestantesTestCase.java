@@ -106,7 +106,7 @@ public class BuqueFasesRestantesTestCase {
 		t2.darOrdenDeInicio(buque); // Con esto aseguramos que el trabajo fue completado
 		t2.darOrdenDeDepart(buque);
 		
-		assertFalse(buque.estaEnFaseDeparting());
+		assertTrue(buque.estaEnFaseDeparting());
 	}
 	
 	@Test
