@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import container.BL;
-import container.BillOfLading;
 import container.ContainerTanque;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
@@ -18,8 +17,8 @@ import terminal.Terminal;
 import ubicacionGeografica.*;
 
 public class BuqueFasesRestantesTestCase {
-	private UbicacionGeografica u1, u2;
-	private Terminal t1, t2;
+	private UbicacionGeografica u1, u2, u3;
+	private Terminal t1, t2, t3;
 	private CircuitoMaritimo circuitoA;
 	private LocalDateTime fechaSalida;
 	private Buque buque;
@@ -31,14 +30,20 @@ public class BuqueFasesRestantesTestCase {
 	public void setUp() {
 		u1 = new UbicacionGeografica(-23, -25);
 		u2 = new UbicacionGeografica(-22.91, -43.17);
+		u3 = new UbicacionGeografica(-10, -20);
 		t1 = new Terminal("Argentina", u1);
 		t2 = new Terminal("Brasil", u2);
+		t3 = new Terminal("Angora", u3);
+		
 		buque = new Buque();
 		n1 = new Naviera();
 		circuitoA = new CircuitoMaritimo(t1, t2);
+		
 		fechaSalida = LocalDateTime.of(2025, 11, 8, 10, 0);
-		circuitoA.agregarTramo(t1, t2, 10);
-		circuitoA.agregarTramo(t2, t1, 10);
+		
+		circuitoA.agregarTramo(t1, t2, 2511);
+		circuitoA.agregarTramo(t2, t3, 10);
+		
 		n1.agregarCircuitoMaritimo(circuitoA);
 		n1.agregarBuque(buque);
 		n1.asignarViaje(buque, circuitoA, fechaSalida);
@@ -62,6 +67,7 @@ public class BuqueFasesRestantesTestCase {
 		// Seteamos que el buque ya está en el destino
 		buque.getGPS().setLatitud(-22.91);
 		buque.getGPS().setLongitud(-43.17);
+		buque.setFase(new Arrived());
 	}
 	
 	@Test
@@ -73,7 +79,6 @@ public class BuqueFasesRestantesTestCase {
 	
 	@Test
 	void testUnBuquePasaALaFaseWorkingMedianteLaTerminalSoloSiEstaEnLaFaseArrivedYRealizaLaDescargaYCarga() {
-		buque.setFase(new Arrived()); // Seteamos que arrivó para que pueda pasar a la siguiente fase
 		t2.darOrdenDeInicio(buque);
 		
 		assertTrue(buque.estaEnFaseWorking());
@@ -86,6 +91,29 @@ public class BuqueFasesRestantesTestCase {
 		assertFalse(t2.tieneContainer(container2));
 	}
 	
+	@Test
+	void testUnBuqueNoPuedePasarALaFaseWorkingSiEstaEnUnaFaseQueNoSeaArrived() {
+		buque.setFase(new Inbound()); // Seteamos que aun no llegó
+		t2.darOrdenDeInicio(buque);
+		
+		assertFalse(buque.estaEnFaseWorking());
+	}
+	
+	@Test
+	void testUnBuquePasaALaFaseDepartingSoloCuandoLaTerminalLoAutorizaYYaRealizóElTrabajoDeDescargaYCarga() {
+		t2.darOrdenDeInicio(buque); // Con esto aseguramos que el trabajo fue completado
+		t2.darOrdenDeDepart(buque);
+		
+		assertTrue(buque.estaEnFaseDeparting());
+	}
+	
+	@Test
+	void testUnBuquePasaALaFaseDepartingYSuNuevoDestinoEsLaT3() {
+		t2.darOrdenDeInicio(buque);
+		t2.darOrdenDeDepart(buque);
+		
+		assertEquals(t3, buque.getDestinoActual());
+	}
 	
 
 

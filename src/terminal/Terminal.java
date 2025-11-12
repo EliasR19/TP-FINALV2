@@ -3,10 +3,7 @@ package terminal;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 
 import Circuitos.Viaje;
@@ -225,6 +222,10 @@ public class Terminal {
 		List<CircuitoMaritimo> circuitos = new ArrayList<>();
 		lineas.stream().forEach(n -> circuitos.addAll(n.getCircuitosMaritimos()));
 		return circuitos;
+	}
+
+	public void darOrdenDeDepart(Buque buque) {
+		buque.partidaHabilitada(this);
 	}
 	
 }
