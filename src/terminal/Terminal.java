@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import Circuitos.Viaje;
 import naviera.*;
 import ubicacionGeografica.UbicacionGeografica;
 import buque.Buque;
@@ -142,6 +145,18 @@ public class Terminal {
 
 	public void retirarCarga(Container c) {
 		containers.remove(c);
+	}
+	
+	public List<Naviera> getNavieras(){
+		return lineas;
+	}
+	
+	public List<Viaje> getViajes(){
+		for(Naviera n : lineas) {
+			return n.getBuques().stream().map(b -> b.getViaje()).collect(Collectors.toList());
+		}
+		
+		return null;
 	}
 	
 }

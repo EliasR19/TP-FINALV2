@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import Circuitos.Viaje;
 import terminal.Terminal;
 import buque.Buque;
-import circuitos.Viaje;
 
 public class Naviera {
 	
@@ -25,6 +25,7 @@ public class Naviera {
 	public List<CircuitoMaritimo> getCircuitosMaritimos(){
 		return circuitos;
 	}
+
 
 
 	public boolean tieneBuque(Buque buque) {
@@ -51,6 +52,23 @@ public class Naviera {
 		buques.add(b);
 	}
 	
+
+	
+	public void establecerSalida(Buque b, LocalDateTime fecSalida) {
+		b.setFecSalida(fecSalida);
+	}
+	
+	
+	
+	public void salidaBuque(Buque bA, CircuitoMaritimo circuito,LocalDateTime fecSalida) {
+		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(bA,fecSalida);
+	}
+	public void asignarViaje(Buque b,CircuitoMaritimo c) {
+		//Asigna un viaje a un buque
+		b.asignarViaje(new Viaje(b.getFecSalida(), c.getOrigen(), c));
+	}
+	
+	
 	public double duracionEntre(Terminal origen, Terminal destino) {
 		
 		//La terminal destino debe estar dentro de algun circuito de esta Naviera. HACER VERIFICACION
@@ -76,21 +94,12 @@ public class Naviera {
 	}
 	
 	
-	public void asignarViaje(Buque buque, CircuitoMaritimo circuito, LocalDateTime fechaSalida) {
-		//Asigna un viaje a un buque
-		buque.asignarDatosParaElViaje(fechaSalida, circuito.getOrigen());
-		Viaje viaje = new Viaje(fechaSalida, circuito.getOrigen(), circuito);
-		viaje.createCronograma();
-		buque.asignarViaje(viaje);
-		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(buque, fechaSalida);
-	}
-	
 	
 	
 	public void recorridos() {
 		for(Buque b : buques) {
 			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
-			b.getViaje().getCronograma();
+			b.cronograma();
 			System.out.println("\n");
 		}
 	}

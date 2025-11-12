@@ -1,4 +1,4 @@
-package circuitos;
+package Circuitos;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -70,12 +70,32 @@ public class Viaje {
 		return fecInicio;
 	}
 	
+
 	public Terminal getDestinoActual() {
 	    for (Cronograma c : cronograma) {
 	        if (!c.getLlegoADestino()) {
 	            return c.getDestino();
 	        }
 	    }
-	    return origen; // Ya llegó a todos los destinos
+	    return origen; 
+	}// Ya llegó a todos los destinos
+
+	public CircuitoMaritimo getCircutio() {
+		return circuito;
+	}
+	
+	public boolean tieneDestino(Terminal terminal) {	
+		return circuito.contiene(origen, terminal);
+
+	}
+	
+	public boolean tieneDestinoYLlegada(LocalDateTime llegada,  Terminal destino) {
+		for(Cronograma c : cronograma) {
+			if(c.getDestino() == destino && c.getLlegada().equals(llegada)) {
+				return true;
+			}
+		}
+		return false;
+
 	}
 }
