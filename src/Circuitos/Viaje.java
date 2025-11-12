@@ -1,4 +1,4 @@
-package circuitos;
+package Circuitos;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
