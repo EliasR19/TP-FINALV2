@@ -61,11 +61,4 @@ public abstract class Orden {
 		this.turno = turno;
 	}
 	
-	public abstract boolean respetaElTurno(LocalDateTime horario);
-	
-
-	public boolean respetaCamionYChofer(Camion camion) {
-		return this.getCamion() == camion && this.getChofer() == camion.getChofer();
-	}
-	
 }

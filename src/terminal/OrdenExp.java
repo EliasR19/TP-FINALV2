@@ -14,12 +14,4 @@ public class OrdenExp extends Orden {
 		super(terminal, shipper, carga, buque, camion, chofer, turno);
 	}
 	
-	@Override
-	public boolean respetaElTurno(LocalDateTime horario) {
-		LocalDateTime limiteInferior = this.getTurno().minusHours(3);
-		LocalDateTime limiteSuperior = this.getTurno().plusHours(3);
-		return horario.isBefore(limiteInferior) && horario.isAfter(limiteSuperior);
-	}
-	
-	
 }
