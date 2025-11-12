@@ -9,7 +9,8 @@ import java.util.Map;
 import naviera.*;
 import ubicacionGeografica.UbicacionGeografica;
 import buque.Buque;
-import clientes.*;
+import buscadorMejorCircuito.BuscadorMejorC;
+import clientes.Shipper;
 import container.Container;
 import empresasTransportistas.*;
 
@@ -24,6 +25,8 @@ public class Terminal {
 	private Map<OrdenExp, LocalDateTime> ordenesExp;
 	//private Map<OrdenImp, LocalDateTime> ordenesImp;
 	private List<Shipper> shippers;
+	
+	private BuscadorMejorC mejor;
 	
 	public Terminal(String nombre, UbicacionGeografica ubicacion) {
 		this.nombre = nombre;
@@ -114,6 +117,21 @@ public class Terminal {
 
 	public void darCarga(Container c) {
 		containers.remove(c);
+	}
+	
+	//PUNTO 3
+	public void setMejorBuscador(BuscadorMejorC mejorC) {
+		mejor = mejorC;
+	}
+	
+	public CircuitoMaritimo buscarMejorC(Terminal destino) {
+		return mejor.buscarMejorC(this, destino);
+	}
+	
+	public List<CircuitoMaritimo> getCircuitos(){
+		List<CircuitoMaritimo> circuitos = new ArrayList<>();
+		lineas.stream().forEach(n -> circuitos.addAll(n.getCircuitosMaritimos()));
+		return circuitos;
 	}
 	
 }
