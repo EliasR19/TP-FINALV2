@@ -157,6 +157,10 @@ public class Buque {
 		viaje.createCronograma();
 	}
 	
+	public void llegoAlDestino(Terminal destino) {
+		viaje.confirmarLlegada(destino);
+	}
+	
 	public void showCronograma() {
 		for(Cronograma c : viaje.getCronograma()) {
 			c.getEntero();

@@ -42,5 +42,8 @@ public class Cronograma {
 		return llegoADestino;
 	}
 	
+	public void confirmarLlegada() {
+		this.llegoADestino = true;
+	}
 	
 }
