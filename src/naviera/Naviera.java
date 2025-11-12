@@ -3,10 +3,9 @@ package naviera;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import terminal.Terminal;
 import buque.Buque;
-import circuitos.Viaje;
+import Circuitos.Viaje;
 
 public class Naviera {
 	
