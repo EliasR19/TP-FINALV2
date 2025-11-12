@@ -115,7 +115,7 @@ public class Naviera {
 	}
 
 	public void showCronogramaBuque() {
-		buques.stream().forEach(b -> b.cronograma());
+		buques.stream().forEach(b -> b.showCronograma());
 	}
 	
 }

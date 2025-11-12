@@ -44,8 +44,10 @@ public class CircuitoMaritimo {
 	public List<Terminal> terminalesDelCircuito(){
 		//Devuelve todas las terminales del circuito
 		List<Terminal> listaTerminales = new ArrayList<Terminal>();
+		listaTerminales.add(this.getTerminalOrigen());
 		for(Tramo t : tramos) {
-			listaTerminales.add(t.getOrigen());
+			listaTerminales.add(t.getDestino());
+			//listaTerminales.add(t.getDestino());
 		}
 		return listaTerminales;
 		
@@ -71,7 +73,7 @@ public class CircuitoMaritimo {
 			
 			while(terminalActual != destino) {
 				if(t.getOrigen() == terminalActual ) {
-				//	System.out.println("actual: " + terminalActual.getName());
+					//System.out.println("actual: " + terminalActual.getNombre());
 					tiempoTotal = tiempoTotal + t.getDuracion();
 					terminalActual = t.getDestino();
 				}

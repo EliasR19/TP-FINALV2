@@ -3,6 +3,7 @@ package terminal;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -180,11 +181,12 @@ public class Terminal {
 	}
 	
 	public List<Viaje> getViajes(){
+		List<Viaje> v = new ArrayList<>();
 		for(Naviera n : lineas) {
-			return n.getBuques().stream().map(b -> b.getViaje()).collect(Collectors.toList());
+			v.addAll( n.getBuques().stream().map(b -> b.getViaje()).collect(Collectors.toList()));
 		}
+		return v;
 		
-		return null;
 	}
 
 	public Integer cantidadDeOrdenesImp() {

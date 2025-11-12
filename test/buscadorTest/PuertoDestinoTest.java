@@ -58,12 +58,12 @@ public class PuertoDestinoTest {
 		// Circuito A = [Argentina, Brasil, España]
 		circuitoA.agregarTramo(Argentina, Brasil, 4);
 		circuitoA.agregarTramo(Brasil, España, 20);
-		circuitoA.agregarTramo(España, Argentina, 22.3d);
+		//circuitoA.agregarTramo(España, Argentina, 22.3d);
 		
 		//Circuito B = [Argentina, España, China]
 		circuitoB.agregarTramo(Argentina, España, 4);
 		circuitoB.agregarTramo(España, China, 30d);
-		circuitoB.agregarTramo(China,Argentina, 55d);
+		//circuitoB.agregarTramo(China,Argentina, 55d);
 		
 		
 		bA = new Buque();
