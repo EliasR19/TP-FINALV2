@@ -1,6 +1,6 @@
 package buscador;
 
-import Circuitos.Viaje;
+import circuitos.Viaje;
 import terminal.Terminal;
 
 public abstract class Operador {

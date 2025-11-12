@@ -3,7 +3,7 @@ package naviera;
 import java.util.ArrayList;
 import java.util.List;
 
-import Circuitos.Tramo;
+import circuitos.Tramo;
 import terminal.*;
 
 public class CircuitoMaritimo {
@@ -105,5 +105,6 @@ public class CircuitoMaritimo {
 	public int cantidadDeTramos() {
 		return tramos.size();
 	}
+	
 
 }

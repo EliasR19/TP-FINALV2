@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import Circuitos.Viaje;
 import terminal.Terminal;
 import buque.Buque;
+import circuitos.Viaje;
 
 public class Naviera {
 	
@@ -66,6 +66,7 @@ public class Naviera {
 	public void asignarViaje(Buque b,CircuitoMaritimo c) {
 		//Asigna un viaje a un buque
 		b.asignarViaje(new Viaje(b.getFecSalida(), c.getOrigen(), c));
+		b.cronograma();
 	}
 	
 	
@@ -95,7 +96,6 @@ public class Naviera {
 	
 	
 	
-	
 	public void recorridos() {
 		for(Buque b : buques) {
 			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
@@ -104,4 +104,14 @@ public class Naviera {
 		}
 	}
 
+	public void armarCronograma() {
+		for(Buque b : buques) {
+			b.cronograma();
+		}
+	}
+
+	public void showCronogramaBuque() {
+		buques.stream().forEach(b -> b.cronograma());
+	}
+	
 }

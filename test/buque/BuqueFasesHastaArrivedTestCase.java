@@ -22,6 +22,7 @@ public class BuqueFasesHastaArrivedTestCase {
 	private Buque buque;
 	private Naviera n1; 
 
+	
 	@BeforeEach
 	public void setUp() {
 		u1 = new UbicacionGeografica(-23, -25);
@@ -35,7 +36,7 @@ public class BuqueFasesHastaArrivedTestCase {
 		circuitoA.agregarTramo(t1, t2, 10);
 		n1.agregarCircuitoMaritimo(circuitoA);
 		n1.agregarBuque(buque);
-		n1.asignarViaje(buque, circuitoA, fechaSalida);
+		n1.asignarViaje(buque, circuitoA);
 	}
 	
 	@Test

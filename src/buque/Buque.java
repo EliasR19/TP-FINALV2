@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import Circuitos.Cronograma;
-import Circuitos.Viaje;
+import circuitos.Cronograma;
+import circuitos.Viaje;
 import container.Container;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
@@ -155,9 +155,13 @@ public class Buque {
 	
 	public void cronograma() {
 		viaje.createCronograma();
+	}
+	
+	public void showCronograma() {
 		for(Cronograma c : viaje.getCronograma()) {
 			c.getEntero();
 		}
 	}
 
+	
 }

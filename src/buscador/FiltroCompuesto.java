@@ -3,8 +3,8 @@ package buscador;
 import java.util.ArrayList;
 import java.util.List;
 
-import Circuitos.Tramo;
-import Circuitos.Viaje;
+import circuitos.Tramo;
+import circuitos.Viaje;
 import terminal.*;
 
 public class FiltroCompuesto extends Filtro{
@@ -37,8 +37,7 @@ public class FiltroCompuesto extends Filtro{
 
 	@Override
 	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
-		// TODO Auto-generated method stub
-		return false;
+		return op.cumpleCondicion(v, terminal, f1, f2);
 	}
 
 	

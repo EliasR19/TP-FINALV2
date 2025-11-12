@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import Circuitos.Tramo;
-import Circuitos.Viaje;
+import circuitos.Tramo;
+import circuitos.Viaje;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
@@ -19,10 +19,6 @@ public class PuertoDestino extends Filtro{
 		this.destino = destino;
 	}
 	
-
-
-
-
 
 	@Override
 	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
