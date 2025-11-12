@@ -225,6 +225,7 @@ public class Terminal {
 	}
 
 	public void darOrdenDeDepart(Buque buque) {
+		buque.llegoAlDestino(this);
 		buque.partidaHabilitada(this);
 	}
 	
