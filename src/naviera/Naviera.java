@@ -3,10 +3,9 @@ package naviera;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import Circuitos.Viaje;
 import terminal.Terminal;
 import buque.Buque;
+import Circuitos.Viaje;
 
 public class Naviera {
 	
@@ -25,8 +24,6 @@ public class Naviera {
 	public List<CircuitoMaritimo> getCircuitosMaritimos(){
 		return circuitos;
 	}
-
-
 
 	public boolean tieneBuque(Buque buque) {
 		return buques.contains(buque);
@@ -99,6 +96,9 @@ public class Naviera {
 	}
 	
 	
+
+	
+
 	
 	public void recorridos() {
 		for(Buque b : buques) {

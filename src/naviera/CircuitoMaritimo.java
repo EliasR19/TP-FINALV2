@@ -58,29 +58,54 @@ public class CircuitoMaritimo {
 		//Por ahora se supone que las dos terminales , a y b, estan en el circuito, más adelante se debe agregar verificación.
 		//FIX LATER
 		//HACER IMPLEMENTACION MÁS PROLIJA.
-		double tiempoTotal = 0;
-		Terminal terminalActual = origen;
-		if(origen == destino) {
-			return tramos.stream().mapToDouble(t -> t.getDuracion()).sum();
+		if(this.contiene(origen, destino)) {
+			
+			double tiempoTotal = 0;
+			Terminal terminalActual = origen;
+			if(origen == destino) {
+				return tramos.stream().mapToDouble(t -> t.getDuracion()).sum();
+			}
+				
+			int tramo = 0;
+			Tramo t = tramos.get(tramo);
+			
+			while(terminalActual != destino) {
+				if(t.getOrigen() == terminalActual ) {
+				//	System.out.println("actual: " + terminalActual.getName());
+					tiempoTotal = tiempoTotal + t.getDuracion();
+					terminalActual = t.getDestino();
+				}
+				tramo++;
+				if(tramo == tramos.size()) {
+					tramo = 0;
+				}
+				 t = tramos.get(tramo);
+			}
+			return tiempoTotal;
 		}
+		return -1;
+	}
+	
+	public int terminalesEntre(Terminal origen, Terminal destino) {
+		int count = 0;
+		Terminal terminalActual = origen;
 			
 		int tramo = 0;
 		Tramo t = tramos.get(tramo);
 		
 		while(terminalActual != destino) {
-			if(t.getOrigen() == terminalActual ) {
-			//	System.out.println("actual: " + terminalActual.getName());
-				tiempoTotal = tiempoTotal + t.getDuracion();
-				terminalActual = t.getDestino();
-			}
+			count++;
 			tramo++;
+			terminalActual = t.getDestino();
 			if(tramo == tramos.size()) {
 				tramo = 0;
 			}
 			 t = tramos.get(tramo);
 		}
-		return tiempoTotal;
+		
+		return count;
 	}
+	
 	
 	public Tramo tramoConOrigen(Terminal t) {
 		for(Tramo t1 : tramos) {
@@ -94,6 +119,13 @@ public class CircuitoMaritimo {
 	public boolean contiene(Terminal origen, Terminal destino) {
 		return terminalesDelCircuito().contains(origen) && terminalesDelCircuito().contains(destino);
 	}
+	
+	
+	public double precioTotalEntre(Terminal origen, Terminal destino) {
+		double precioDiaViaje = 3000;
+		return this.tiempoRecorridoEntre(origen, destino) * precioDiaViaje;
+	}
+	
 	public List<Tramo> getTramos(){
 		return tramos;
 	}

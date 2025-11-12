@@ -11,9 +11,11 @@ import java.util.stream.Collectors;
 
 import Circuitos.Viaje;
 import naviera.*;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.*;
 import buque.Buque;
-import clientes.*;
+import buscadorMejorCircuito.BuscadorMejorC;
+import clientes.Consignee;
+import clientes.Shipper;
 import container.Container;
 import empresasTransportistas.*;
 
@@ -32,6 +34,8 @@ public class Terminal {
 	private List<Shipper> shippers;
 	private List<Consignee> consignees;
 	
+	
+	private BuscadorMejorC mejor;
 	
 	public Terminal(String nombre, UbicacionGeografica ubicacion) {
 		this.nombre = nombre;
@@ -173,6 +177,7 @@ public class Terminal {
 		containers.remove(c);
 	}
 	
+
 	public List<Naviera> getNavieras(){
 		return lineas;
 	}
@@ -199,6 +204,27 @@ public class Terminal {
 
 	public Boolean tieneRegistradoC(Consignee consignee) {
 		return consignees.contains(consignee);
+	}
+
+	//Precio total
+	public double getPrecioTotal(CircuitoMaritimo c) {
+		//Se suma todos los servicios dados, y el recorrido
+		return 00;
+	}
+	
+	//PUNTO 3
+	public void setMejorBuscador(BuscadorMejorC mejorC) {
+		mejor = mejorC;
+	}
+	
+	public CircuitoMaritimo buscarMejorC(Terminal destino) {
+		return mejor.buscarMejorC(this, destino);
+	}
+	
+	public List<CircuitoMaritimo> getCircuitos(){
+		List<CircuitoMaritimo> circuitos = new ArrayList<>();
+		lineas.stream().forEach(n -> circuitos.addAll(n.getCircuitosMaritimos()));
+		return circuitos;
 	}
 	
 }

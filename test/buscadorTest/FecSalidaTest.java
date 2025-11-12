@@ -15,6 +15,7 @@ import buscador.*;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
+
 import ubicacionGeografica.UbicacionGeografica;
 
 public class FecSalidaTest {
