@@ -119,6 +119,12 @@ public class Terminal {
 		containers.remove(c);
 	}
 	
+	//Precio total
+	public double getPrecioTotal(CircuitoMaritimo c) {
+		//Se suma todos los servicios dados, y el recorrido
+		return 00;
+	}
+	
 	//PUNTO 3
 	public void setMejorBuscador(BuscadorMejorC mejorC) {
 		mejor = mejorC;

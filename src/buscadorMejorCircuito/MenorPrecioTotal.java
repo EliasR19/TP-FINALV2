@@ -7,8 +7,8 @@ public class MenorPrecioTotal implements BuscadorMejorC{
 
 	@Override
 	public CircuitoMaritimo buscarMejorC(Terminal terminal, Terminal destino) {
-		// TODO Auto-generated method stub
-		return null;
+		return terminal.getCircuitos().stream().min((c1, c2)-> 
+		Double.compare(c1.precioTotalEntre(terminal, destino),  c2.precioTotalEntre(terminal, destino))).get();
 	}
 
 }

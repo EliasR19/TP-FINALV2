@@ -58,6 +58,7 @@ public class CircuitoMaritimo {
 		//Por ahora se supone que las dos terminales , a y b, estan en el circuito, más adelante se debe agregar verificación.
 		//FIX LATER
 		//HACER IMPLEMENTACION MÁS PROLIJA.
+		if(this.contiene(origen, destino)) {
 		double tiempoTotal = 0;
 		Terminal terminalActual = origen;
 		if(origen == destino) {
@@ -80,6 +81,10 @@ public class CircuitoMaritimo {
 			 t = tramos.get(tramo);
 		}
 		return tiempoTotal;
+		}
+		throw 
+		System.out.println("Alguna de las terminales dadas no pertenece a este circuito.");
+		return null;
 	}
 	
 	public Tramo tramoConOrigen(Terminal t) {
@@ -94,6 +99,13 @@ public class CircuitoMaritimo {
 	public boolean contiene(Terminal origen, Terminal destino) {
 		return terminalesDelCircuito().contains(origen) && terminalesDelCircuito().contains(destino);
 	}
+	
+	
+	public double precioTotalEntre(Terminal origen, Terminal destino) {
+		double precioDiaViaje = 3000;
+		return this.tiempoRecorridoEntre(origen, destino) * precioDiaViaje;
+	}
+	
 	public List<Tramo> getTramos(){
 		return tramos;
 	}
