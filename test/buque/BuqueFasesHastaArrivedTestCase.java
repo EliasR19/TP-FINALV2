@@ -34,6 +34,7 @@ public class BuqueFasesHastaArrivedTestCase {
 		circuitoA = new CircuitoMaritimo(t1, t2);
 		fechaSalida = LocalDateTime.of(2025, 11, 8, 10, 0);
 		circuitoA.agregarTramo(t1, t2, 10);
+		circuitoA.agregarTramo(t2, t1, 10);
 		n1.agregarCircuitoMaritimo(circuitoA);
 		n1.agregarBuque(buque);
 		n1.asignarViaje(buque, circuitoA, fechaSalida);
