@@ -2,6 +2,7 @@ package clientes;
 
 import java.time.LocalDateTime;
 
+import buque.Buque;
 import terminal.OrdenExp;
 
 public class Shipper extends Cliente {
@@ -15,6 +16,14 @@ public class Shipper extends Cliente {
 			orden.getTerminal().guardarContainer(orden.getCarga());
 			orden.getTerminal().descargar(orden.getCamion());
 		}
+	}
+
+	@Override
+	public void notificar(Buque b) {
+			String mail = "Sarpa buque: " + b;
+			this.agregarMail(mail);
+			System.out.println(mail);
+		
 	}
 
 	

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import naviera.*;
 import ubicacionGeografica.*;
 import buque.Buque;
+import buque.EventManager;
 import buscadorMejorCircuito.BuscadorMejorC;
 import circuitos.Viaje;
 import clientes.Consignee;
@@ -30,8 +31,8 @@ public class Terminal {
 	private List<OrdenImp> ordenesImp;
 	private List<Shipper> shippers;
 	private List<Consignee> consignees;
-	private Notificador notificador;
 	
+	private EventManager event = new EventManager();
 	
 	private BuscadorMejorC mejor;
 	
@@ -47,7 +48,6 @@ public class Terminal {
 		this.ordenesImp = new ArrayList<OrdenImp>();
 		this.shippers = new ArrayList<Shipper>();
 		this.consignees= new ArrayList<Consignee>();
-		this.notificador = new Notificador();
 	}
 	
 	public void agregarLiena(Naviera l) {
@@ -72,18 +72,28 @@ public class Terminal {
 		consignees.add(consignee);
 		camiones.add(camion);
 		choferes.add(chofer);
+
+		event.agregarObserver(consignee, buque);
 		OrdenImp ordenImp = new OrdenImp(this, consignee, carga, buque, camion, chofer, turno);
 		ordenesImp.add(ordenImp);
 		return ordenImp;
+
+		
+
 	}
 	
 	public OrdenExp generarOrdenExp(Shipper shipper, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
 		shippers.add(shipper);
 		camiones.add(camion);
 		choferes.add(chofer);
+
+		event.agregarObserver(shipper, buque);
 		OrdenExp ordenExp = new OrdenExp(this, shipper, carga, buque, camion, chofer, turno);
 		ordenesExp.add(ordenExp);
 		return ordenExp;
+
+	
+
 	}
 
 	public boolean respetaElTurnoExp(OrdenExp orden, LocalDateTime horario) {
@@ -135,9 +145,6 @@ public class Terminal {
 		return ubicacion;
 	}
 
-	public void mandarMailConsignees() {
-		// TODO Auto-generated method stub
-	}
 
 	public void darOrdenDeInicio(Buque buque) {
 		buque.iniciarFaseWorking();
@@ -232,12 +239,10 @@ public class Terminal {
 		buque.partidaHabilitada(this);
 	}
 
-	public void mandarMailAShippersDel(Viaje viaje) {
-		for (OrdenExp orden : ordenesExp) {
-			if (orden.getViaje().equals(viaje)) {
-				notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
-			}
-		}
+
+	//Observer
+	public void notificar(Buque buque) {
+		event.notificar(buque);
 	}
 
 

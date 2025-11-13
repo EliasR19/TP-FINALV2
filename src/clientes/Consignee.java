@@ -2,6 +2,7 @@ package clientes;
 
 import java.time.LocalDateTime;
 
+import buque.Buque;
 import terminal.OrdenImp;
 
 public class Consignee extends Cliente {
@@ -15,6 +16,14 @@ public class Consignee extends Cliente {
 			orden.getTerminal().llevarCarga(orden.getCamion(), orden.getCarga());
 			orden.getTerminal().retirarCarga(orden.getCarga());
 		}
+	}
+
+	@Override
+	public void notificar(Buque b) {
+			String mail = "Llego buque: " + b;
+			this.agregarMail(mail);
+			System.out.println(mail);
+		
 	}
 	
 }

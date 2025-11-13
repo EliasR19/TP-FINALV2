@@ -63,6 +63,7 @@ public class GPS extends UbicacionGeografica {
 	    			setLatitud(getLatitud() + metrosNorte * factor / 111000); 
 	    			setLongitud(getLongitud() + metrosEste * factor / (111000 * Math.cos(Math.toRadians(getLatitud()))));
 	    		}
+	   
 		buque.actualizarPosicion(distancia, destino); // Se le avisa al buque de los cambios
 	    }
 	

@@ -50,7 +50,7 @@ public class Naviera {
 	}
 	
 
-	
+/*	
 	public void establecerSalida(Buque b, LocalDateTime fecSalida) {
 		b.setFecSalida(fecSalida);
 	}
@@ -60,7 +60,7 @@ public class Naviera {
 	public void salidaBuque(Buque bA, CircuitoMaritimo circuito,LocalDateTime fecSalida) {
 		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(bA,fecSalida);
 	}
-
+*/
 	public void asignarViaje(Buque buque, CircuitoMaritimo circuito, LocalDateTime fechaSalida) {
         //Asigna un viaje a un buque
         buque.asignarDatosParaElViaje(fechaSalida, circuito.getOrigen());
@@ -76,13 +76,7 @@ public class Naviera {
 		//La terminal destino debe estar dentro de algun circuito de esta Naviera. HACER VERIFICACION
 		//FIX LATER
 		return this.circuitoCon(origen, destino).tiempoRecorridoEntre(origen, destino);
-//		LocalTime totalRecorrido = LocalTime.of(0, 0);
-//		for(Tramo t : this.circuitoCon(origen, destino).getTramos()){
-//			if(t.getOrigen() == origen) {
-//				totalRecorrido.plusHours((long) t.getRecorrido());
-//			}
-//		}
-//		return totalRecorrido;
+
 	}
 	
 	private CircuitoMaritimo circuitoCon(Terminal origen, Terminal destino) {
