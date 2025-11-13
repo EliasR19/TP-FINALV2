@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import naviera.*;
+import servicios.Servicio;
+import servicios.ServicioLavado;
 import ubicacionGeografica.*;
 import buque.Buque;
 import buscadorMejorCircuito.BuscadorMejorC;
@@ -31,6 +33,7 @@ public class Terminal {
 	private List<Shipper> shippers;
 	private List<Consignee> consignees;
 	private Notificador notificador;
+	private List<Servicio> servicios;
 	
 	
 	private BuscadorMejorC mejor;
@@ -38,16 +41,18 @@ public class Terminal {
 	public Terminal(String nombre, UbicacionGeografica ubicacion) {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
-		this.lineas = new ArrayList<Naviera>();
-		this.containers = new ArrayList<Container>();
-		this.empresasTransportistas = new ArrayList<EmpresaTransportista>();
-		this.camiones = new ArrayList<Camion>();
-		this.choferes = new ArrayList<Chofer>();
-		this.ordenesExp = new ArrayList<OrdenExp>();
-		this.ordenesImp = new ArrayList<OrdenImp>();
-		this.shippers = new ArrayList<Shipper>();
-		this.consignees= new ArrayList<Consignee>();
-		this.notificador = new Notificador();
+		lineas = new ArrayList<Naviera>();
+		containers = new ArrayList<Container>();
+		empresasTransportistas = new ArrayList<EmpresaTransportista>();
+		camiones = new ArrayList<Camion>();
+		choferes = new ArrayList<Chofer>();
+		ordenesExp = new ArrayList<OrdenExp>();
+		ordenesImp = new ArrayList<OrdenImp>();
+		shippers = new ArrayList<Shipper>();
+		consignees= new ArrayList<Consignee>();
+		notificador = new Notificador();
+		servicios = new ArrayList<Servicio>(); 
+		
 	}
 	
 	public void agregarLiena(Naviera l) {
@@ -68,11 +73,11 @@ public class Terminal {
 		return naviera.duracionEntre(this, destino);
 	}
 	
-	public OrdenImp generarOrdenImp(Consignee consignee, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
+	public OrdenImp generarOrdenImp(Consignee consignee, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno, List<Servicio> list) {
 		consignees.add(consignee);
 		camiones.add(camion);
 		choferes.add(chofer);
-		OrdenImp ordenImp = new OrdenImp(this, consignee, carga, buque, camion, chofer, turno);
+		OrdenImp ordenImp = new OrdenImp(this, consignee, carga, buque, camion, chofer, turno, list);
 		ordenesImp.add(ordenImp);
 		return ordenImp;
 	}
@@ -236,6 +241,19 @@ public class Terminal {
 				notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
 			}
 		}
+	}
+
+	public List<Servicio> asignarServicios(Container carga) {
+		
+		return null;
+	}
+
+	public void agregarServicio(Servicio servicio) {
+		servicios.add(servicio);
+	}
+
+	public boolean tieneServicio(Servicio servicio) {
+		return servicios.contains(servicio);
 	}
 
 

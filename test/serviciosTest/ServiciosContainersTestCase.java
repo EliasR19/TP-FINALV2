@@ -1,5 +1,6 @@
 package serviciosTest;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
@@ -16,9 +17,13 @@ import servicios.ServicioDesconsolidado;
 import servicios.ServicioElectricidad;
 import servicios.ServicioLavado;
 import servicios.ServicioPesado;
+import terminal.Terminal;
+import ubicacionGeografica.UbicacionGeografica;
 
 class ServiciosContainersTestCase {
 	
+	private UbicacionGeografica u1;
+	private Terminal t1;
 	private ContainerTanque containerT;
 	private ContainerDry containerDS;
 	private ContainerDry containerDD;
@@ -33,6 +38,9 @@ class ServiciosContainersTestCase {
 	
 	@BeforeEach
 	public void setUp() {
+		
+		u1 = new UbicacionGeografica(-23, -25);
+		t1 = new Terminal("Argentina", u1);
 		
 		bl = new BL();
 		blE = new BLEspecial();
@@ -59,6 +67,11 @@ class ServiciosContainersTestCase {
 		containerDD = new ContainerDry("azul4982645", "Dry", 5d, 5d, 2.1d, blE);
 		
 		containerR = new ContainerReefer("azul5555555", "Reefer", 7d, 25d, 3d, bl, 20d);
+		
+		t1.agregarServicio(servicioLavado);
+		t1.agregarServicio(servicioElectricidad);
+		t1.agregarServicio(servicioPesado);
+		t1.agregarServicio(servicioDesconsolidado);
 		
 	}
 
@@ -128,5 +141,12 @@ class ServiciosContainersTestCase {
 		assertEquals(0d, servicioDesconsolidado.servicioPara(containerR));
 	}
 
-
+	@Test
+	void testUnaTerminalTieneGuardadoLosServiciosQueRealiza() {
+		assertTrue(t1.tieneServicio(servicioLavado));
+		assertTrue(t1.tieneServicio(servicioElectricidad));
+		assertTrue(t1.tieneServicio(servicioPesado));
+		assertTrue(t1.tieneServicio(servicioDesconsolidado));
+	}
+	
 }
