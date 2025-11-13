@@ -92,15 +92,6 @@ public class BuqueFasesHastaArrivedTestCase {
 		t1.generarOrdenImp(consignee, null, buque, camion, chofer, turno);
 		
 		for (int i = 0; i < 2511 ; i++) { // El buque debe viajar 2511 minutos para llegar al destino
-			if(buque.estaEnFaseOutbound()) {
-				System.out.println(1);
-			}
-			if(buque.estaEnFaseInbound()) {
-				System.out.println(2);
-			}
-			if(buque.estaEnFaseArrived()) {
-				System.out.println(3);
-			}
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
 		assertEquals(-22.91, buque.getGPS().getLatitud());
