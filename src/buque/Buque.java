@@ -44,6 +44,10 @@ public class Buque {
 		return viaje.getDestinoActual();
 	}
 	
+	public Terminal getOrigenActual() {
+		return viaje.getOrigenActual();
+	}
+	
 	public void actualizarPosicion(double distanciaRestante, Terminal destino) {
 	    fase.actualizarPosicion(this, distanciaRestante, destino);
 	}

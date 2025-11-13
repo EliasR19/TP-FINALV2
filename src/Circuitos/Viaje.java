@@ -83,6 +83,17 @@ public class Viaje {
 	    }
 	    return origen; 
 	}// Ya llegó a todos los destinos
+	
+	
+	public Terminal getOrigenActual() {
+		for (Cronograma c : cronograma) {
+	        if (!c.getLlegoADestino()) {
+	            return c.getOrigen();
+	        }
+	    }
+		return origen; // Ya llegó a todos los destinos
+	}
+	
 
 	public CircuitoMaritimo getCircutio() {
 		return circuito;
@@ -110,6 +121,7 @@ public class Viaje {
 	        if (c.getDestino().getNombre().equals(destino.getNombre())) {
 	            c.confirmarLlegada();
 	        }
-	 }
-}
+		}
+	}
+
 }
