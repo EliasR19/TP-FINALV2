@@ -10,11 +10,10 @@ public class Shipper extends Cliente {
 		super(nombre);
 	}
 	
-	// posible merge a clase terminal
 	public void exportarCarga(OrdenExp orden, LocalDateTime horario) {
 		if(orden.getTerminal().respetaElTurnoExp(orden, horario) && orden.getTerminal().respetaCamionYChofer(orden)) {
-			orden.getTerminal().descargar(orden.getCamion());
 			orden.getTerminal().guardarContainer(orden.getCarga());
+			orden.getTerminal().descargar(orden.getCamion());
 		}
 	}
 

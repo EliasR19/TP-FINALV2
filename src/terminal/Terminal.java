@@ -57,9 +57,6 @@ public class Terminal {
 	public String getNombre() {
 		return nombre;
 	}
-	
-
-	
 
 	public void asignarFecSalidaBuqe(Buque bA, LocalDateTime fecSalida) {
 		//Se supone que el buque esta dentro de la terminal
@@ -71,30 +68,34 @@ public class Terminal {
 		return naviera.duracionEntre(this, destino);
 	}
 	
-	public void generarOrdenImp(Consignee consignee, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
-		ordenesImp.add(new OrdenImp(this, consignee, carga, buque, camion, chofer, turno));
+	public OrdenImp generarOrdenImp(Consignee consignee, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
 		consignees.add(consignee);
 		camiones.add(camion);
 		choferes.add(chofer);
+		OrdenImp ordenImp = new OrdenImp(this, consignee, carga, buque, camion, chofer, turno);
+		ordenesImp.add(ordenImp);
+		return ordenImp;
 	}
 	
-	public void generarOrdenExp(Shipper shipper, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
-		ordenesExp.add(new OrdenExp(this, shipper, carga, buque, camion, chofer, turno));
+	public OrdenExp generarOrdenExp(Shipper shipper, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
 		shippers.add(shipper);
 		camiones.add(camion);
 		choferes.add(chofer);
+		OrdenExp ordenExp = new OrdenExp(this, shipper, carga, buque, camion, chofer, turno);
+		ordenesExp.add(ordenExp);
+		return ordenExp;
 	}
 
 	public boolean respetaElTurnoExp(OrdenExp orden, LocalDateTime horario) {
 		// verifica si el camion llega a dejar la carga en un limite de 3 horas antes o despues del turno.
 		LocalDateTime limiteInferior = orden.getTurno().minusHours(3);
 		LocalDateTime limiteSuperior = orden.getTurno().plusHours(3);
-		return horario.isBefore(limiteInferior) && horario.isAfter(limiteSuperior);
+		return horario.isBefore(limiteInferior) && horario.isAfter(limiteSuperior) || horario == orden.getTurno();
 	}
 	
 	public boolean respetaElTurnoImp(OrdenImp orden, LocalDateTime horario) {
 		LocalDateTime limite24hs = orden.getTurno().plusHours(24);
-		return horario.isBefore(orden.getTurno()) && horario.isAfter(limite24hs);
+		return horario.isBefore(orden.getTurno()) && horario.isAfter(limite24hs) || horario == orden.getTurno();
 	}
 	
 	public boolean respetaCamionYChofer(Orden orden) {
