@@ -4,7 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +14,11 @@ import org.junit.jupiter.api.Test;
 import buque.Arrived;
 import buque.Buque;
 import buque.Inbound;
+import clientes.Shipper;
 import container.BL;
 import container.ContainerTanque;
+import empresasTransportistas.Camion;
+import empresasTransportistas.Chofer;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
@@ -121,6 +126,12 @@ public class BuqueFasesRestantesTestCase {
 	
 	@Test
 	void testUnBuqueEnFaseDepartingCuandoEstáAlejado1KilometroOMasVuelveAPasarAFaseOutboundYLaTerminalLeAvisaALosShippers() {
+		Shipper shipper = new Shipper("Marcos");
+		Camion camion = new Camion();
+		Chofer chofer = new Chofer("Maxi");
+		LocalDateTime turno = LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0));
+		t2.generarOrdenExp(shipper, container1, buque, camion, chofer, turno);
+		
 		
 		UbicacionGeografica ubicacionTerminal = t2.getUbicacion();
 		

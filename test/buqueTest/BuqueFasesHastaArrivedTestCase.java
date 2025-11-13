@@ -4,12 +4,17 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
+import clientes.Consignee;
+import empresasTransportistas.Camion;
+import empresasTransportistas.Chofer;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
@@ -80,6 +85,13 @@ public class BuqueFasesHastaArrivedTestCase {
 	
 	@Test
 	void testUnBuqueLlegaAlDestino() {
+		Consignee consignee = new Consignee("Marcos");
+		Camion camion = new Camion();
+		Chofer chofer = new Chofer("Maxi");
+		LocalDateTime turno = LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0));
+		
+		t1.generarOrdenImp(consignee, null, buque, camion, chofer, turno);
+		
 		for (int i = 0; i < 2511 ; i++) { // El buque debe viajar 2511 minutos para llegar al destino
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
