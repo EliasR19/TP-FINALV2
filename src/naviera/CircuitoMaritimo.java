@@ -28,7 +28,6 @@ public class CircuitoMaritimo {
 	
 	
 	public void agregarTramo(Terminal tOrigen, Terminal tDestino, double duracion) {
-		// FIX LATER que no haya dos tramos con el mismo origen/destino
 		Tramo tramo = new Tramo(tOrigen, tDestino, duracion);
 		tramos.add(tramo);
 		//A - B    B - B2   B2- C   C - A
@@ -40,7 +39,6 @@ public class CircuitoMaritimo {
 
 	
 	
-	//Despues hacer protected
 	public List<Terminal> terminalesDelCircuito(){
 		//Devuelve todas las terminales del circuito
 		List<Terminal> listaTerminales = new ArrayList<Terminal>();
@@ -62,26 +60,29 @@ public class CircuitoMaritimo {
 			
 			double tiempoTotal = 0;
 			Terminal terminalActual = origen;
+			
 			if(origen == destino) {
 				return tramos.stream().mapToDouble(t -> t.getDuracion()).sum();
 			}
 				
-			int tramo = 0;
-			Tramo t = tramos.get(tramo);
+		//int tramo = 0;
+		//Tramo t = tramos.get(tramo);
+			/*
+			 * while(terminalActual != destino) { if(t.getOrigen() == terminalActual ) {
+			 *   tiempoTotal =tiempoTotal + t.getDuracion(); 
+			 *   terminalActual = t.getDestino(); } 
+			 *   tramo++;
+			 * if(tramo == tramos.size()) { tramo = 0; } t = tramos.get(tramo); }
+			 */
 			
-			while(terminalActual != destino) {
-				if(t.getOrigen() == terminalActual ) {
-				//	System.out.println("actual: " + terminalActual.getName());
-					tiempoTotal = tiempoTotal + t.getDuracion();
-					terminalActual = t.getDestino();
+			for(Tramo tr : tramos) {
+				terminalActual = tr.getDestino();
+				tiempoTotal = tiempoTotal + tr.getDuracion();
+				if(terminalActual == destino) {
+					return tiempoTotal;
 				}
-				tramo++;
-				if(tramo == tramos.size()) {
-					tramo = 0;
-				}
-				 t = tramos.get(tramo);
 			}
-			return tiempoTotal;
+
 		}
 		return -1;
 	}
@@ -89,18 +90,14 @@ public class CircuitoMaritimo {
 	public int terminalesEntre(Terminal origen, Terminal destino) {
 		int count = 0;
 		Terminal terminalActual = origen;
-			
-		int tramo = 0;
-		Tramo t = tramos.get(tramo);
 		
-		while(terminalActual != destino) {
-			count++;
-			tramo++;
-			terminalActual = t.getDestino();
-			if(tramo == tramos.size()) {
-				tramo = 0;
+		for(Tramo tr : tramos) {
+			if(terminalActual != destino) {
+				count ++;
+			} else {
+				return count;
 			}
-			 t = tramos.get(tramo);
+			terminalActual = tr.getDestino();
 		}
 		
 		return count;
