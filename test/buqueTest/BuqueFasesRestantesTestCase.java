@@ -1,4 +1,4 @@
-package buque;
+package buqueTest;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +9,9 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import buque.Arrived;
+import buque.Buque;
+import buque.Inbound;
 import container.BL;
 import container.ContainerTanque;
 import naviera.CircuitoMaritimo;
@@ -59,10 +62,10 @@ public class BuqueFasesRestantesTestCase {
 		bl2.enlistar("Aceite de Oliva", 100d);
 		bl2.enlistar("Gasolina", 400d);
 		
-		container1 = new ContainerTanque("azul1234567", 26d, 22d, 20d, bl1);
+		container1 = new ContainerTanque("azul1234567", "Tanque", 26d, 22d, 20d, bl1);
 		buque.subirCarga(container1);
 		
-		container2 = new ContainerTanque("azul1234568", 26d, 22d, 20d, bl2);
+		container2 = new ContainerTanque("azul1234568", "Tanque", 26d, 22d, 20d, bl2);
 		t2.guardarContainer(container2);
 
 		// Seteamos que el buque ya está en el destino

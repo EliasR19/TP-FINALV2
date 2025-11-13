@@ -51,7 +51,7 @@ class ConsigneeTestCase {
 		bl.enlistar("Aceite de Oliva", 100d);
 		bl.enlistar("Gasolina", 400d);
 		
-		carga = new ContainerTanque("azul1234567", 26d, 22d, 20d, bl);
+		carga = new ContainerTanque("azul1234567", "Tanque", 26d, 22d, 20d, bl);
 		
 	}
 	

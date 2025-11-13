@@ -2,8 +2,8 @@ package terminal;
 
 import java.time.LocalDateTime;
 
-import Circuitos.Viaje;
 import buque.Buque;
+import circuitos.Viaje;
 import clientes.*;
 import container.Container;
 import empresasTransportistas.Camion;

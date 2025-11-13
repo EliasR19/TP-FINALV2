@@ -4,9 +4,9 @@ public abstract class UnicoImportador extends Container{
 
 	private BL bl;
 	
-	public UnicoImportador(String id, double ancho, double largo, double altura, BL bl) {
+	public UnicoImportador(String id, String tipo, double ancho, double largo, double altura, BL bl) {
 		
-		super(id, ancho, largo, altura);
+		super(id, tipo, ancho, largo, altura);
 		this.bl = bl;
 	}
 

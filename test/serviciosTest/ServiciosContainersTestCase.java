@@ -52,13 +52,13 @@ class ServiciosContainersTestCase {
 		blE.agregarBL(bl);
 		blE.agregarBL(bl);
 		
-		containerT = new ContainerTanque("azul1234567", 2.5d, 10d, 2.8d, bl);
+		containerT = new ContainerTanque("azul1234567", "Tanque", 2.5d, 10d, 2.8d, bl);
 		
-		containerDS = new ContainerDry("azul8910112", 2.5d, 10d, 2.9d, bl);
+		containerDS = new ContainerDry("azul8910112", "Dry", 2.5d, 10d, 2.9d, bl);
 		
-		containerDD = new ContainerDry("azul4982645", 5d, 5d, 2.1d, blE);
+		containerDD = new ContainerDry("azul4982645", "Dry", 5d, 5d, 2.1d, blE);
 		
-		containerR = new ContainerReefer("azul5555555", 7d, 25d, 3d, bl, 20d);
+		containerR = new ContainerReefer("azul5555555", "Reefer", 7d, 25d, 3d, bl, 20d);
 		
 	}
 

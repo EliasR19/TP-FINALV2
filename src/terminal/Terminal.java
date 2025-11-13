@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import Circuitos.Viaje;
 import naviera.*;
 import ubicacionGeografica.*;
 import buque.Buque;
 import buscadorMejorCircuito.BuscadorMejorC;
+import circuitos.Viaje;
 import clientes.Consignee;
 import clientes.Shipper;
 import container.Container;

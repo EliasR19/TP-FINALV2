@@ -1,4 +1,4 @@
-package buque;
+package buqueTest;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import buque.Buque;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;

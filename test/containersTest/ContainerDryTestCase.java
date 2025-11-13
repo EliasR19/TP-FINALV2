@@ -33,9 +33,9 @@ class ContainerDryTestCase {
 		blEspecial.agregarBL(bl1);
 		blEspecial.agregarBL(bl2);
 		
-		container = new ContainerDry("azul1234567", 26d, 22d, 20d, bl1);
+		container = new ContainerDry("azul1234567", "Dry", 26d, 22d, 20d, bl1);
 		
-		containerD = new ContainerDry("azul1234567", 26d, 22d, 20d, blEspecial);
+		containerD = new ContainerDry("azul1234567", "Dry", 26d, 22d, 20d, blEspecial);
 		
 	}
 	

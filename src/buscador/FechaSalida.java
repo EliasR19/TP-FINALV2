@@ -2,7 +2,7 @@ package buscador;
 
 import java.time.LocalDateTime;
 
-import Circuitos.Viaje;
+import circuitos.Viaje;
 import terminal.Terminal;
 
 public class FechaSalida extends Filtro {

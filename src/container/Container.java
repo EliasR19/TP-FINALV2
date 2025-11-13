@@ -3,12 +3,14 @@ package container;
 public abstract class Container {
 
 	private String id;
+	private String tipo;
 	private double ancho;
 	private double largo;
 	private double altura;
 	
-	public Container(String id, double ancho, double largo, double altura) {
+	public Container(String id, String tipo, double ancho, double largo, double altura) {
 		this.id = id;
+		this.tipo = tipo;
 		this.ancho = ancho;
 		this.largo = largo;
 		this.altura = altura;
@@ -18,6 +20,10 @@ public abstract class Container {
 		return id;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+	
 	public double getAncho() {
 		return ancho;
 	}
