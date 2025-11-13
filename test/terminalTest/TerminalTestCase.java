@@ -72,7 +72,7 @@ class TerminalTestCase {
 	}
 	
 	@Test 
-	void testGenerarOrdenImp() {
+	void testGenerarOrdenImp() { 
 		
 		terminal.generarOrdenImp(consignee, carga, buque, camion, chofer, turno);
 		
