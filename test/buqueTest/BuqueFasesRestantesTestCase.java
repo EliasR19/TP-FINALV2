@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import buque.Arrived;
 import buque.Buque;
 import buque.Inbound;
+import clientes.Consignee;
 import clientes.Shipper;
 import container.BL;
 import container.ContainerTanque;
@@ -34,6 +35,14 @@ public class BuqueFasesRestantesTestCase {
 	private BL bl1, bl2;
 	private ContainerTanque container1, container2;
 
+	Consignee consignee ;
+	Camion camion ;
+	Chofer chofer;
+	LocalDateTime turno ;
+	Shipper shipper;
+
+
+	
 	@BeforeEach
 	public void setUp() {
 		u1 = new UbicacionGeografica(-23, -25);
@@ -77,6 +86,12 @@ public class BuqueFasesRestantesTestCase {
 		buque.getGPS().setLatitud(-22.91);
 		buque.getGPS().setLongitud(-43.17);
 		buque.setFase(new Arrived());
+		
+		consignee = new Consignee("Marcos");
+		 shipper = new Shipper("Pedro");
+		 camion = new Camion();
+		chofer = new Chofer("Maxi");
+		 turno = LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0));
 	}
 	
 	@Test
@@ -102,6 +117,9 @@ public class BuqueFasesRestantesTestCase {
 	
 	@Test
 	void testUnBuqueNoPuedePasarALaFaseWorkingSiEstaEnUnaFaseQueNoSeaArrived() {
+
+		t2.generarOrdenImp(consignee, null, buque, camion, chofer, turno);
+		
 		buque.setFase(new Inbound()); // Seteamos que aun no llegó
 		t2.darOrdenDeInicio(buque);
 		
@@ -110,6 +128,9 @@ public class BuqueFasesRestantesTestCase {
 	
 	@Test
 	void testUnBuquePasaALaFaseDepartingSoloCuandoLaTerminalLoAutorizaYYaRealizóElTrabajoDeDescargaYCarga() {
+		
+		t2.generarOrdenImp(consignee, null, buque, camion, chofer, turno);
+		
 		t2.darOrdenDeInicio(buque); // Con esto aseguramos que el trabajo fue completado
 		t2.darOrdenDeDepart(buque);
 		
@@ -118,6 +139,12 @@ public class BuqueFasesRestantesTestCase {
 	
 	@Test
 	void testUnBuquePasaALaFaseDepartingYSuNuevoDestinoEsLaT3() {
+		Consignee consignee = new Consignee("Marcos");
+		Camion camion = new Camion();
+		Chofer chofer = new Chofer("Maxi");
+		LocalDateTime turno = LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0));
+		t2.generarOrdenImp(consignee, null, buque, camion, chofer, turno);
+		
 		t2.darOrdenDeInicio(buque);
 		t2.darOrdenDeDepart(buque);
 		
@@ -126,10 +153,7 @@ public class BuqueFasesRestantesTestCase {
 	
 	@Test
 	void testUnBuqueEnFaseDepartingCuandoEstáAlejado1KilometroOMasVuelveAPasarAFaseOutboundYLaTerminalLeAvisaALosShippers() {
-		Shipper shipper = new Shipper("Marcos");
-		Camion camion = new Camion();
-		Chofer chofer = new Chofer("Maxi");
-		LocalDateTime turno = LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0));
+
 		t2.generarOrdenExp(shipper, container1, buque, camion, chofer, turno);
 		
 		
