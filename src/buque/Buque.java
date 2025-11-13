@@ -7,7 +7,6 @@ import java.util.List;
 import circuitos.Cronograma;
 import circuitos.Viaje;
 import container.Container;
-import terminal.Notificador;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
 
@@ -178,5 +177,4 @@ public class Buque {
 		}
 	}
 
-	
 }
