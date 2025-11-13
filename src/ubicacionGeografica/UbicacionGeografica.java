@@ -1,7 +1,5 @@
 package ubicacionGeografica;
 
-import terminal.Terminal;
-
 public class UbicacionGeografica {
 	private double latitud;  // Norte(+)/Sur(-)
 	private double longitud; // Este(+)/Oeste(-)
