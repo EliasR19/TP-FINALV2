@@ -116,6 +116,22 @@ public class BuqueFasesRestantesTestCase {
 		assertEquals(t3, buque.getDestinoActual());
 	}
 	
+	@Test
+	void testUnBuqueEnFaseDepartingCuandoEstáAlejado1KilometroOMasVuelveAPasarAFaseOutboundYLaTerminalLeAvisaALosShippers() {
+		
+		UbicacionGeografica ubicacionTerminal = t2.getUbicacion();
+		
+		t2.darOrdenDeInicio(buque);
+		t2.darOrdenDeDepart(buque);
+		
+		buque.getGPS().actualizarPosicionPorUnMinuto();
+		buque.getGPS().actualizarPosicionPorUnMinuto();
+		
+		assertEquals(1479.9586406377032, buque.getGPS().distanciaEntre(ubicacionTerminal.getLatitud(), ubicacionTerminal.getLongitud()));
+		assertTrue(buque.estaEnFaseOutbound()); 
+		
+	}
+	
 
 
 }

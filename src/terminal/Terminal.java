@@ -30,6 +30,7 @@ public class Terminal {
 	private List<OrdenImp> ordenesImp;
 	private List<Shipper> shippers;
 	private List<Consignee> consignees;
+	private Notificador notificador;
 	
 	
 	private BuscadorMejorC mejor;
@@ -46,6 +47,7 @@ public class Terminal {
 		this.ordenesImp = new ArrayList<OrdenImp>();
 		this.shippers = new ArrayList<Shipper>();
 		this.consignees= new ArrayList<Consignee>();
+		this.notificador = new Notificador();
 	}
 	
 	public void agregarLiena(Naviera l) {
@@ -228,5 +230,14 @@ public class Terminal {
 		buque.llegoAlDestino(this);
 		buque.partidaHabilitada(this);
 	}
-	
+
+	public void mandarMailAShippersDel(Viaje viaje) {
+		for (OrdenExp orden : ordenesExp) {
+			if (orden.getViaje().equals(viaje)) {
+				notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
+			}
+		}
+	}
+
+
 }
