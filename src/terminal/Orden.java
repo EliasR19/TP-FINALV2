@@ -28,7 +28,7 @@ public abstract class Orden {
 		this.buque = buque;
 		this.camion = camion;
 		this.chofer = chofer;
-		this.turno = turno;
+		this.setTurno(turno);;
 		this.viaje = buque.getViaje();
 	}
 	

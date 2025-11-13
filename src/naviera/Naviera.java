@@ -94,13 +94,13 @@ public class Naviera {
 	
 
 	
-	public void recorridos() {
-		for(Buque b : buques) {
-			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
-			b.cronograma();
-			System.out.println("\n");
-		}
-	}
+	//public void recorridos() {
+	//	for(Buque b : buques) {
+	//		System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
+	//		b.cronograma();
+	//		System.out.println("\n");
+	//	}
+	//}
 
 	public void armarCronograma() {
 		for(Buque b : buques) {
@@ -108,8 +108,14 @@ public class Naviera {
 		}
 	}
 
-	public void showCronogramaBuque() {
-		buques.stream().forEach(b -> b.cronograma());
+	public String showCronogramaBuque() {
+		String crm = "";
+		//buques.stream().forEach(b -> crm = crm + "\n" + b.showCronograma());
+		for(Buque b : buques) {
+			crm = crm + "\n" + b.showCronograma();
+		}
+		return crm;
+		
 	}
 	
 }

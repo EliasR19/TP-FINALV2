@@ -164,10 +164,12 @@ public class Buque {
 		viaje.confirmarLlegada(destino);
 	}
 	
-	public void showCronograma() {
+	public String showCronograma() {
+		String crm ="";
 		for(Cronograma c : viaje.getCronograma()) {
-			c.getEntero();
+			crm = crm +"\n" + c.getEntero();
 		}
+		return crm;
 	}
 	
 	//Observer

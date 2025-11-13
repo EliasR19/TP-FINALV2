@@ -61,4 +61,18 @@ public class CircuitoTest {
 		assertEquals(40d, cA.tiempoRecorridoEntre(t1, t3));
 	}
 	
+	@Test
+	public void getOrigenTest() {
+		assertEquals(t1, cA.getTerminalOrigen());
+	}
+	@Test
+	public void getDestinoTest() {
+		assertEquals(t3, cA.getTerminalDestino());
+	}
+	
+	@Test
+	public void TestDuracionEntreDosTerminalesIguales() {
+		assertEquals(45d, cA.tiempoRecorridoEntre(t1, t1));
+	}
+	
 }

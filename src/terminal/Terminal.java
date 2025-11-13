@@ -239,7 +239,10 @@ public class Terminal {
 		buque.partidaHabilitada(this);
 	}
 
+	
 
+	
+	
 	//Observer
 	public void notificar(Buque buque) {
 		event.notificar(buque);

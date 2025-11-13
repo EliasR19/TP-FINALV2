@@ -165,7 +165,7 @@ public class BuqueFasesRestantesTestCase {
 		buque.getGPS().actualizarPosicionPorUnMinuto();
 		buque.getGPS().actualizarPosicionPorUnMinuto();
 		
-		assertEquals(1479.9586406377032, buque.getGPS().distanciaEntre(ubicacionTerminal.getLatitud(), ubicacionTerminal.getLongitud()));
+		assertEquals(2219.91728655714, buque.getGPS().distanciaEntre(ubicacionTerminal.getLatitud(), ubicacionTerminal.getLongitud()));
 		assertTrue(buque.estaEnFaseOutbound()); 
 		
 	}

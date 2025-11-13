@@ -81,6 +81,7 @@ class TerminalTestCase {
 		assertTrue(terminal.tieneRegistradoAlChofer(chofer));
 		assertEquals(1, terminal.cantidadDeOrdenesImp());
 		
+		
 	}
 	
 }

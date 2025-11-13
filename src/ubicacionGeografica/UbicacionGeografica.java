@@ -28,12 +28,12 @@ public class UbicacionGeografica {
 		this.longitud = unaLongitud;
 	}
 
-	public boolean tienenMismaPosicion(UbicacionGeografica ubicacion) {
-		boolean mismaLatitud = latitud == ubicacion.getLatitud();
-		boolean mismaLongitud = longitud == ubicacion.getLongitud();
-		
-		return mismaLatitud && mismaLongitud;
-	}
+	//public boolean tienenMismaPosicion(UbicacionGeografica ubicacion) {
+	//	boolean mismaLatitud = latitud == ubicacion.getLatitud();
+	//	boolean mismaLongitud = longitud == ubicacion.getLongitud();
+	//	
+	//	return mismaLatitud && mismaLongitud;
+	//}
 
 	public double[] factorPara(double unaLatitud, double unaLongitud, double avance) {
 		

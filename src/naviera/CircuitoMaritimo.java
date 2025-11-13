@@ -62,7 +62,7 @@ public class CircuitoMaritimo {
 			Terminal terminalActual = origen;
 			
 			if(origen == destino) {
-				return tramos.stream().mapToDouble(t -> t.getDuracion()).sum();
+				return tramos.getLast().getDuracion();
 			}
 				
 		//int tramo = 0;
