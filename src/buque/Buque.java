@@ -7,6 +7,7 @@ import java.util.List;
 import circuitos.Cronograma;
 import circuitos.Viaje;
 import container.Container;
+import terminal.Notificador;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
 
@@ -17,11 +18,13 @@ public class Buque {
 	private LocalDateTime fecSalida;
 	private GPS gps;
 	private List<Container> carga;
+	private List<Terminal> mailsQueMandoA;
 	
 	public Buque() {
 		carga = new ArrayList<Container>();
 		fase = new Outbound();
 		gps = new GPS(0, 0, this);
+		mailsQueMandoA = new ArrayList<Terminal>();
 	}
 	
 	public void setFecSalida(LocalDateTime fecSalida) {
@@ -74,7 +77,10 @@ public class Buque {
 	}
 
 	public void avisarSobreInminenteArribo(Terminal destino) {
-		destino.mandarMailConsignees();
+		if(!mailsQueMandoA.contains(destino)) {
+			destino.mandarMailConsignees(viaje);
+			mailsQueMandoA.add(destino);
+		}
 	}
 
 	public boolean estaEnFaseArrived() {
@@ -84,6 +90,7 @@ public class Buque {
 	public void iniciarViaje() {
 		if (LocalDateTime.now().isEqual(fecSalida)) {
 			System.out.println("Buque iniciando viaje hacia la Terminal " + this.getDestinoActual().getNombre());
+			mailsQueMandoA.clear();
 			getGPS().iniciarTimer(viaje.getDestinoActual());
 		}else if (LocalDateTime.now().isBefore(fecSalida)){
 			System.out.println("Aún falta para iniciar el viaje");

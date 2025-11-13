@@ -135,8 +135,12 @@ public class Terminal {
 		return ubicacion;
 	}
 
-	public void mandarMailConsignees() {
-		// TODO Auto-generated method stub
+	public void mandarMailConsignees(Viaje viaje) {
+		for (OrdenExp orden : ordenesExp) {
+			if (orden.getViaje().equals(viaje)) {
+				notificador.enviarMailDeLlegadaDeBuque(orden.getCliente(), orden);
+			}
+		}
 	}
 
 	public void darOrdenDeInicio(Buque buque) {
