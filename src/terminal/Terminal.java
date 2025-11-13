@@ -10,6 +10,7 @@ import Circuitos.Viaje;
 import naviera.*;
 import ubicacionGeografica.*;
 import buque.Buque;
+import buque.EventManager;
 import buscadorMejorCircuito.BuscadorMejorC;
 import clientes.Consignee;
 import clientes.Shipper;
@@ -30,8 +31,8 @@ public class Terminal {
 	private List<OrdenImp> ordenesImp;
 	private List<Shipper> shippers;
 	private List<Consignee> consignees;
-	private Notificador notificador;
 	
+	private EventManager event = new EventManager();
 	
 	private BuscadorMejorC mejor;
 	
@@ -47,7 +48,6 @@ public class Terminal {
 		this.ordenesImp = new ArrayList<OrdenImp>();
 		this.shippers = new ArrayList<Shipper>();
 		this.consignees= new ArrayList<Consignee>();
-		this.notificador = new Notificador();
 	}
 	
 	public void agregarLiena(Naviera l) {
@@ -76,6 +76,8 @@ public class Terminal {
 		consignees.add(consignee);
 		camiones.add(camion);
 		choferes.add(chofer);
+		
+		event.agregarObserver(consignee, buque);
 	}
 	
 	public void generarOrdenExp(Shipper shipper, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
@@ -83,6 +85,8 @@ public class Terminal {
 		shippers.add(shipper);
 		camiones.add(camion);
 		choferes.add(chofer);
+	
+		event.agregarObserver(shipper, buque);
 	}
 
 	public boolean respetaElTurnoExp(OrdenExp orden, LocalDateTime horario) {
@@ -134,9 +138,6 @@ public class Terminal {
 		return ubicacion;
 	}
 
-	public void mandarMailConsignees() {
-		// TODO Auto-generated method stub
-	}
 
 	public void darOrdenDeInicio(Buque buque) {
 		buque.iniciarFaseWorking();
@@ -231,12 +232,10 @@ public class Terminal {
 		buque.partidaHabilitada(this);
 	}
 
-	public void mandarMailAShippersDel(Viaje viaje) {
-		for (OrdenExp orden : ordenesExp) {
-			if (orden.getViaje().equals(viaje)) {
-				notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
-			}
-		}
+
+	//Observer
+	public void notificar(Buque buque) {
+		event.notificar(buque);
 	}
 
 

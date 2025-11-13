@@ -6,6 +6,7 @@ import java.util.List;
 
 import Circuitos.Cronograma;
 import Circuitos.Viaje;
+import clientes.Cliente;
 import container.Container;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
@@ -17,11 +18,13 @@ public class Buque {
 	private LocalDateTime fecSalida;
 	private GPS gps;
 	private List<Container> carga;
+
 	
 	public Buque() {
 		carga = new ArrayList<Container>();
 		fase = new Outbound();
 		gps = new GPS(0, 0, this);
+
 	}
 	
 	public void setFecSalida(LocalDateTime fecSalida) {
@@ -73,9 +76,6 @@ public class Buque {
 		return fase.estaEnFaseInbound();
 	}
 
-	public void avisarSobreInminenteArribo(Terminal destino) {
-		destino.mandarMailConsignees();
-	}
 
 	public boolean estaEnFaseArrived() {
 		return fase.estaEnFaseArrived();
@@ -170,6 +170,14 @@ public class Buque {
 			c.getEntero();
 		}
 	}
+	
+	//Observer
+	
+	public void notificarTerminal(Terminal destino) {
+		destino.notificar(this);
+	}
+	
+
 
 	
 }

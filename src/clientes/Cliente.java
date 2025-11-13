@@ -3,6 +3,8 @@ package clientes;
 import java.util.ArrayList;
 import java.util.List;
 
+import buque.Buque;
+
 public abstract class Cliente {
 	
 	private String nombre;
@@ -10,18 +12,20 @@ public abstract class Cliente {
 	
 	public Cliente(String nombre) {
 		this.nombre = nombre;
-		this.mails = new ArrayList<String>();
+		mails = new ArrayList();
 	}
 	
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public List<String> getMails() {
+	public List<String> getMails(){
 		return mails;
 	}
-
-	public void recibirMail(String mail) {
-		mails.add(mail);
+	protected void agregarMail(String s) {
+		mails.add(s);
 	}
+
+	public abstract void notificar(Buque b);
+	
 }
