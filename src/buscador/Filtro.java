@@ -3,7 +3,7 @@ package buscador;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import Circuitos.*;
+import circuitos.*;
 import terminal.Terminal;
 
 public abstract class Filtro {

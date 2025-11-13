@@ -1,4 +1,4 @@
-package Circuitos;
+package circuitos;
 
 import terminal.Terminal;
 
