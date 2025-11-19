@@ -14,14 +14,13 @@ public class Buque {
 	
 	private Fase fase;
 	private Viaje viaje;
-	private LocalDateTime fecSalida;
 	private GPS gps;
 	private List<Container> carga;
 	private List<Terminal> mailsQueMandoA;
 	
-	public Buque() {
-		carga = new ArrayList<Container>();
+	public Buque(Viaje viaje) {
 		fase = new Outbound();
+		this.viaje = viaje;
 		gps = new GPS(0, 0, this);
 		mailsQueMandoA = new ArrayList<Terminal>();
 	}
