@@ -11,7 +11,7 @@ public class Departing implements Fase {
 	    }
 	}
 
-	public boolean estaEnFaseDeparting() {
+	public boolean esDeparting() {
 		return true;
 	}
 

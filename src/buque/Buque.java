@@ -21,19 +21,11 @@ public class Buque {
 	public Buque(Viaje viaje) {
 		fase = new Outbound();
 		this.viaje = viaje;
-		gps = new GPS(0, 0, this);
+		gps = new GPS(viaje.getOrigenActual().getUbicacion().getLatitud(), viaje.getOrigenActual().getUbicacion().getLongitud(), this);
 		mailsQueMandoA = new ArrayList<Terminal>();
 	}
 	
-	public void setFecSalida(LocalDateTime fecSalida) {
-		this.fecSalida = fecSalida;
-	}
-	
-	public LocalDateTime getFecSalida() {
-		return fecSalida;
-	}
-
-	public void asignarViaje(Viaje viaje) {
+	public void setViaje(Viaje viaje) {
 		this.viaje = viaje;
 	}
 
@@ -67,11 +59,11 @@ public class Buque {
 	}
 
 	public boolean estaEnFaseOutbound() {
-		return fase.estaEnFaseOutbound();
+		return fase.esOutbound();
 	}
 
 	public boolean estaEnFaseInbound() {
-		return fase.estaEnFaseInbound();
+		return fase.esInbound();
 	}
 
 	public void avisarSobreInminenteArribo(Terminal destino) {
@@ -82,17 +74,17 @@ public class Buque {
 	}
 
 	public boolean estaEnFaseArrived() {
-		return fase.estaEnFaseArrived();
+		return fase.esArrived();
 	}
 
 	public void iniciarViaje() {
-		if (LocalDateTime.now().isEqual(fecSalida)) {
+		if (LocalDateTime.now().isEqual(viaje.getFecInicio())) {
 			System.out.println("Buque iniciando viaje hacia la Terminal " + this.getDestinoActual().getNombre());
 			mailsQueMandoA.clear();
 			getGPS().iniciarTimer(viaje.getDestinoActual());
-		}else if (LocalDateTime.now().isBefore(fecSalida)){
+		}else if (LocalDateTime.now().isBefore(viaje.getFecInicio())){
 			System.out.println("Aún falta para iniciar el viaje");
-		}else if (LocalDateTime.now().isAfter(fecSalida)){
+		}else if (LocalDateTime.now().isAfter(viaje.getFecInicio())){
 			System.out.println("Se deberá arreglar un nuevo cronograma por atraso antes de salir");
 		}
 	}
@@ -110,7 +102,7 @@ public class Buque {
 	}
 
 	public void iniciarFaseWorking() {
-		if (fase.estaEnFaseArrived()) {
+		if (fase.esArrived()) {
 			this.setFase(new Working());
 		}
 	}
@@ -138,18 +130,14 @@ public class Buque {
 		
 	}
 
-	public void asignarDatosParaElViaje(LocalDateTime fechaSalida, Terminal origen) {
-		this.setFecSalida(fechaSalida);
-		gps.setLatitud(origen.getUbicacion().getLatitud());
-		gps.setLongitud(origen.getUbicacion().getLongitud());
-	}
+
 
 	public boolean estaEnFaseWorking() {
-		return fase.estaEnFaseWorking();
+		return fase.esWorking();
 	}
 
 	public boolean estaEnFaseDeparting() {
-		return fase.estaEnFaseDeparting();
+		return fase.esDeparting();
 	}
 
 	public void bajarCarga(Container c) {

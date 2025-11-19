@@ -14,7 +14,7 @@ public class Outbound implements Fase {
 	    }
 	}
 
-	public boolean estaEnFaseOutbound() {
+	public boolean esOutbound() {
 		return true;
 	}
 }

@@ -14,7 +14,7 @@ public class Inbound implements Fase {
 	    }
 	}
 
-	public boolean estaEnFaseInbound() {
+	public boolean esInbound() {
 		return true;
 	}
 

@@ -8,7 +8,7 @@ public class Working implements Fase {
 		buque.getGPS().apagarTimer();
 	}
 
-	public boolean estaEnFaseWorking() {
+	public boolean esWorking() {
 		return true;
 	}
 

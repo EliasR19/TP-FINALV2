@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
+import circuitos.Viaje;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
@@ -22,6 +23,7 @@ public class BuqueFasesHastaArrivedTestCase {
 	private LocalDateTime fechaSalida;
 	private Buque buque;
 	private Naviera n1; 
+	private Viaje viaje;
 
 	
 	@BeforeEach
@@ -30,34 +32,50 @@ public class BuqueFasesHastaArrivedTestCase {
 		u2 = new UbicacionGeografica(-22.91, -43.17);
 		t1 = new Terminal("Argentina", u1);
 		t2 = new Terminal("Brasil", u2);
-		buque = new Buque();
+		
 		n1 = new Naviera();
 		circuitoA = new CircuitoMaritimo(t1, t2);
 		fechaSalida = LocalDateTime.of(2025, 11, 8, 10, 0);
+		
 		circuitoA.agregarTramo(t1, t2, 10);
 		circuitoA.agregarTramo(t2, t1, 10);
 		n1.agregarCircuitoMaritimo(circuitoA);
 		n1.agregarBuque(buque);
-		n1.asignarViaje(buque, circuitoA, fechaSalida);
+		
+		viaje = new Viaje(fechaSalida, t1, circuitoA);
+		
+		buque = new Buque(viaje);
 	}
 	
 	@Test
-	void testUnBuqueTieneUnGPSQueLeDiceSuPosicion() {
+	void testUnBuqueConoceElViajeQueHará() {
+		assertEquals(viaje, buque.getViaje());
+	}
+	
+	@Test
+	void testUnBuqueSabeSuPosicionGraciasAlGps() {
 		assertEquals(-23, buque.getGPS().getLatitud());
 		assertEquals(-25, buque.getGPS().getLongitud());
 	}
-	 
+	
+	@Test
+	void testUnBuqueTieneCoomoFaseInicialElEstadoOutbound() {
+		assertTrue(buque.estaEnFaseOutbound());
+		
+		assertFalse(buque.estaEnFaseInbound());
+		assertFalse(buque.estaEnFaseArrived()); 
+		assertFalse(buque.estaEnFaseWorking());
+		assertFalse(buque.estaEnFaseDeparting());
+	}
+	
 	@Test
 	void testUnBuqueAvanzaYElGPSCuandoPasaUnMinutoLeDiceSuPosicionYSabeSuFaseActual() {
 		buque.getGPS().actualizarPosicionPorUnMinuto();
 		
 		assertEquals(-22.9999641273093, buque.getGPS().getLatitud());
 		assertEquals(-25.00724229574184, buque.getGPS().getLongitud());
+
 		assertTrue(buque.estaEnFaseOutbound());
-		assertFalse(buque.estaEnFaseInbound()); // Con esto dejamos en claro que solo
-		assertFalse(buque.estaEnFaseArrived()); // tendrá una fase a la vez
-		assertFalse(buque.estaEnFaseWorking());
-		assertFalse(buque.estaEnFaseDeparting());
 	}
 	
 	@Test
@@ -98,7 +116,7 @@ public class BuqueFasesHastaArrivedTestCase {
 																  // lo hace de forma automatica y no se puede mostrar 
 																  // en los test sino (solo el hecho de que se activa)
 		
-		buque.setFecSalida(LocalDateTime.now()); // Solo para que corra el test
+		buque.getViaje().setFecInicio(LocalDateTime.now()); // Solo para que corra el test
 		buque.iniciarViaje();
 		assertTrue(buque.getGPS().getTimerIniciado());
 	}
@@ -108,7 +126,7 @@ public class BuqueFasesHastaArrivedTestCase {
 																  // lo hace de forma automatica y no se puede mostrar 
 																  // en los test sino (solo el hecho de que se activa)
 								
-		buque.setFecSalida(LocalDateTime.now().plusHours(1)); // Solo para que corra el test, con esto sabemos que falta 1 hora aun
+		buque.getViaje().setFecInicio(LocalDateTime.now().plusHours(1)); // Solo para que corra el test, con esto sabemos que falta 1 hora aun
 		buque.iniciarViaje();
 		assertFalse(buque.getGPS().getTimerIniciado());
 	}
@@ -118,7 +136,7 @@ public class BuqueFasesHastaArrivedTestCase {
 																          				// lo hace de forma automatica y no se puede mostrar 
 																         				// en los test sino (solo el hecho de que se activa)
 								
-		buque.setFecSalida(LocalDateTime.now().minusHours(1)); // Solo para que corra el test, con esto sabemos que ya paso 1 hora
+		buque.getViaje().setFecInicio(LocalDateTime.now().minusHours(1)); // Solo para que corra el test, con esto sabemos que ya paso 1 hora
 		buque.iniciarViaje();
 		assertFalse(buque.getGPS().getTimerIniciado());
 	}

@@ -28,10 +28,10 @@ public class GPS extends UbicacionGeografica {
 	
 	public void iniciarTimer(Terminal terminal) {
 		
-		timerIniciado = true;
 		super.setLatitud(terminal.getUbicacion().getLatitud());
 		super.setLongitud(terminal.getUbicacion().getLongitud());
 		
+		timerIniciado = true;
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
@@ -57,11 +57,11 @@ public class GPS extends UbicacionGeografica {
 		
 	    if (factor >= 1.0) { // Si llega al destino o nos vamos a pasar de él, tomamos directamente los datos del destino 
 	    					// (que seria que se mueve menos metros de lo max que puede avanzar en un minuto, lo necesario solamante)
-	    	setLatitud(destino.getUbicacion().getLatitud());
-	    	setLongitud(destino.getUbicacion().getLongitud());
+	    	super.setLatitud(destino.getUbicacion().getLatitud());
+	    	super.setLongitud(destino.getUbicacion().getLongitud());
 	    	}   else { // Sino, se avanza de forma proporcional
-	    			setLatitud(getLatitud() + metrosNorte * factor / 111000); 
-	    			setLongitud(getLongitud() + metrosEste * factor / (111000 * Math.cos(Math.toRadians(getLatitud()))));
+	    			super.setLatitud(super.getLatitud() + metrosNorte * factor / 111000); 
+	    			super.setLongitud(super.getLongitud() + metrosEste * factor / (111000 * Math.cos(Math.toRadians(getLatitud()))));
 	    		}
 		buque.actualizarPosicion(distancia, destino); // Se le avisa al buque de los cambios
 	    }
