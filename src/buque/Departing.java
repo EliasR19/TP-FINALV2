@@ -2,7 +2,7 @@ package buque;
 
 import terminal.Terminal;
 
-public class Departing extends Fase {
+public class Departing implements Fase {
 
 	public void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino) {
 		if(distanciaRestante >= 1000) {
@@ -11,7 +11,7 @@ public class Departing extends Fase {
 	    }
 	}
 
-	boolean estaEnFaseDeparting() {
+	public boolean estaEnFaseDeparting() {
 		return true;
 	}
 

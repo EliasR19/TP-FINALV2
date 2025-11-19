@@ -2,7 +2,7 @@ package buque;
 
 import terminal.Terminal;
 
-public class Outbound extends Fase {
+public class Outbound implements Fase {
 
 	@Override
 	public void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino) {
