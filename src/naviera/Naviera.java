@@ -68,6 +68,11 @@ public class Naviera {
         viaje.createCronograma();
         buque.asignarViaje(viaje);
     }
+	
+	public void asignarViaje(Viaje viaje, Buque buque) {
+		buque.asignarViaje(viaje);
+		viaje.createCronograma();
+	}
 
 	
 	

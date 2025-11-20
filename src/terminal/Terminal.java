@@ -191,7 +191,7 @@ public class Terminal {
 			return n.getBuques().stream().map(b -> b.getViaje()).collect(Collectors.toList());
 		}
 		
-		return null;
+		return new ArrayList<Viaje>();
 	}
 
 	public Integer cantidadDeOrdenesImp() {

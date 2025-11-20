@@ -15,7 +15,7 @@ public class FechaSalida extends Filtro {
 	
 
 	@Override
-	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
+	protected boolean cumpleCondicion(Viaje v) {
 		return v.getFecInicio().equals(fecSalida);
 	}
 

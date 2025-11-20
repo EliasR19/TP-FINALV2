@@ -53,21 +53,12 @@ public class Viaje {
 	
 
 	public Terminal getDestinoActual() {
-	    for (Cronograma c : cronograma) {
-	        if (!c.getLlegoADestino()) {
-	            return c.getDestino();
-	        }
-	    }
 	    return origen; 
 	}// Ya llegó a todos los destinos
 	
 	
-	public Terminal getOrigenActual() {
-		for (Cronograma c : cronograma) {
-	        if (!c.getLlegoADestino()) {
-	            return c.getOrigen();
-	        }
-	    }
+	public Terminal getOrigen() {
+
 		return origen; // Ya llegó a todos los destinos
 	}
 	

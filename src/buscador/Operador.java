@@ -6,6 +6,6 @@ import terminal.Terminal;
 public abstract class Operador {
 
 
-	protected abstract boolean cumpleCondicion(Viaje v, Terminal terminal, Filtro f1, Filtro f2);
+	protected abstract boolean cumpleCondicion(Viaje v, Filtro f1, Filtro f2);
 
 }

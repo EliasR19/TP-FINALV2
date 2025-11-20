@@ -22,6 +22,7 @@ public class Buque {
 		fase = new Outbound();
 		this.viaje = viaje;
 		gps = new GPS(0, 0, this);
+		this.asignarViaje(viaje);
 		mailsQueMandoA = new ArrayList<Terminal>();
 	}
 	
@@ -35,6 +36,9 @@ public class Buque {
 
 	public void asignarViaje(Viaje viaje) {
 		this.viaje = viaje;
+		gps.setLatitud(viaje.getOrigen().getUbicacion().getLatitud());
+		gps.setLongitud(viaje.getOrigen().getUbicacion().getLongitud());
+		
 	}
 
 	public GPS getGPS() {
@@ -46,7 +50,7 @@ public class Buque {
 	}
 	
 	public Terminal getOrigenActual() {
-		return viaje.getOrigenActual();
+		return viaje.getOrigen();
 	}
 	
 	public void actualizarPosicion(double distanciaRestante, Terminal destino) {

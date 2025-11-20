@@ -1,11 +1,13 @@
 package buscador;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import circuitos.Tramo;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 import circuitos.Viaje;
-import terminal.*;
+import naviera.CircuitoMaritimo;
+
 
 public class FiltroCompuesto extends Filtro{
 	
@@ -22,22 +24,15 @@ public class FiltroCompuesto extends Filtro{
 
 
 	@Override
-	public List<List<Tramo>> buscar(Terminal terminal) {
-		List<List<Tramo>> result = new ArrayList<>();
-		
-		for(Viaje v : terminal.getViajes()) {
-			if(this.cumpleCondicion(v, terminal)) {
-				
-				result.add(v.getCircutio().getTramos());
-			}
-		}
-		return result;
+	public List<CircuitoMaritimo> buscar(List<Viaje> viajes) {
+		return viajes.stream().filter(v -> this.cumpleCondicion(v)).map(v -> v.getCircutio()).collect(Collectors.toList());
 	}
 
 
+
 	@Override
-	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
-		return op.cumpleCondicion(v, terminal, f1, f2);
+	protected boolean cumpleCondicion(Viaje v) {
+		return op.cumpleCondicion(v, f1, f2);
 	}
 
 	
