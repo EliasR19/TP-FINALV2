@@ -108,13 +108,14 @@ public class BuqueFasesHastaArrivedTestCase {
 	}
 	
 	@Test
-	void testUnBuqueLlegaAlDestino() {
+	void testUnBuqueLlegaAlDestinoYApagaSuTimer() {
 		for (int i = 0; i < 2511 ; i++) { // El buque debe viajar 2511 minutos para llegar al destino
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
 		assertEquals(-22.91, buque.getGPS().getLatitud());
 		assertEquals(-43.17, buque.getGPS().getLongitud());
 		assertTrue(buque.estaEnFaseArrived());
+		assertFalse(buque.getGPS().getTimerIniciado());
 	}
 	
 	@Test

@@ -5,7 +5,7 @@ import terminal.Terminal;
 public class Working implements Fase {
 
 	public void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino) {
-		buque.getGPS().apagarTimer();
+		// No realiza nada
 	}
 
 	public boolean esWorking() {

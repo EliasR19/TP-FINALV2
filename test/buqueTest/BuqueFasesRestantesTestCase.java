@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import buque.Arrived;
 import buque.Buque;
 import buque.Inbound;
+import circuitos.Viaje;
 import container.BL;
 import container.ContainerTanque;
 import naviera.CircuitoMaritimo;
@@ -28,6 +29,7 @@ public class BuqueFasesRestantesTestCase {
 	private Naviera n1;
 	private BL bl1, bl2;
 	private ContainerTanque container1, container2;
+	private Viaje viaje;
 
 	@BeforeEach
 	public void setUp() {
@@ -38,7 +40,6 @@ public class BuqueFasesRestantesTestCase {
 		t2 = new Terminal("Brasil", u2);
 		t3 = new Terminal("Angora", u3);
 		
-		buque = new Buque();
 		n1 = new Naviera();
 		circuitoA = new CircuitoMaritimo(t1, t2);
 		
@@ -50,7 +51,10 @@ public class BuqueFasesRestantesTestCase {
 		
 		n1.agregarCircuitoMaritimo(circuitoA);
 		n1.agregarBuque(buque);
-		n1.asignarViaje(buque, circuitoA, fechaSalida);
+		
+		viaje = new Viaje(fechaSalida, t1, circuitoA);
+		
+		buque = new Buque(viaje);
 		
 		bl1 = new BL();
 		bl1.enlistar("Agua", 500d);

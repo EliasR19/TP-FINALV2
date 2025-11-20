@@ -22,6 +22,7 @@ public class Buque {
 		fase = new Outbound();
 		this.viaje = viaje;
 		gps = new GPS(viaje.getOrigenActual().getUbicacion().getLatitud(), viaje.getOrigenActual().getUbicacion().getLongitud(), this);
+		carga = new ArrayList<Container>();
 		mailsQueMandoA = new ArrayList<Terminal>();
 	}
 	
