@@ -51,8 +51,8 @@ public class Naviera {
 	
 
 	
-	public void establecerSalida(Buque b, LocalDateTime fecSalida) {
-		b.setFecSalida(fecSalida);
+	public void establecerSalida(Buque buque, LocalDateTime fecSalida) {
+		buque.getViaje().setFecInicio(fecSalida);
 	}
 	
 	
@@ -61,16 +61,6 @@ public class Naviera {
 		circuito.terminalesDelCircuito().getFirst().asignarFecSalidaBuqe(bA,fecSalida);
 	}
 
-	public void asignarViaje(Buque buque, CircuitoMaritimo circuito, LocalDateTime fechaSalida) {
-        //Asigna un viaje a un buque
-        buque.asignarDatosParaElViaje(fechaSalida, circuito.getOrigen());
-        Viaje viaje = new Viaje(fechaSalida, circuito.getOrigen(), circuito);
-        viaje.createCronograma();
-        buque.setViaje(viaje);
-    }
-
-	
-	
 	public double duracionEntre(Terminal origen, Terminal destino) {
 		
 		//La terminal destino debe estar dentro de algun circuito de esta Naviera. HACER VERIFICACION
@@ -102,7 +92,7 @@ public class Naviera {
 	
 	public void recorridos() {
 		for(Buque b : buques) {
-			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
+			System.out.println("Buque: " + b + " | FecSalida: " + b.getViaje().getFecInicio());
 			b.cronograma();
 			System.out.println("\n");
 		}
