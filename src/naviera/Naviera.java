@@ -90,22 +90,22 @@ public class Naviera {
 	
 
 	
-	public void recorridos() {
-		for(Buque b : buques) {
-			System.out.println("Buque: " + b + " | FecSalida: " + b.getViaje().getFecInicio());
-			b.cronograma();
-			System.out.println("\n");
-		}
-	}
+	//public void recorridos() {
+	//	for(Buque b : buques) {
+	//		System.out.println("Buque: " + b + " | FecSalida: " + b.getViaje().getFecInicio());
+	//		b.cronograma();
+	//		System.out.println("\n");
+	//	}
+	//}
 
-	public void armarCronograma() {
-		for(Buque b : buques) {
-			b.cronograma();
-		}
-	}
+	//public void armarCronograma() {
+	//	for(Buque b : buques) {
+	//		b.cronograma();
+	//	}
+	//}
 
-	public void showCronogramaBuque() {
-		buques.stream().forEach(b -> b.cronograma());
-	}
+	//public void showCronogramaBuque() {
+	//	buques.stream().forEach(b -> b.cronograma());
+	//}
 	
 }

@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import circuitos.Cronograma;
 import circuitos.Viaje;
 import container.Container;
 import terminal.Terminal;
@@ -53,10 +52,6 @@ public class Buque {
 
 	public Viaje getViaje() {
 		return viaje;
-	}
-
-	public Fase getFase() {
-		return fase;
 	}
 
 	public boolean estaEnFaseOutbound() {
@@ -151,18 +146,8 @@ public class Buque {
 		}
 	}
 	
-	public void cronograma() {
-		viaje.createCronograma();
-	}
-	
 	public void llegoAlDestino(Terminal destino) {
 		viaje.confirmarLlegada(destino);
-	}
-	
-	public void showCronograma() {
-		for(Cronograma c : viaje.getCronograma()) {
-			c.getEntero();
-		}
 	}
 
 	public boolean mandoMailA(Terminal terminal) {

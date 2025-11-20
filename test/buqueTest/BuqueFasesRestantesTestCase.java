@@ -130,7 +130,7 @@ public class BuqueFasesRestantesTestCase {
 		
 		t2.darOrdenDeInicio(buque);
 		t2.darOrdenDeDepart(buque);
-		
+		 
 		buque.getGPS().actualizarPosicionPorUnMinuto();
 		buque.getGPS().actualizarPosicionPorUnMinuto();
 		
