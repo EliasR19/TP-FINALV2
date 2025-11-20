@@ -164,4 +164,8 @@ public class Buque {
 		}
 	}
 
+	public boolean mandoMailA(Terminal terminal) {
+		return mailsQueMandoA.contains(terminal);
+	}
+
 }

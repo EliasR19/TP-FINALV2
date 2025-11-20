@@ -79,21 +79,32 @@ public class BuqueFasesHastaArrivedTestCase {
 	}
 	
 	@Test
-	void testUnBuqueCuandoNoEstaA50MetrosOMenosDeLaTerminalAunNoPasaALaSiguienteFase() {
-		for (int i = 0; i < 2443 ; i++) { 
+	void testUnBuqueCuandoNoEstaA50KMOMenosDeLaTerminalAunNoPasaALaSiguienteFase() {
+		for (int i = 0; i < 2442 ; i++) { 
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
-		assertEquals(50103.45619089812, buque.getGPS().getDistanciaRestante());
+		assertEquals(50843.44274510807, buque.getGPS().getDistanciaRestante());
 		assertTrue(buque.estaEnFaseOutbound()); // Aún está por arriba de los 50kms
 	}
 	
 	@Test
-	void testUnBuqueCuandoEstaA50MetrosOMenosDeLaTerminalPasaALaSiguienteFase() {
+	void testUnBuqueCuandoEnElPróximoMinutoYaVaAEstarA50kmOMenosCambiaAInboundPeroNoMandaElMail() {
+		for (int i = 0; i < 2443 ; i++) { 
+			buque.getGPS().actualizarPosicionPorUnMinuto();
+		}
+		assertEquals(50103.45619089812, buque.getGPS().getDistanciaRestante());
+		assertTrue(buque.estaEnFaseInbound());
+		assertFalse(buque.mandoMailA(t2));
+	}
+	
+	@Test
+	void testUnBuqueCuandoEstaA50KMOMenosDeLaTerminalPasaALaSiguienteFaseYMandaElMailALaTerminalDeDestino() {
 		for (int i = 0; i < 2444 ; i++) { 
 			buque.getGPS().actualizarPosicionPorUnMinuto();
 		}
 		assertEquals(49363.46944096873, buque.getGPS().getDistanciaRestante());
 		assertTrue(buque.estaEnFaseInbound());
+		assertTrue(buque.mandoMailA(t2));
 	}
 	
 	@Test

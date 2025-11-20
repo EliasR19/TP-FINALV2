@@ -44,7 +44,7 @@ public class GPS extends UbicacionGeografica {
         
 		double avance = 740; // Por cada minuto el buque avanza 740 metros, ya que tomo que los buques avanzan 24 nudos por hora.
 						     // 24 nudos serían 44.448 metros por hora.
-						     // 44 metros / 60 minutos = 0.740 metros por minuto
+						     // 44.448 metros / 60 minutos = 740 metros por minuto
 		Terminal destino = buque.getDestinoActual();
 		double[] factores = destino.getUbicacion().factorPara(getLatitud(), getLongitud(), avance);
 		double metrosNorte 	     = factores[0];
