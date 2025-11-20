@@ -82,26 +82,32 @@ public class main {
 			
 			Argentina.agregarLiena(lineaA);
 			
-			
 			/*
 			 * Circuito A = [Argentina, Brasil, España]
 			 * Circuito B = [Argentina, España, China]
 			 * */
 
-			b = new Buscador(Argentina);
+			//b = new Buscador(Argentina);
 			fSimple = new PuertoDestino(China);
-			b.agregarFiltro(fSimple);
+			Argentina.setFiltroBuscadorMejoresCM(fSimple);
+			//b.agregarFiltro(fSimple);
 			
 			//Argentina.getViajes().forEach(v -> System.out.println(v.getOrigenActual().getNombre() + " - " + v.getDestinoActual().getNombre()));
 			//System.out.println(bA.getViaje().getOrigenActual().getNombre());
 			
 			//b.getViajes().forEach(v -> System.out.println("a" + v.getOrigenActual().getNombre() + " - " + v.getDestinoActual().getNombre()));
 			
-			System.out.println(vB.tieneDestinoYLlegada(LocalDateTime.of(LocalDate.of(2025,12,2), LocalTime.of(3, 0)), España));
+			//System.out.println(vB.tieneDestinoYLlegada(LocalDateTime.of(LocalDate.of(2025,12,2), LocalTime.of(3, 0)), España));
 			
-			for(CircuitoMaritimo cm : b.buscar()) {
+			for(Viaje v: Argentina.getBuscador().getViajes()) {
+				System.out.println("a" + v);
+			}
+			
+			for(CircuitoMaritimo cm : Argentina.buscarMejoresRutas()) {
 				System.out.println("a" + cm.getOrigen().getNombre());
 			}
+			
+			
 			for(Cronograma c : vA.getCronograma()) {
 				System.out.println(c.getOrigen().getNombre() + " | " + c.getSalida() + " -->" + c.getDestino().getNombre() + " | " + c.getLlegada());
 			}

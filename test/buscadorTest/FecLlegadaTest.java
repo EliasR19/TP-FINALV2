@@ -85,7 +85,7 @@ public class FecLlegadaTest {
 		
 		Argentina.agregarLiena(lineaA);
 		
-		b = new Buscador(Argentina);
+		//b = new Buscador(Argentina);
 		
 		/*
 		 * Circuito A = [Argentina, Brasil, España]
@@ -97,8 +97,10 @@ public class FecLlegadaTest {
 	@Test
 	public void fecLlegadaSimple() {
 		fSimple = new FechaLLegada(LocalDateTime.of(LocalDate.of(2025,12,2), LocalTime.of(3, 0)), España);
-		b.agregarFiltro(fSimple);
-		assertEquals(List.of(circuitoB), b.buscar());
+		Argentina.setFiltroBuscadorMejoresCM(fSimple);
+		//b.agregarFiltro(fSimple);
+		//assertEquals(List.of(circuitoB), b.buscar());
+		assertEquals(List.of(circuitoB), Argentina.buscarMejoresRutas());
 	}
 	
 	
