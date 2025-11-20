@@ -75,7 +75,6 @@ public class PuertoDestinoTest {
 
 	
 
-		b = new Buscador(Argentina);
 	
 
 		lineaA.agregarCircuitoMaritimo(circuitoA);
@@ -89,6 +88,7 @@ public class PuertoDestinoTest {
 		
 		Argentina.agregarLiena(lineaA);
 		
+		b = new Buscador(Argentina);
 		
 		/*
 		 * Circuito A = [Argentina, Brasil, España]
@@ -114,7 +114,7 @@ public class PuertoDestinoTest {
 		fCompuesto = new FiltroCompuesto(And, fSimple, fSimple2);
 		
 		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(circuitoA.getTramos()), b.buscar());
+		assertEquals(List.of(circuitoA), b.buscar());
 		
 	}
 	
@@ -127,7 +127,7 @@ public class PuertoDestinoTest {
 		fCompuesto = new FiltroCompuesto(Or, fSimple, fSimple2);
 		
 		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(circuitoA.getTramos(), circuitoB.getTramos()), b.buscar());
+		assertEquals(List.of(circuitoA, circuitoB), b.buscar());
 		
 	}
 	

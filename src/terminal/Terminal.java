@@ -58,10 +58,7 @@ public class Terminal {
 		return nombre;
 	}
 
-	public void asignarFecSalidaBuqe(Buque bA, LocalDateTime fecSalida) {
-		//Se supone que el buque esta dentro de la terminal
-		bA.setFecSalida(fecSalida);
-	}
+
 	
 	// Punto 4
 	public double duracionRecorridoEntre(Naviera naviera, Terminal destino) {
@@ -190,7 +187,6 @@ public class Terminal {
 		for(Naviera n : lineas) {
 			return n.getBuques().stream().map(b -> b.getViaje()).collect(Collectors.toList());
 		}
-		
 		return new ArrayList<Viaje>();
 	}
 

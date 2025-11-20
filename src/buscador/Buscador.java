@@ -14,18 +14,27 @@ public class Buscador {
 
 	
 	public Buscador(Terminal terminal) {
-		viajes = terminal.getViajes();
 		this.terminal= terminal; 
+		viajes = new ArrayList<>();
+		this.agregarViajes();
 	}
 	
+	private void agregarViajes() {
+		for(Viaje v : terminal.getViajes()) {
+			viajes.add(v);
+		}
+	}
+
 	public List<CircuitoMaritimo> buscar(){
 		return filtro.buscar(viajes);
 	}
 
 	
-
-
 	public void agregarFiltro(Filtro f) {
 		filtro = f;
+	}
+	
+	public List<Viaje> getViajes(){
+		return viajes;
 	}
 }

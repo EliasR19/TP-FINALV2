@@ -20,6 +20,7 @@ public class Viaje {
 		this.origen = origen;
 		this.circuito = circuito;
 		cronograma = new ArrayList<>();
+		this.createCronograma();
 	}
 	
 	public void createCronograma() {
@@ -52,16 +53,25 @@ public class Viaje {
 	}
 	
 
+
 	public Terminal getDestinoActual() {
+	    for (Cronograma c : cronograma) {
+	        if (!c.getLlegoADestino()) {
+	            return c.getDestino();
+	        }
+	    }
 	    return origen; 
 	}// Ya llegó a todos los destinos
 	
 	
-	public Terminal getOrigen() {
-
+	public Terminal getOrigenActual() {
+		for (Cronograma c : cronograma) {
+	        if (!c.getLlegoADestino()) {
+	            return c.getOrigen();
+	        }
+	    }
 		return origen; // Ya llegó a todos los destinos
 	}
-	
 
 	public CircuitoMaritimo getCircutio() {
 		return circuito;
@@ -69,7 +79,6 @@ public class Viaje {
 	
 	public boolean tieneDestino(Terminal terminal) {	
 		return circuito.contiene(origen, terminal);
-
 	}
 	
 	public boolean tieneDestinoYLlegada(LocalDateTime llegada,  Terminal destino) {
