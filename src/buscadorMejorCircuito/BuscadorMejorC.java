@@ -5,6 +5,6 @@ import terminal.Terminal;
 
 public interface BuscadorMejorC {
 
-	public abstract CircuitoMaritimo buscarMejorC(Terminal terminal, Terminal destino);
-	
+	public CircuitoMaritimo buscarMejorC(Terminal terminal, Terminal destino);
+
 }
