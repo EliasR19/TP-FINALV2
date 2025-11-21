@@ -1,5 +1,7 @@
 package clientesTest;
 
+import static org.mockito.Mockito.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
@@ -25,7 +27,7 @@ class ShipperTestCase {
 	private Container carga;
 	private BL bl;
 	private OrdenExp ordenExp;
-	private Buque buque;
+	private Buque buqueDummy;
 	private Camion camion;
 	private Chofer chofer;
 	private LocalDateTime turno;
@@ -35,7 +37,7 @@ class ShipperTestCase {
 		u1 = new UbicacionGeografica(-23, -25);
 		terminal = new Terminal("Argentina", u1);
 		shipper = new Shipper("Marcos");
-		buque = new Buque();
+		buqueDummy = mock(Buque.class);
 		camion = new Camion();
 		chofer = new Chofer("Maxi");
 		camion.setChofer(chofer);
@@ -55,7 +57,7 @@ class ShipperTestCase {
 
 	@Test
 	void testExportarCarga() {
-		ordenExp = terminal.generarOrdenExp(shipper, carga, buque, camion, chofer, turno);
+		ordenExp = terminal.generarOrdenExp(shipper, carga, buqueDummy, camion, chofer, turno);
 		shipper.exportarCarga(ordenExp, turno);
 		assertTrue(terminal.tieneContainer(carga));
 		assertEquals(null, camion.getCarga());

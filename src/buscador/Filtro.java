@@ -14,7 +14,4 @@ public abstract class Filtro {
 	}
 	
 	protected abstract boolean cumpleCondicion(Viaje v, Terminal terminal);
-	
-	
-	
 }

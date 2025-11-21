@@ -60,7 +60,7 @@ public class Terminal {
 
 	public void asignarFecSalidaBuqe(Buque bA, LocalDateTime fecSalida) {
 		//Se supone que el buque esta dentro de la terminal
-		bA.setFecSalida(fecSalida);
+		bA.getViaje().setFecInicio(fecSalida);
 	}
 	
 	// Punto 4

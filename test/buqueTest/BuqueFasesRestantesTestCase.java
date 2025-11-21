@@ -54,11 +54,11 @@ public class BuqueFasesRestantesTestCase {
 		circuitoA.agregarTramo(t3, t1, 100);
 		
 		n1.agregarCircuitoMaritimo(circuitoA);
-		n1.agregarBuque(buque);
 		
 		viaje = new Viaje(fechaSalida, t1, circuitoA);
 		
 		buque = new Buque(viaje);
+		n1.agregarBuque(buque);
 		
 		bl1 = new BL();
 		bl1.enlistar("Agua", 500d);

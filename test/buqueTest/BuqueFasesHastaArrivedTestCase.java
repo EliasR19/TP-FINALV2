@@ -41,11 +41,11 @@ public class BuqueFasesHastaArrivedTestCase {
 		circuitoA.agregarTramo(t1, t2, 10);
 		circuitoA.agregarTramo(t2, t1, 10);
 		n1.agregarCircuitoMaritimo(circuitoA);
-		n1.agregarBuque(buque);
 		
 		viaje = new Viaje(fechaSalida, t1, circuitoA);
 		
 		buque = new Buque(viaje);
+		n1.agregarBuque(buque);
 		buque.getGPS().setTimerIniciado(true);
 	}
 	

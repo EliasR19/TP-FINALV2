@@ -1,5 +1,6 @@
 package terminalTest;
 
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
@@ -38,7 +39,7 @@ class TerminalTestCase {
 		ubicacionTerminal = new UbicacionGeografica(200, 100);
 		terminal = new Terminal("A", ubicacionTerminal);
 		shipper = new Shipper("Marcos");
-		buque = new Buque();
+		buque = mock(Buque.class);
 		camion = new Camion();
 		chofer = new Chofer("Maxi");
 		turno = LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0));

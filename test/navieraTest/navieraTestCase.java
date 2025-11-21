@@ -1,5 +1,6 @@
 package navieraTest;
 
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,9 +31,8 @@ class navieraTestCase {
 	@Test
 	void testUnaNavieraTieneVariosBuques() {
 		
-		buque1 = new Buque();
-		buque2 = new Buque();
-		
+		buque1 = mock(Buque.class);
+		buque2 = mock(Buque.class);
 		naviera.agregarBuque(buque1);
 		naviera.agregarBuque(buque2);
 		

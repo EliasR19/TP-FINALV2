@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import buque.Buque;
 import buscador.*;
+import circuitos.Viaje;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
@@ -28,6 +29,9 @@ public class FecSalidaTest {
 	Naviera lineaA ;
 	CircuitoMaritimo circuitoA ;
 	CircuitoMaritimo circuitoB ;
+	
+	Viaje viajeA;
+	Viaje viajeB;
 	
 	Buque bA;
 	Buque bB ;
@@ -64,24 +68,21 @@ public class FecSalidaTest {
 		circuitoB.agregarTramo(Argentina, España, 4);
 		circuitoB.agregarTramo(España, China, 30d);
 		circuitoB.agregarTramo(China,Argentina, 55d);
-		
-		
-		bA = new Buque();
-		bB = new Buque();
 
-	
+		viajeA = new Viaje(LocalDateTime.of(2025, 10, 31, 1, 0), Argentina, circuitoA);
+		viajeB = new Viaje(LocalDateTime.of(2025, 12, 1, 23, 0), Argentina, circuitoB);
 
 		b = new Buscador(Argentina);
 	
 		
 		lineaA.agregarCircuitoMaritimo(circuitoA);
 		lineaA.agregarCircuitoMaritimo(circuitoB);
+		
+		bA = new Buque(viajeA);
+		bB = new Buque(viajeB);
+		
 		lineaA.agregarBuque(bA);
 		lineaA.agregarBuque(bB);
-		
-		lineaA.asignarViaje(bA, circuitoA,LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)));
-		lineaA.asignarViaje(bB, circuitoB, LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)));
-		
 		
 		Argentina.agregarLiena(lineaA);
 		
