@@ -2,6 +2,7 @@ package buqueTest;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
@@ -45,6 +46,7 @@ public class BuqueFasesHastaArrivedTestCase {
 		viaje = new Viaje(fechaSalida, t1, circuitoA);
 		
 		buque = new Buque(viaje);
+		buque.getGPS().setTimerIniciado(true);
 	}
 	
 	@Test
@@ -53,7 +55,7 @@ public class BuqueFasesHastaArrivedTestCase {
 	}
 	
 	@Test
-	void testUnBuqueSabeSuPosicionGraciasAlGps() {
+	void testUnBuqueSabeSuPosicionGraciasAlGPS() {
 		assertEquals(-23, buque.getGPS().getLatitud());
 		assertEquals(-25, buque.getGPS().getLongitud());
 	}
@@ -119,7 +121,8 @@ public class BuqueFasesHastaArrivedTestCase {
 	}
 	
 	@Test
-	void testElGPSDelBuqueNoSeActivaHastaQueEsteNoParte() {
+	void testElGPSDelBuqueIncialmenteEstaApagado() {
+		buque = new Buque(viaje);
 		assertFalse(buque.getGPS().getTimerIniciado());
 	}
 	
@@ -135,11 +138,17 @@ public class BuqueFasesHastaArrivedTestCase {
 	
 	@Test
 	void testElGPSDelBuqueNoPuedeEmpezarSiAunFaltaParaQueElBuqueParta() { // Esto sería para mostrar lo del timer, ya que eso
-																  // lo hace de forma automatica y no se puede mostrar 
-																  // en los test sino (solo el hecho de que se activa)
-								
+																          // lo hace de forma automatica y no se puede mostrar 
+																          // en los test sino (solo el hecho de que se activa)
+		
+		buque = new Buque(viaje);
 		buque.getViaje().setFecInicio(LocalDateTime.now().plusHours(1)); // Solo para que corra el test, con esto sabemos que falta 1 hora aun
-		buque.iniciarViaje();
+		try {
+			buque.iniciarViaje();
+	        fail("Se debe lanzar la excepción porque aún falta una hora para la salida del buque");
+	    } catch (RuntimeException e) {
+	        assertEquals("Aún falta para iniciar el viaje", e.getMessage());
+	    }
 		assertFalse(buque.getGPS().getTimerIniciado());
 	}
 	
@@ -147,9 +156,14 @@ public class BuqueFasesHastaArrivedTestCase {
 	void testElGPSDelBuqueNoPuedeEmpezarSiYaPasoLaFechaDeSalidaDelBuqueYEsteNoSalio() { // Esto sería para mostrar lo del timer, ya que eso
 																          				// lo hace de forma automatica y no se puede mostrar 
 																         				// en los test sino (solo el hecho de que se activa)
-								
+		buque = new Buque(viaje);
 		buque.getViaje().setFecInicio(LocalDateTime.now().minusHours(1)); // Solo para que corra el test, con esto sabemos que ya paso 1 hora
-		buque.iniciarViaje();
+		try {
+			buque.iniciarViaje();
+	        fail("Se debe lanzar la excepción porque ya pasó una hora para la salida del buque");
+	    } catch (RuntimeException e) {
+	        assertEquals("Se deberá arreglar un nuevo cronograma por atraso antes de salir", e.getMessage());
+	    }
 		assertFalse(buque.getGPS().getTimerIniciado());
 	}
 }

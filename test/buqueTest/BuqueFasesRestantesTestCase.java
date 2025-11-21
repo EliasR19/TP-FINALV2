@@ -1,7 +1,10 @@
 package buqueTest;
 
+import static org.mockito.Mockito.*;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
@@ -12,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import buque.Arrived;
 import buque.Buque;
 import buque.Inbound;
+import buque.Working;
 import circuitos.Viaje;
 import container.BL;
 import container.ContainerTanque;
@@ -97,6 +101,18 @@ public class BuqueFasesRestantesTestCase {
 
 		assertTrue(t2.tieneContainer(container1));
 		assertFalse(t2.tieneContainer(container2));
+	}
+	
+	@Test
+	void testUnBuqueEnLaFaseWorkingNoActualizaSuPosicionPorqueElTimerEstaApagado() {
+		buque.setFase(new Working());
+		
+		try {
+	        buque.getGPS().actualizarPosicionPorUnMinuto();
+	        fail("Se debe lanzar la excepción por el timer apagado");
+	    } catch (RuntimeException e) {
+	        assertEquals("No se puede actualizar la posición con el timer apagado", e.getMessage());
+	    }
 	}
 	
 	@Test

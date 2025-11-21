@@ -79,9 +79,9 @@ public class Buque {
 			mailsQueMandoA.clear();
 			getGPS().iniciarTimer(viaje.getDestinoActual());
 		}else if (LocalDateTime.now().isBefore(viaje.getFecInicio())){
-			System.out.println("Aún falta para iniciar el viaje");
+			throw new RuntimeException("Aún falta para iniciar el viaje");
 		}else if (LocalDateTime.now().isAfter(viaje.getFecInicio())){
-			System.out.println("Se deberá arreglar un nuevo cronograma por atraso antes de salir");
+			throw new RuntimeException("Se deberá arreglar un nuevo cronograma por atraso antes de salir");
 		}
 	}
 
@@ -152,6 +152,10 @@ public class Buque {
 
 	public boolean mandoMailA(Terminal terminal) {
 		return mailsQueMandoA.contains(terminal);
+	}
+
+	public void apagarTimer() {
+		gps.apagarTimer();
 	}
 
 }
