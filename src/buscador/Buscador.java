@@ -47,9 +47,6 @@ public class Buscador {
 		return mejorCirMaritimo.buscarMejorC(origen, destino);
 	}
 
-	public List<Viaje> getViajes() {
-		return viajes;
-	}
 	
 	
 

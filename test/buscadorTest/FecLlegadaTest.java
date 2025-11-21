@@ -111,9 +111,9 @@ public class FecLlegadaTest {
 		fSimple2 = new FechaLLegada(LocalDateTime.of(LocalDate.of(2025,12,3), LocalTime.of(9, 0)), China);
 		
 		fCompuesto = new FiltroCompuesto(And, fSimple, fSimple2);
-		
-		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(circuitoB), b.buscar());
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
+		//b.agregarFiltro(fCompuesto);
+		assertEquals(List.of(circuitoB), Argentina.buscarMejoresRutas());
 		
 	}
 	
@@ -124,9 +124,9 @@ public class FecLlegadaTest {
 		fSimple2 = new FechaLLegada(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(5, 0)), Brasil);
 		
 		fCompuesto = new FiltroCompuesto(Or, fSimple, fSimple2);
-		
-		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(circuitoA, circuitoB), b.buscar());
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
+		//b.agregarFiltro(fCompuesto);
+		assertEquals(List.of(circuitoA, circuitoB),  Argentina.buscarMejoresRutas());
 		
 	}
 	
@@ -137,9 +137,9 @@ public class FecLlegadaTest {
 		fSimple2 = new FechaLLegada(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(5, 0)), Brasil);
 		
 		fCompuesto = new FiltroCompuesto(And, fSimple, fSimple2);
-		
-		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(), b.buscar());
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
+		//b.agregarFiltro(fCompuesto);
+		assertEquals(List.of(), Argentina.buscarMejoresRutas());
 		
 	}
 	

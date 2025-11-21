@@ -101,8 +101,9 @@ public class FecSalidaTest {
 	@Test
 	public void fecLlegadaSimple() {
 		fSimple = new FechaSalida(LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)));
-		b.agregarFiltro(fSimple);
-		assertEquals(List.of(circuitoB), b.buscar());
+		Argentina.setFiltroBuscadorMejoresCM(fSimple);
+		//b.agregarFiltro(fSimple);
+		assertEquals(List.of(circuitoB), Argentina.buscarMejoresRutas());
 		
 	}
 	
@@ -114,9 +115,10 @@ public class FecSalidaTest {
 		
 		fCompuesto = new FiltroCompuesto(And, fSimple, fSimple2);
 		
-		b.agregarFiltro(fCompuesto);
+		//b.agregarFiltro(fCompuesto);
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
 		//Un circuito No puede tener dos fechas de salidas
-		assertEquals(List.of(), b.buscar());
+		assertEquals(List.of(), Argentina.buscarMejoresRutas());
 		
 	}
 	
@@ -128,8 +130,9 @@ public class FecSalidaTest {
 		
 		fCompuesto = new FiltroCompuesto(Or, fSimple, fSimple2);
 		
-		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(circuitoA, circuitoB), b.buscar());
+		//b.agregarFiltro(fCompuesto);
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
+		assertEquals(List.of(circuitoA, circuitoB), Argentina.buscarMejoresRutas());
 		
 	}
 	
@@ -141,8 +144,9 @@ public class FecSalidaTest {
 		
 		fCompuesto = new FiltroCompuesto(And, fSimple, fSimple2);
 		
-		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(), b.buscar());
+		//b.agregarFiltro(fCompuesto);
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
+		assertEquals(List.of(), Argentina.buscarMejoresRutas());
 		
 	}
 	

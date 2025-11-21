@@ -88,7 +88,7 @@ public class PuertoDestinoTest {
 		
 		Argentina.agregarLiena(lineaA);
 		
-		b = new Buscador(Argentina);
+		//b = new Buscador(Argentina);
 		
 		/*
 		 * Circuito A = [Argentina, Brasil, España]
@@ -100,8 +100,9 @@ public class PuertoDestinoTest {
 	@Test
 	public void PuertoDestinoSimple() {
 		fSimple = new PuertoDestino(Brasil);
-		b.agregarFiltro(fSimple);
-		assertEquals(List.of(circuitoA), b.buscar());
+		//b.agregarFiltro(fSimple);
+		Argentina.setFiltroBuscadorMejoresCM(fSimple);
+		assertEquals(List.of(circuitoA), Argentina.buscarMejoresRutas());
 		
 	}
 	
@@ -112,9 +113,9 @@ public class PuertoDestinoTest {
 		fSimple2 = new PuertoDestino(España);
 		
 		fCompuesto = new FiltroCompuesto(And, fSimple, fSimple2);
-		
-		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(circuitoA), b.buscar());
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
+		//b.agregarFiltro(fCompuesto);
+		assertEquals(List.of(circuitoA), Argentina.buscarMejoresRutas());
 		
 	}
 	
@@ -125,9 +126,9 @@ public class PuertoDestinoTest {
 		fSimple2 = new PuertoDestino(China);
 		
 		fCompuesto = new FiltroCompuesto(Or, fSimple, fSimple2);
-		
-		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(circuitoA, circuitoB), b.buscar());
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
+		//b.agregarFiltro(fCompuesto);
+		assertEquals(List.of(circuitoA, circuitoB), Argentina.buscarMejoresRutas());
 		
 	}
 	
@@ -138,9 +139,9 @@ public class PuertoDestinoTest {
 		fSimple2 = new PuertoDestino(China);
 		
 		fCompuesto = new FiltroCompuesto(And, fSimple, fSimple2);
-		
-		b.agregarFiltro(fCompuesto);
-		assertEquals(List.of(), b.buscar());
+		Argentina.setFiltroBuscadorMejoresCM(fCompuesto);
+		//b.agregarFiltro(fCompuesto);
+		assertEquals(List.of(), Argentina.buscarMejoresRutas());
 		
 	}
 	

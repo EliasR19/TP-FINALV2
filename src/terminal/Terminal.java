@@ -57,6 +57,8 @@ public class Terminal {
 	
 	public void agregarLiena(Naviera l) {
 		lineas.add(l);
+		//Le va agregando los viajes al buscador a medida que se le agregan 
+		//las navieras con los buques(que son los que tienen los viajes)
 		buscador.agregarViajes(this.getViajes());
 	}
 

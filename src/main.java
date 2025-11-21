@@ -99,10 +99,7 @@ public class main {
 			
 			//System.out.println(vB.tieneDestinoYLlegada(LocalDateTime.of(LocalDate.of(2025,12,2), LocalTime.of(3, 0)), España));
 			
-			for(Viaje v: Argentina.getBuscador().getViajes()) {
-				System.out.println("a" + v);
-			}
-			
+
 			for(CircuitoMaritimo cm : Argentina.buscarMejoresRutas()) {
 				System.out.println("a" + cm.getOrigen().getNombre());
 			}
