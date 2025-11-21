@@ -20,21 +20,22 @@ public class Buque {
 	
 	public Buque(Viaje viaje) {
 		fase = new Outbound();
-		this.viaje = viaje;
+		//this.viaje = viaje;
 		gps = new GPS(0, 0, this);
+		this.asignarViaje(viaje);
 		mailsQueMandoA = new ArrayList<Terminal>();
 	}
 	
-	public void setFecSalida(LocalDateTime fecSalida) {
-		this.fecSalida = fecSalida;
-	}
 	
 	public LocalDateTime getFecSalida() {
-		return fecSalida;
+		return viaje.getFecInicio();
 	}
 
 	public void asignarViaje(Viaje viaje) {
 		this.viaje = viaje;
+		gps.setLatitud(viaje.getOrigenActual().getUbicacion().getLatitud());
+		gps.setLongitud(viaje.getOrigenActual().getUbicacion().getLongitud());
+		
 	}
 
 	public GPS getGPS() {
@@ -86,13 +87,13 @@ public class Buque {
 	}
 
 	public void iniciarViaje() {
-		if (LocalDateTime.now().isEqual(fecSalida)) {
+		if (LocalDateTime.now().isEqual(viaje.getFecInicio())) {
 			System.out.println("Buque iniciando viaje hacia la Terminal " + this.getDestinoActual().getNombre());
 			mailsQueMandoA.clear();
 			getGPS().iniciarTimer(viaje.getDestinoActual());
-		}else if (LocalDateTime.now().isBefore(fecSalida)){
+		}else if (LocalDateTime.now().isBefore(viaje.getFecInicio())){
 			System.out.println("Aún falta para iniciar el viaje");
-		}else if (LocalDateTime.now().isAfter(fecSalida)){
+		}else if (LocalDateTime.now().isAfter(viaje.getFecInicio())){
 			System.out.println("Se deberá arreglar un nuevo cronograma por atraso antes de salir");
 		}
 	}
@@ -139,7 +140,6 @@ public class Buque {
 	}
 
 	public void asignarDatosParaElViaje(LocalDateTime fechaSalida, Terminal origen) {
-		this.setFecSalida(fechaSalida);
 		gps.setLatitud(origen.getUbicacion().getLatitud());
 		gps.setLongitud(origen.getUbicacion().getLongitud());
 	}

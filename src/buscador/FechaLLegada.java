@@ -10,7 +10,6 @@ public class FechaLLegada extends Filtro{
 	private Terminal destino;
 	
 	
-
 	public FechaLLegada(LocalDateTime fecLLegada, Terminal destino) {
 		this.fecLLegada = fecLLegada;
 		this.destino = destino;
@@ -19,7 +18,7 @@ public class FechaLLegada extends Filtro{
 
 
 	@Override
-	protected boolean cumpleCondicion(Viaje v, Terminal terminal) {
+	protected boolean cumpleCondicion(Viaje v) {
 		return v.tieneDestinoYLlegada(fecLLegada, destino);
 	}
 

@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
 import naviera.*;
 import ubicacionGeografica.*;
 import buque.Buque;
+import buscador.Buscador;
+import buscador.Filtro;
 import buscadorMejorCircuito.BuscadorMejorC;
+import buscadorMejorCircuito.MenorCantidadTerminales;
 import circuitos.Viaje;
 import clientes.Consignee;
 import clientes.Shipper;
@@ -33,7 +36,7 @@ public class Terminal {
 	private Notificador notificador;
 	
 	
-	private BuscadorMejorC mejor;
+	private Buscador buscador;
 	
 	public Terminal(String nombre, UbicacionGeografica ubicacion) {
 		this.nombre = nombre;
@@ -48,20 +51,22 @@ public class Terminal {
 		this.shippers = new ArrayList<Shipper>();
 		this.consignees= new ArrayList<Consignee>();
 		this.notificador = new Notificador();
+		
+		buscador = new Buscador(this);
 	}
 	
 	public void agregarLiena(Naviera l) {
 		lineas.add(l);
+		//Le va agregando los viajes al buscador a medida que se le agregan 
+		//las navieras con los buques(que son los que tienen los viajes)
+		buscador.agregarViajes(this.getViajes());
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void asignarFecSalidaBuqe(Buque bA, LocalDateTime fecSalida) {
-		//Se supone que el buque esta dentro de la terminal
-		bA.setFecSalida(fecSalida);
-	}
+
 	
 	// Punto 4
 	public double duracionRecorridoEntre(Naviera naviera, Terminal destino) {
@@ -190,8 +195,7 @@ public class Terminal {
 		for(Naviera n : lineas) {
 			return n.getBuques().stream().map(b -> b.getViaje()).collect(Collectors.toList());
 		}
-		
-		return null;
+		return new ArrayList<Viaje>();
 	}
 
 	public Integer cantidadDeOrdenesImp() {
@@ -211,12 +215,28 @@ public class Terminal {
 	}
 	
 	//PUNTO 3
-	public void setMejorBuscador(BuscadorMejorC mejorC) {
-		mejor = mejorC;
+	
+		//Buscador Mejor CM [Unico]
+	public void setBuscadorCirMaritimo(BuscadorMejorC mejorC) {
+		buscador.setMejorBuscadorCirMaritimo(mejorC);
 	}
 	
 	public CircuitoMaritimo buscarMejorC(Terminal destino) {
-		return mejor.buscarMejorC(this, destino);
+		return buscador.buscarMejorCirMaritimo(this, destino);
+	}
+	
+	
+		//Buscador Mejores Rutas [List CM]
+	public List<CircuitoMaritimo> buscarMejoresRutas(){
+		return buscador.buscar();
+	}
+	
+	public void setFiltroBuscadorMejoresCM(Filtro filtro) {
+		buscador.agregarFiltro(filtro);
+	}
+	
+	public Buscador getBuscador() {
+		return buscador;
 	}
 	
 	public List<CircuitoMaritimo> getCircuitos(){
@@ -225,6 +245,9 @@ public class Terminal {
 		return circuitos;
 	}
 
+	
+	
+	//Fases
 	public void darOrdenDeDepart(Buque buque) {
 		buque.llegoAlDestino(this);
 		buque.partidaHabilitada(this);
