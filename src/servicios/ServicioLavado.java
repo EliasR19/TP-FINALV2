@@ -4,17 +4,17 @@ import container.Container;
 
 public class ServicioLavado extends Servicio {
 
-	public ServicioLavado(double precioFijo) {
-		super(precioFijo);
+	public ServicioLavado() {
+		super(130d);
 	}
-	
-	public double servicioPara(Container container) {
-		
-		if (container.capacidad() <= 70d) {
+
+
+	@Override
+	public double precioFinal(Container c) {
+		if (c.capacidad() <= 70d) {
 			return this.getPrecioFijo();
 		}
-		return this.getPrecioFijo() + (this.getPrecioFijo() * 0.50);
-		
+		return this.getPrecioFijo() + (this.getPrecioFijo() * 0.5);
 	}
 
 }

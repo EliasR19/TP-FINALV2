@@ -13,9 +13,7 @@ public abstract class Servicio {
 		return precioFijo;
 	}
 
-	public void setPrecioFijo(double precioFijo) {
-		this.precioFijo = precioFijo;
-	}
-	
-	public abstract double servicioPara(Container container);
+	public abstract double precioFinal(Container c); 
+
+
 }

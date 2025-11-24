@@ -1,8 +1,13 @@
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import buque.Buque;
 import buscador.Buscador;
@@ -11,8 +16,18 @@ import buscador.Operador;
 import buscador.PuertoDestino;
 import circuitos.Cronograma;
 import circuitos.Viaje;
+import container.BL;
+import container.BLEspecial;
+import container.Carga;
+import container.ContainerDry;
+import container.ContainerReefer;
+import container.ContainerTanque;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
+import servicios.ServicioDesconsolidado;
+import servicios.ServicioElectricidad;
+import servicios.ServicioLavado;
+import servicios.ServicioPesado;
 import terminal.Terminal;
 import ubicacionGeografica.UbicacionGeografica;
 
@@ -20,101 +35,64 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		Terminal Argentina;
-		Terminal Brasil ;
-		Terminal España ;
-		Terminal China;
+		 ContainerTanque containerT;
+		 ContainerDry containerDS;
+		 ContainerDry containerDD;
+		 ContainerReefer containerR;
+		 BL bl;
+		 BLEspecial blE;
+		 LocalDateTime inicio, fin;
+		 ServicioLavado servicioLavado;
+		 ServicioElectricidad servicioElectricidad;
+		 ServicioPesado servicioPesado;
+		 ServicioDesconsolidado servicioDesconsolidado;
 		
-		Naviera lineaA ;
-		CircuitoMaritimo circuitoA ;
-		CircuitoMaritimo circuitoB ;
+		Carga dummyCarga;
+		Carga c1;
 
-		Viaje vA, vB;
-		
-		Buque bA;
-		Buque bB ;
-
-		Operador Or;
-		Operador And ;
-		
-		Filtro fSimple;
-		Filtro fSimple2;
-		Filtro fCompuesto;
-
-		
-		Buscador b;
-
-			Argentina = new Terminal("Argentina", new UbicacionGeografica(0, 0));
-			Brasil = new Terminal("Brasil", new UbicacionGeografica(0, 0));
-			España = new Terminal("España", new UbicacionGeografica(0, 0));
-			China = new Terminal("China", new UbicacionGeografica(0, 0));
 			
-			lineaA = new Naviera();
+			bl = new BL();
+			blE = new BLEspecial();
 			
-			circuitoA = new CircuitoMaritimo(Argentina, España);
-			circuitoB = new CircuitoMaritimo(Argentina, China);
+			inicio = LocalDateTime.of(2025, 11, 7, 8, 0);
+	        fin = LocalDateTime.of(2025, 11, 7, 10, 0);
 			
-			// Circuito A = [Argentina, Brasil, España]
-			circuitoA.agregarTramo(Argentina, Brasil, 4);
-			circuitoA.agregarTramo(Brasil, España, 20);
-			circuitoA.agregarTramo(España, Argentina, 22.3d);
+			servicioLavado = new ServicioLavado();
+			servicioElectricidad = new ServicioElectricidad(inicio, fin);
+			servicioPesado = new ServicioPesado();
+			//servicioDesconsolidado = new ServicioDesconsolidado(3000d);
 			
-			//Circuito B = [Argentina, España, China]
-			circuitoB.agregarTramo(Argentina, España, 4);
-			circuitoB.agregarTramo(España, China, 30d);
-			circuitoB.agregarTramo(China,Argentina, 55d);
+	       // dummyCarga = mock(Carga.class);
+	        //when(dummyCarga.getPeso()).thenReturn(300d);
+	        
+	        c1 = new Carga("A", 300d);
+	        
+			//bl.agregarCarga(dummyCarga);
+			bl.agregarCarga(c1);
+	        
+			//blE.agregarBL(bl);
+			//blE.agregarBL(bl);
 			
-			vA = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)),Argentina, circuitoA);
-			vB = new Viaje(LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)),Argentina, circuitoB);
+			containerT = new ContainerTanque("azul1234567", "Tanque", 2.5d, 10d, 2.8d, bl);
 			
-			bA = new Buque(vA);
-			bB = new Buque(vB);
-
-		
-
-		
-
-			lineaA.agregarCircuitoMaritimo(circuitoA);
-			lineaA.agregarCircuitoMaritimo(circuitoB);
-			lineaA.agregarBuque(bA);
-			lineaA.agregarBuque(bB);
-		
+			containerDS = new ContainerDry("azul8910112", "Dry", 2.5d, 10d, 2.9d, bl);
 			
-			Argentina.agregarLiena(lineaA);
+			containerDD = new ContainerDry("azul4982645", "Dry", 5d, 5d, 2.1d, blE);
 			
-			/*
-			 * Circuito A = [Argentina, Brasil, España]
-			 * Circuito B = [Argentina, España, China]
-			 * */
-
-			//b = new Buscador(Argentina);
-			fSimple = new PuertoDestino(China);
-			Argentina.setFiltroBuscadorMejoresCM(fSimple);
-			//b.agregarFiltro(fSimple);
-			
-			//Argentina.getViajes().forEach(v -> System.out.println(v.getOrigenActual().getNombre() + " - " + v.getDestinoActual().getNombre()));
-			//System.out.println(bA.getViaje().getOrigenActual().getNombre());
-			
-			//b.getViajes().forEach(v -> System.out.println("a" + v.getOrigenActual().getNombre() + " - " + v.getDestinoActual().getNombre()));
-			
-			//System.out.println(vB.tieneDestinoYLlegada(LocalDateTime.of(LocalDate.of(2025,12,2), LocalTime.of(3, 0)), España));
+			containerR = new ContainerReefer("azul5555555", "Reefer", 7d, 25d, 3d, bl, 20d);
 			
 
-			for(CircuitoMaritimo cm : Argentina.buscarMejoresRutas()) {
-				System.out.println("a" + cm.getOrigen().getNombre());
-			}
 			
+			//Mayor o igual a 70mc
+			System.out.println(containerT.capacidad());
+			containerT.darServicio(servicioLavado);
+			System.out.println(containerT.precioFinal());
 			
-			for(Cronograma c : vA.getCronograma()) {
-				System.out.println(c.getOrigen().getNombre() + " | " + c.getSalida() + " -->" + c.getDestino().getNombre() + " | " + c.getLlegada());
-			}
-			for(Cronograma c : vB.getCronograma()) {
-				System.out.println(c.getOrigen().getNombre() + " | " + c.getSalida() + " -->" + c.getDestino().getNombre() + " | " + c.getLlegada());
-			}
+			//Menor a 70mc
+			System.out.println(containerDD.capacidad());
 			
-			//System.out.println(vA.tieneDestino(Brasil));
-			
-			
+			containerDD.darServicio(servicioLavado);
+			System.out.println( containerDD.precioFinal());
 		
 
 	}

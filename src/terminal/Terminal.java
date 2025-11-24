@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import naviera.*;
+import servicios.Servicio;
 import ubicacionGeografica.*;
 import buque.Buque;
 import buscador.Buscador;
@@ -235,6 +236,8 @@ public class Terminal {
 		buscador.agregarFiltro(filtro);
 	}
 	
+	
+	
 	public Buscador getBuscador() {
 		return buscador;
 	}
@@ -245,6 +248,11 @@ public class Terminal {
 		return circuitos;
 	}
 
+	//Servicios
+	public void darServicioContainer(Container c, Servicio s) {
+		c.darServicio(s);
+	}
+	
 	
 	
 	//Fases

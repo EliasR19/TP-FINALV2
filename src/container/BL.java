@@ -1,24 +1,24 @@
 package container;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BL implements BillOfLading {
 	
-	private Map<String, Double> bl = new HashMap<String, Double>();
+	private List<Carga> cargas;
+	
+	public BL() {
+		cargas = new ArrayList<>();
+	}
 
-	public void enlistar(String tipo, double peso) {
-		bl.put(tipo, peso);
+
+	public void agregarCarga(Carga c) {
+		cargas.add(c);
 	}
 	
 	@Override
 	public double getPesoTotal() {
-
-		double pesoTotal = 0;
-		for(String k : bl.keySet()) {
-			pesoTotal += bl.get(k);
-		}
-		return pesoTotal;
+		return cargas.stream().mapToDouble(c -> c.getPeso()).sum();
 	}
 
 	public boolean esEspecial() {

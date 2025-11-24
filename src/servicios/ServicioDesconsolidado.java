@@ -4,15 +4,15 @@ import container.Container;
 
 public class ServicioDesconsolidado extends Servicio {
 
-	public ServicioDesconsolidado(double precioFijo) {
-		super(precioFijo);
+	public ServicioDesconsolidado() {
+		super(200d);
 	}
 
-	public double servicioPara(Container container) {
-		if (container.tieneBLEspecial()) {
-			return getPrecioFijo();
-		}
-		return 0d;
+
+
+	@Override
+	public double precioFinal(Container c) {
+		return this.getPrecioFijo();
 	}
 
 }
