@@ -1,4 +1,4 @@
-package recorridos.tramo;
+package recorridosTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

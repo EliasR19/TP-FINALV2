@@ -32,10 +32,6 @@ public class CircuitoMaritimo {
 		tramos.add(tramo);
 		//A - B    B - B2   B2- C   C - A
 	}
-	
-	
-	
-//	public List<Tramo> terminalesDelCircuitoOrd(){
 
 	
 	
@@ -106,11 +102,11 @@ public class CircuitoMaritimo {
 	
 	public Tramo tramoConOrigen(Terminal t) {
 		for(Tramo t1 : tramos) {
-			if(t1.getOrigen().getNombre().equals(t.getNombre())) {
+			if(t1.getOrigen().equals(t)) {
 				return t1;
 			}
 		}
-		return null;
+		throw new RuntimeException("No existe ningun tramo en el circuito con origen en: " + t.getNombre());
 	}
 
 	public boolean contiene(Terminal origen, Terminal destino) {

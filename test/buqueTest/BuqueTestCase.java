@@ -1,45 +1,33 @@
 package buqueTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
-import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
 import circuitos.Viaje;
-import naviera.CircuitoMaritimo;
-import naviera.Naviera;
-import terminal.Terminal;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.GPS;
 
 class BuqueTestCase {
 
-	private UbicacionGeografica u1, u2;
-	private Terminal t1, t2;
-	private CircuitoMaritimo circuitoA;
-	private LocalDateTime fechaSalida;
 	private Buque buque;
-	private Naviera n1; 
 	private Viaje viaje;
+	private GPS gps;
 
 	
 	@BeforeEach
-	public void setUp() {
-		u1 = mock(UbicacionGeografica.class);
-		u2 = mock(UbicacionGeografica.class);
-		t1 = mock(Terminal.class);
-		t2 = mock(Terminal.class);
-		
-		n1 = mock(Naviera.class);
-	
-		circuitoA = mock(CircuitoMaritimo.class);
-		fechaSalida = mock(LocalDateTime.class);
+	public void setUp() throws Exception {
+			
 		viaje = mock(Viaje.class);
-		
-		buque = new Buque(viaje);
+		gps = new GPS(100, 200, buque);
+		buque = new Buque(viaje, gps);
+	}
+	
+	@Test 
+	void testConstructorBuque() {
+		verify(this.buque);
 	}
 	
 	@Test

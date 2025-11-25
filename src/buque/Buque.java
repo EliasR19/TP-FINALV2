@@ -18,12 +18,12 @@ public class Buque {
 	private List<Container> carga;
 	private List<Terminal> mailsQueMandoA;
 	
-	public Buque(Viaje viaje) {
+	public Buque(Viaje viaje, GPS gps) {
 		fase = new Outbound();
-		//this.viaje = viaje;
-		gps = new GPS(0, 0, this);
+		this.gps = gps;
 		this.asignarViaje(viaje);
 		mailsQueMandoA = new ArrayList<Terminal>();
+		carga = new ArrayList<Container>();
 	}
 	
 	
@@ -54,17 +54,29 @@ public class Buque {
 	    fase.actualizarPosicion(this, distanciaRestante, destino);
 	}
 
-
-	public void setFase(Fase nuevaFase) {
-		this.fase = nuevaFase;
-	}
-
 	public Viaje getViaje() {
 		return viaje;
 	}
 
+	public void setViaje(Viaje viaje) {
+		this.viaje = viaje;
+	}
+
 	public Fase getFase() {
 		return fase;
+	}
+	
+	public void setFase(Fase nuevaFase) {
+		this.fase = nuevaFase;
+	}
+	
+	public List<Terminal> getMailsQueMandoA() {
+		return mailsQueMandoA;
+	}
+	
+	
+	public void setMailsQueMandoA(List<Terminal> mailsQueMandoA) {
+		this.mailsQueMandoA = mailsQueMandoA;
 	}
 
 	public boolean estaEnFaseOutbound() {
@@ -175,5 +187,12 @@ public class Buque {
 			c.getEntero();
 		}
 	}
+
+
+	public List<Container> getCarga() {
+		return carga;
+	}
+
+
 
 }

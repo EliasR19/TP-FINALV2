@@ -4,7 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,9 @@ import org.junit.jupiter.api.Test;
 import buque.Arrived;
 import buque.Buque;
 import buque.Inbound;
+import circuitos.Viaje;
 import container.BL;
+import container.Carga;
 import container.ContainerTanque;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
@@ -28,9 +32,13 @@ public class BuqueFasesRestantesTestCase {
 	private Naviera n1;
 	private BL bl1, bl2;
 	private ContainerTanque container1, container2;
+	private Viaje viaje;
+	private GPS gps;
+	private Carga carga1, carga2, carga3;
+	private CircuitoMaritimo circuito1;
 
 	@BeforeEach
-	public void setUp() {
+	public void setUp() throws Exception {
 		u1 = new UbicacionGeografica(-23, -25);
 		u2 = new UbicacionGeografica(-22.91, -43.17);
 		u3 = new UbicacionGeografica(-10, -20);
@@ -38,7 +46,14 @@ public class BuqueFasesRestantesTestCase {
 		t2 = new Terminal("Brasil", u2);
 		t3 = new Terminal("Angora", u3);
 		
-		buque = new Buque();
+		circuito1 = new CircuitoMaritimo(t1, t2);
+		circuito1.agregarTramo(t1, t2, 4);
+        circuito1.agregarTramo(t2, t3, 20);
+        circuito1.agregarTramo(t3, t1, 22.3d);
+		
+		viaje = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)), t1, circuito1);
+		gps = new GPS(100, 200, buque);
+		buque = new Buque(viaje, gps);
 		n1 = new Naviera();
 		circuitoA = new CircuitoMaritimo(t1, t2);
 		
@@ -52,15 +67,19 @@ public class BuqueFasesRestantesTestCase {
 		n1.agregarBuque(buque);
 		n1.asignarViaje(buque, circuitoA, fechaSalida);
 		
+		carga1 = new Carga("Agua", 500d);
+		carga2 = new Carga("Aceite de Oliva", 100d);
+		carga3 = new Carga("Gasolina", 400d);
+				
 		bl1 = new BL();
-		bl1.enlistar("Agua", 500d);
-		bl1.enlistar("Aceite de Oliva", 100d);
-		bl1.enlistar("Gasolina", 400d);
+		bl1.enlistar(carga1);
+		bl1.enlistar(carga2);
+		bl1.enlistar(carga3);
 		
 		bl2 = new BL();
-		bl2.enlistar("Agua", 500d);
-		bl2.enlistar("Aceite de Oliva", 100d);
-		bl2.enlistar("Gasolina", 400d);
+		bl2.enlistar(carga1);
+		bl2.enlistar(carga2);
+		bl2.enlistar(carga3);
 		
 		container1 = new ContainerTanque("azul1234567", "Tanque", 26d, 22d, 20d, bl1);
 		buque.subirCarga(container1);

@@ -15,15 +15,14 @@ public class Viaje {
 	
 	
 	public Viaje(LocalDateTime fecInicio, Terminal origen, CircuitoMaritimo circuito) {
-		super();
 		this.fecInicio = fecInicio;
 		this.origen = origen;
 		this.circuito = circuito;
-		cronograma = new ArrayList<>();
 		this.createCronograma();
 	}
 	
 	public void createCronograma() {
+		cronograma = new ArrayList<Cronograma>();
 		Tramo tramoActual = circuito.tramoConOrigen(origen);
 		LocalDateTime salidaTime = fecInicio; 
 		
@@ -99,6 +98,14 @@ public class Viaje {
 	            c.confirmarLlegada();
 	        }
 		}
+	}
+
+	public CircuitoMaritimo getCircuito() {
+		return circuito;
+	}
+
+	public void setCircuito(CircuitoMaritimo circuito) {
+		this.circuito = circuito;
 	}
 
 }

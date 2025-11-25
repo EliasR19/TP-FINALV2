@@ -24,6 +24,11 @@ public class BL implements BillOfLading {
 	public boolean esEspecial() {
 		return false;
 	}
+
+
+	public void enlistar(Carga carga) {
+		cargas.add(carga);
+	}
 		
 }
 	
