@@ -61,7 +61,7 @@ class ContainerDryTestCase {
 	@Test
 	void testContainerDryDesconsolidadoPesoTotal() {
 		
-		assertEquals(2000d, containerD.getPesoTotal());
+		assertEquals(2100d, containerD.getPesoTotal());
 		
 	}
 

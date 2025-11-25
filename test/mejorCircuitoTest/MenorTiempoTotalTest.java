@@ -1,6 +1,7 @@
 package mejorCircuitoTest;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import circuitos.Viaje;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
+import ubicacionGeografica.GPS;
 import ubicacionGeografica.UbicacionGeografica;
 
 class MenorTiempoTotalTest {
@@ -45,7 +47,7 @@ class MenorTiempoTotalTest {
 	Filtro fSimple2;
 	Filtro fCompuesto;
 
-	
+	GPS dummyGPS;
 	Buscador b;
 	
 
@@ -74,8 +76,10 @@ class MenorTiempoTotalTest {
 		vA = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)),Argentina, circuitoA);
 		vB = new Viaje(LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)),Argentina, circuitoB);
 		
-		bA = new Buque(vA);
-		bB = new Buque(vB);
+		dummyGPS = mock(GPS.class);
+		
+		bA = new Buque(vA,dummyGPS);
+		bB = new Buque(vB,dummyGPS);
 
 	
 
