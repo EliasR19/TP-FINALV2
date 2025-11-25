@@ -2,10 +2,9 @@ package clientes;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import buque.Buque;
 
-public abstract class Cliente {
+public abstract class Cliente implements ObserverC{
 	
 	private String nombre;
 	//private List<String> mails;

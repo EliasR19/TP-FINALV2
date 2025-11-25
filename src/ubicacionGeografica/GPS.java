@@ -78,5 +78,21 @@ public class GPS extends UbicacionGeografica {
 		timer.cancel();
         timerIniciado = false;
 	}
+	
+	public double distanciaA(double lon, double lat) {
+		double x = getLatitud() - lat;
+		double y = getLongitud() - lon;
+		
+		return Math.sqrt(x * x + y * y);
+	}
+	
+	public void actualizarPosA(double lon, double lat) {
+		Terminal destino = buque.getDestinoActual();
+		Double distancia = distanciaA(lon,lat);
+				
+		setLatitud(lat);
+    	setLongitud(lon);
+    	buque.actualizarPosicion(distancia, destino);
+	}
 
 	}

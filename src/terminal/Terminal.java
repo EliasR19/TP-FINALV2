@@ -35,7 +35,7 @@ public class Terminal {
 	private List<Orden> ordenesImp;
 	private List<Shipper> shippers;
 	private List<Consignee> consignees;
-	private Notificador notificador;
+
 	
 	
 	private Buscador buscador;
@@ -52,7 +52,7 @@ public class Terminal {
 		this.ordenesImp = new ArrayList<Orden>();
 		this.shippers = new ArrayList<Shipper>();
 		this.consignees= new ArrayList<Consignee>();
-		this.notificador = new Notificador();
+
 		
 		buscador = new Buscador(this);
 	}

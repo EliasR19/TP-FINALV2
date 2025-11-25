@@ -75,12 +75,12 @@ public class Buque {
 		return fase.estaEnFaseInbound();
 	}
 
-	public void avisarSobreInminenteArribo(Terminal destino) {
-		if(!mailsQueMandoA.contains(destino)) {
-			destino.mandarMailConsignees(viaje);
-			mailsQueMandoA.add(destino);
-		}
-	}
+	//public void avisarSobreInminenteArribo(Terminal destino) {
+	//	if(!mailsQueMandoA.contains(destino)) {
+	//		destino.mandarMailConsignees(viaje);
+	//		mailsQueMandoA.add(destino);
+	//	}
+	//}
 
 	public boolean estaEnFaseArrived() {
 		return fase.estaEnFaseArrived();

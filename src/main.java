@@ -35,64 +35,90 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		 ContainerTanque containerT;
-		 ContainerDry containerDS;
-		 ContainerDry containerDD;
-		 ContainerReefer containerR;
-		 BL bl;
-		 BLEspecial blE;
-		 LocalDateTime inicio, fin;
-		 ServicioLavado servicioLavado;
-		 ServicioElectricidad servicioElectricidad;
-		 ServicioPesado servicioPesado;
-		 ServicioDesconsolidado servicioDesconsolidado;
+		Terminal Argentina;
+		Terminal Brasil ;
+		Terminal España ;
+		Terminal China;
 		
-		Carga dummyCarga;
-		Carga c1;
+		Naviera lineaA ;
+		CircuitoMaritimo circuitoA ;
+		CircuitoMaritimo circuitoB ;
 
-			
-			bl = new BL();
-			blE = new BLEspecial();
-			
-			inicio = LocalDateTime.of(2025, 11, 7, 8, 0);
-	        fin = LocalDateTime.of(2025, 11, 7, 10, 0);
-			
-			servicioLavado = new ServicioLavado();
-			servicioElectricidad = new ServicioElectricidad(inicio, fin);
-			servicioPesado = new ServicioPesado();
-			//servicioDesconsolidado = new ServicioDesconsolidado(3000d);
-			
-	       // dummyCarga = mock(Carga.class);
-	        //when(dummyCarga.getPeso()).thenReturn(300d);
-	        
-	        c1 = new Carga("A", 300d);
-	        
-			//bl.agregarCarga(dummyCarga);
-			bl.agregarCarga(c1);
-	        
-			//blE.agregarBL(bl);
-			//blE.agregarBL(bl);
-			
-			containerT = new ContainerTanque("azul1234567", "Tanque", 2.5d, 10d, 2.8d, bl);
-			
-			containerDS = new ContainerDry("azul8910112", "Dry", 2.5d, 10d, 2.9d, bl);
-			
-			containerDD = new ContainerDry("azul4982645", "Dry", 5d, 5d, 2.1d, blE);
-			
-			containerR = new ContainerReefer("azul5555555", "Reefer", 7d, 25d, 3d, bl, 20d);
-			
+		Viaje vA, vB;
+		
+		Buque bA;
+		Buque bB ;
 
+		Operador Or;
+		Operador And ;
+		
+		Filtro fSimple;
+		Filtro fSimple2;
+		Filtro fCompuesto;
+
+		
+		Buscador b;
+		
+
+
+			Argentina = new Terminal("Argentina", new UbicacionGeografica(17, 22));
+			Brasil = new Terminal("Brasil", new UbicacionGeografica(0, 0));
+			España = new Terminal("España", new UbicacionGeografica(0, 0));
+			China = new Terminal("China", new UbicacionGeografica(0, 0));
 			
-			//Mayor o igual a 70mc
-			System.out.println(containerT.capacidad());
-			containerT.darServicio(servicioLavado);
-			System.out.println(containerT.precioFinal());
+			lineaA = new Naviera();
 			
-			//Menor a 70mc
-			System.out.println(containerDD.capacidad());
+			circuitoA = new CircuitoMaritimo(Argentina, España);
+			circuitoB = new CircuitoMaritimo(Argentina, China);
 			
-			containerDD.darServicio(servicioLavado);
-			System.out.println( containerDD.precioFinal());
+			// Circuito A = [Argentina, Brasil, España]
+			circuitoA.agregarTramo(Argentina, Brasil, 4);
+			circuitoA.agregarTramo(Brasil, España, 20);
+			circuitoA.agregarTramo(España, Argentina, 22.3d);
+			
+			//Circuito B = [Argentina, España, China]
+			circuitoB.agregarTramo(Argentina, España, 4);
+			circuitoB.agregarTramo(España, China, 30d);
+			circuitoB.agregarTramo(China,Argentina, 55d);
+			
+			vA = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)),Argentina, circuitoA);
+			vB = new Viaje(LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)),Argentina, circuitoB);
+			
+			bA = new Buque(vA);
+			bB = new Buque(vB);
+
+
+			lineaA.agregarCircuitoMaritimo(circuitoA);
+			lineaA.agregarCircuitoMaritimo(circuitoB);
+			lineaA.agregarBuque(bA);
+			lineaA.agregarBuque(bB);
+			
+			//lineaA.asignarViaje(bA, circuitoA,LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)));
+			//lineaA.asignarViaje(bB, circuitoB, LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0)));
+			
+			
+			Argentina.agregarLiena(lineaA);
+			
+			//b = new Buscador(Argentina);
+			
+			/*
+			 * Circuito A = [Argentina, Brasil, España]
+			 * Circuito B = [Argentina, España, China]
+			 * */
+			double x = 23;
+			double y = 30;
+			
+			System.out.println(bA.getFase());
+			System.out.println(bA.getGPS().getLatitud());
+			System.out.println(bA.getGPS().getLongitud());
+			System.out.println(bA.getGPS().distanciaA(x,y));
+			
+			bA.getGPS().actualizarPosA(x, y);
+			
+			System.out.println(bA.getFase());
+			System.out.println(bA.getGPS().getLatitud());
+			System.out.println(bA.getGPS().getLongitud());
+			System.out.println(bA.getGPS().distanciaA(x,y));
 		
 
 	}

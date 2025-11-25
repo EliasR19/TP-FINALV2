@@ -61,4 +61,9 @@ public class UbicacionGeografica {
 	private double metrosNorte(double unaLatitud) {
 		return (latitud - unaLatitud) * 111000;		// La diferencia de latitud se hace con la diferencia de grados y luego
 	} 												//  multiplicando por 111000 metros. Si da + es Norte, si da - es Sur
+
+	public void setLonLat(double lon, double lat) {
+		latitud = lat;
+		longitud = lon;
+	}
 }

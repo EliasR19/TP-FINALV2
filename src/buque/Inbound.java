@@ -9,7 +9,7 @@ public class Inbound implements Fase {
 		if(distanciaRestante <= 0) {
 	        buque.setFase(new Arrived());
 	    } else {
-	    	buque.avisarSobreInminenteArribo(destino);
+	    	//buque.avisarSobreInminenteArribo(destino);
 	    	System.out.println("El buque se encuentra a 50 kms o menos de la Terminal " + buque.getDestinoActual().getNombre());
 	    }
 	}
