@@ -1,6 +1,7 @@
 package terminal;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import buque.Buque;
 import circuitos.Viaje;
@@ -8,6 +9,7 @@ import clientes.*;
 import container.Container;
 import empresasTransportistas.Camion;
 import empresasTransportistas.Chofer;
+import servicios.*;
 
 public abstract class Orden {
 	
@@ -20,6 +22,8 @@ public abstract class Orden {
 	private LocalDateTime turno;
 	private Viaje viaje;
 	
+	private List<Servicio> servicios;
+	
 	public Orden(Terminal terminal, Cliente cliente, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
 		
 		this.terminal = terminal;
@@ -30,6 +34,7 @@ public abstract class Orden {
 		this.chofer = chofer;
 		this.turno = turno;
 		this.viaje = buque.getViaje();
+		servicios = carga.getServicios();
 	}
 	
 	public Terminal getTerminal() {
@@ -66,6 +71,10 @@ public abstract class Orden {
 
 	public void setTurno(LocalDateTime turno) {
 		this.turno = turno;
+	}
+
+	public List<Servicio> getServicios() {
+		return servicios;
 	}
 	
 }

@@ -1,5 +1,9 @@
 package container;
 
+import java.util.ArrayList;
+import java.util.List;
+import servicios.*;
+
 public abstract class Container {
 
 	private String id;
@@ -8,12 +12,18 @@ public abstract class Container {
 	private double largo;
 	private double altura;
 	
+	private List<Servicio> servicios;
+	//private double peso; //Solo se conoce el peso cuando se le da el sertvicio;
+	
 	public Container(String id, String tipo, double ancho, double largo, double altura) {
 		this.id = id;
 		this.tipo = tipo;
 		this.ancho = ancho;
 		this.largo = largo;
 		this.altura = altura;
+		//peso = 0d;
+		
+		servicios = new ArrayList<>();
 	}
 
 	public String getId() {
@@ -46,6 +56,27 @@ public abstract class Container {
 		return false;
 	}
 
+	
 	public abstract boolean tieneBLEspecial();
 	
+	//Dar servicio
+	public void darServicio(Servicio s) {
+		servicios.add(s);
+	}
+	
+	public List<Servicio> getServicios(){
+		return servicios;
+	}
+	
+	/*
+	 * public void registrarPeso() { peso = this.getPesoTotal(); }
+	 * 
+	 * public double getPesoRegistrado() { return peso; }
+	 */
+	
+	//Precio Final
+	public double precioFinal() {
+		return servicios.stream().mapToDouble(s -> s.precioFinal(this)).sum();
+	}
+
 }

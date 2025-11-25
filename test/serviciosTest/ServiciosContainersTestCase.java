@@ -1,6 +1,8 @@
 package serviciosTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import container.BL;
 import container.BLEspecial;
+import container.Carga;
 import container.ContainerDry;
 import container.ContainerReefer;
 import container.ContainerTanque;
@@ -19,10 +22,10 @@ import servicios.ServicioPesado;
 
 class ServiciosContainersTestCase {
 	
-	private ContainerTanque containerT;
-	private ContainerDry containerDS;
-	private ContainerDry containerDD;
-	private ContainerReefer containerR;
+	private ContainerTanque tank;
+	private ContainerDry dryComun;
+	private ContainerDry dryEspecial;
+	private ContainerReefer refeer;
 	private BL bl;
 	private BLEspecial blE;
 	private LocalDateTime inicio, fin;
@@ -31,102 +34,92 @@ class ServiciosContainersTestCase {
 	private ServicioPesado servicioPesado;
 	private ServicioDesconsolidado servicioDesconsolidado;
 	
+
 	@BeforeEach
 	public void setUp() {
 		
-		bl = new BL();
-		blE = new BLEspecial();
+
 		
 		inicio = LocalDateTime.of(2025, 11, 7, 8, 0);
         fin = LocalDateTime.of(2025, 11, 7, 10, 0);
 		
-		servicioLavado = new ServicioLavado(100d);
-		servicioElectricidad = new ServicioElectricidad(100d, inicio, fin);
-		servicioPesado = new ServicioPesado(5000d);
-		servicioDesconsolidado = new ServicioDesconsolidado(3000d);
+		servicioLavado = new ServicioLavado();
+		servicioElectricidad = new ServicioElectricidad(inicio, fin);
+		servicioPesado = new ServicioPesado();
+		//servicioDesconsolidado = new ServicioDesconsolidado(3000d);
 		
-		bl.enlistar("Agua", 500d);
-		bl.enlistar("Aceite de Oliva", 100d);
-		bl.enlistar("Gasolina", 400d);
+
+
+		bl = mock(BL.class);
+		when(bl.getPesoTotal()).thenReturn(4000d);
 		
-		blE.agregarBL(bl);
-		blE.agregarBL(bl);
+		blE = mock(BLEspecial.class);
+		when(blE.esEspecial()).thenReturn(true);
+        	
 		
-		containerT = new ContainerTanque("azul1234567", "Tanque", 2.5d, 10d, 2.8d, bl);
+		tank = new ContainerTanque("azul1234567", "Tanque", 3d, 10d, 2.8d, bl);
 		
-		containerDS = new ContainerDry("azul8910112", "Dry", 2.5d, 10d, 2.9d, bl);
+		dryComun = new ContainerDry("azul8910112", "DryC", 2d, 10d, 2d, bl);
 		
-		containerDD = new ContainerDry("azul4982645", "Dry", 5d, 5d, 2.1d, blE);
+		dryEspecial = new ContainerDry("azul4982645", "DryE", 5d, 5d, 2.1d, blE);
 		
-		containerR = new ContainerReefer("azul5555555", "Reefer", 7d, 25d, 3d, bl, 20d);
+		refeer = new ContainerReefer("azul5555555", "Reefer", 7d, 25d, 3d, bl, 20d);
 		
 	}
 
 	@Test
-	void testElPrecioDeServicioPorLavadoEsElPrecioFijoPorqueNoSuperaLos70m3() {
+	void ServicioLavadoDosMedidas() {
 		
-		assertEquals(70d, containerT.capacidad());
-		assertEquals(100d, servicioLavado.servicioPara(containerT));
+		//Mayor o igual a 70mc
+		assertEquals(84d,tank.capacidad());
+		tank.darServicio(servicioLavado);
+		assertEquals(195d, tank.precioFinal());
 		
-		assertEquals(52.5d, containerDD.capacidad());
-		assertEquals(100d, servicioLavado.servicioPara(containerDD));
+		//Menor a 70mc
+		assertEquals(40d, dryComun.capacidad());
 		
-	}
-	
-	@Test
-	void testElPrecioDeServicioPorLavadoEsElPrecioAumentadoPorqueSuperaLos70m3() {
-		
-		assertEquals(72.5d, containerDS.capacidad());
-		assertEquals(150d, servicioLavado.servicioPara(containerDS));
-		
-		assertEquals(525d, containerR.capacidad());
-		assertEquals(150d, servicioLavado.servicioPara(containerR));
+		dryComun.darServicio(servicioLavado);
+		assertEquals(130, dryComun.precioFinal());
 		
 	}
 	
+	
 	@Test
-	void testUnContainerReeferRecibeElServicioElectricidadConElPrecioCorrespondiente() {
+	void ServicioElectricidad() {
+		refeer.darServicio(servicioElectricidad);
+		assertEquals(2, servicioElectricidad.horasTotal());
+		assertEquals(100d, refeer.precioFinal());
 		
-		assertEquals(200d, servicioElectricidad.servicioPara(containerR));
+	}
+
+	
+	@Test
+	void ServicioDePesado() {
+		tank.darServicio(servicioPesado);
+		dryEspecial.darServicio(servicioPesado);
+		dryComun.darServicio(servicioPesado);
 		
+		assertEquals(100d, tank.precioFinal());
+		assertEquals(100d, dryComun.precioFinal());
+		assertEquals(300d, dryEspecial.precioFinal());
+
 	}
 	
 	@Test
-	void testUnContainerQueNoEsRefeerNoUsaElServicioElectricidad_SuPrecioEs0() {
-		assertEquals(0d, servicioElectricidad.servicioPara(containerT));
-		assertEquals(0d, servicioElectricidad.servicioPara(containerDS));
-		assertEquals(0d, servicioElectricidad.servicioPara(containerDD));
-	}
-	
-	@Test
-	void testElPrecioPorElServicioPesadoEsElPrecioFijo() {
-		assertEquals(5000d, servicioPesado.servicioPara(containerT));
-		assertEquals(5000d, servicioPesado.servicioPara(containerDS));
-		assertEquals(5000d, servicioPesado.servicioPara(containerDD));
-		assertEquals(5000d, servicioPesado.servicioPara(containerR));
-	}
-	
-	@Test
-	void testSeTieneRegistroDelPesoDeUnContainerPorElServicioPesado() {
-		assertEquals(1000d, servicioPesado.pesoDe(containerT));
-		assertEquals(1000d, servicioPesado.pesoDe(containerDS));
-		assertEquals(2000d, servicioPesado.pesoDe(containerDD));
-		assertEquals(1000d, servicioPesado.pesoDe(containerR));
-	}
-	
-	@Test
-	void testElContainerDryConBLEspecialRecibeElServicioDesconsolidadoConPrecioFijo() {
+	void ServicioPesadoYRegistroDePeso() {
+		tank.darServicio(servicioPesado);
 		
-		assertEquals(3000d, servicioDesconsolidado.servicioPara(containerDD));
+		assertEquals(100d, tank.precioFinal());
+		assertEquals(4000, tank.getPesoTotal());
 	}
 	
 	@Test
-	void testLosContainersQueNoTieneBLEspecialNoUsanElServicioDesconsolidado_SuPrecioEs0() {
-		
-		assertEquals(0d, servicioDesconsolidado.servicioPara(containerT));
-		assertEquals(0d, servicioDesconsolidado.servicioPara(containerDS));
-		assertEquals(0d, servicioDesconsolidado.servicioPara(containerR));
+	void ServicioDescolidado() {
+		//Ya lo tiene porque se le agrega en el cosnstructor cuando el bl es Especial
+		assertEquals(200d, dryEspecial.precioFinal());
 	}
+	
+
 
 
 }

@@ -3,17 +3,20 @@ package servicios;
 import container.Container;
 
 public class ServicioPesado extends Servicio{
-
-	public ServicioPesado(double precioFijo) {
-		super(precioFijo);
+	
+	
+	public ServicioPesado() {
+		super(100d);
 	}
 
-	public double servicioPara(Container container) {
-		return getPrecioFijo();
+	@Override
+	public double precioFinal(Container c) {
+		return this.getPrecioFijo();
 	}
 
-	public Double pesoDe(Container container) {
-		return container.getPesoTotal();
+	@Override
+	public String getTipo() {
+		return "Pesado";
 	}
 
 }
