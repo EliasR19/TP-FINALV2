@@ -17,4 +17,10 @@ public class ServicioLavado extends Servicio {
 		return this.getPrecioFijo() + (this.getPrecioFijo() * 0.5);
 	}
 
+
+	@Override
+	public String getTipo() {
+		return "Lavado";
+	}
+
 }

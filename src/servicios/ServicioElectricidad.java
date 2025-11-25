@@ -28,4 +28,10 @@ public class ServicioElectricidad extends Servicio{
 		return inicio.until(fin, ChronoUnit.HOURS);
 	}
 
+
+	@Override
+	public String getTipo() {
+		return "Electricidad";
+	}
+
 }

@@ -14,7 +14,7 @@ public abstract class UnicoImportador extends Container{
 		return bl;
 	}
 	
-	protected double getPesoTotal() {
+	public double getPesoTotal() {
 		return bl.getPesoTotal();
 	}
 	

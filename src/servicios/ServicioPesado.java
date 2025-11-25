@@ -11,8 +11,12 @@ public class ServicioPesado extends Servicio{
 
 	@Override
 	public double precioFinal(Container c) {
-		c.registrarPeso();
 		return this.getPrecioFijo();
+	}
+
+	@Override
+	public String getTipo() {
+		return "Pesado";
 	}
 
 }

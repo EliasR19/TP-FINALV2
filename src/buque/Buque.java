@@ -116,15 +116,15 @@ public class Buque {
 		}
 	}
 
-	public void realizarDescargaYCarga(Terminal destino) { // Como no se contempla el proceso de carga y descarga 
-														   // dejamos que se descargan todos los del buque y se
-														   // cargan todos de la terminal
-		List<Container> cargaParaLaTerminal = new ArrayList<>(carga);
-		
-		this.bajarCargas(cargaParaLaTerminal);
-		destino.recibirCarga(cargaParaLaTerminal, this);
-		
-	}
+//	public void realizarDescargaYCarga(Terminal destino) { // Como no se contempla el proceso de carga y descarga 
+//														   // dejamos que se descargan todos los del buque y se
+//														   // cargan todos de la terminal
+//		List<Container> cargaParaLaTerminal = new ArrayList<>(carga);
+//		
+//		this.bajarCargas(cargaParaLaTerminal);
+//		destino.recibirCarga(cargaParaLaTerminal, this);
+//		
+//	}
 
 	private void bajarCargas(List<Container> cargas) {
 		for (Container c : cargas) {

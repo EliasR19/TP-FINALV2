@@ -52,6 +52,7 @@ class ServiciosContainersTestCase {
 
 		bl = mock(BL.class);
 		when(bl.getPesoTotal()).thenReturn(4000d);
+		
 		blE = mock(BLEspecial.class);
 		when(blE.esEspecial()).thenReturn(true);
         	
@@ -109,7 +110,7 @@ class ServiciosContainersTestCase {
 		tank.darServicio(servicioPesado);
 		
 		assertEquals(100d, tank.precioFinal());
-		assertEquals(4000, tank.getPesoRegistrado());
+		assertEquals(4000, tank.getPesoTotal());
 	}
 	
 	@Test

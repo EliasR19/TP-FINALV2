@@ -4,6 +4,7 @@ import container.Container;
 
 public abstract class Servicio {
 	private double precioFijo;
+	private String tipo;
 	
 	public Servicio(double precioFijo) {
 		this.precioFijo = precioFijo;
@@ -13,7 +14,9 @@ public abstract class Servicio {
 		return precioFijo;
 	}
 
-	public abstract double precioFinal(Container c); 
+	public abstract double precioFinal(Container c);
 
+	public abstract String getTipo();
+	
 
 }

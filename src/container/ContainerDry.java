@@ -26,7 +26,7 @@ public class ContainerDry extends Container{
 
 
 	@Override
-	protected double getPesoTotal() {
+	public double getPesoTotal() {
 		return bl.getPesoTotal();
 	}
 	

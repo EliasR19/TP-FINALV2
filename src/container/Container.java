@@ -13,7 +13,7 @@ public abstract class Container {
 	private double altura;
 	
 	private List<Servicio> servicios;
-	private double peso; //Solo se conoce el peso cuando se le da el sertvicio;
+	//private double peso; //Solo se conoce el peso cuando se le da el sertvicio;
 	
 	public Container(String id, String tipo, double ancho, double largo, double altura) {
 		this.id = id;
@@ -21,7 +21,7 @@ public abstract class Container {
 		this.ancho = ancho;
 		this.largo = largo;
 		this.altura = altura;
-		peso = 0d;
+		//peso = 0d;
 		
 		servicios = new ArrayList<>();
 	}
@@ -46,7 +46,7 @@ public abstract class Container {
 		return altura;
 	}
 	
-	protected abstract double getPesoTotal();
+	public abstract double getPesoTotal();
 
 	public double capacidad() {
 		 return ancho * largo * altura;
@@ -63,14 +63,16 @@ public abstract class Container {
 	public void darServicio(Servicio s) {
 		servicios.add(s);
 	}
-	public  void registrarPeso() {
-		peso = this.getPesoTotal();
+	
+	public List<Servicio> getServicios(){
+		return servicios;
 	}
 	
-	public double getPesoRegistrado() {
-		return peso;
-	}
-	
+	/*
+	 * public void registrarPeso() { peso = this.getPesoTotal(); }
+	 * 
+	 * public double getPesoRegistrado() { return peso; }
+	 */
 	
 	//Precio Final
 	public double precioFinal() {

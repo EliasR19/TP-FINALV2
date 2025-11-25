@@ -15,6 +15,7 @@ import buscador.Filtro;
 import buscadorMejorCircuito.BuscadorMejorC;
 import buscadorMejorCircuito.MenorCantidadTerminales;
 import circuitos.Viaje;
+import clientes.Cliente;
 import clientes.Consignee;
 import clientes.Shipper;
 import container.Container;
@@ -30,8 +31,8 @@ public class Terminal {
 	private List<EmpresaTransportista> empresasTransportistas;
 	private List<Camion> camiones;
 	private List<Chofer> choferes;
-	private List<OrdenExp> ordenesExp;
-	private List<OrdenImp> ordenesImp;
+	private List<Orden> ordenesExp;
+	private List<Orden> ordenesImp;
 	private List<Shipper> shippers;
 	private List<Consignee> consignees;
 	private Notificador notificador;
@@ -47,8 +48,8 @@ public class Terminal {
 		this.empresasTransportistas = new ArrayList<EmpresaTransportista>();
 		this.camiones = new ArrayList<Camion>();
 		this.choferes = new ArrayList<Chofer>();
-		this.ordenesExp = new ArrayList<OrdenExp>();
-		this.ordenesImp = new ArrayList<OrdenImp>();
+		this.ordenesExp = new ArrayList<Orden>();
+		this.ordenesImp = new ArrayList<Orden>();
 		this.shippers = new ArrayList<Shipper>();
 		this.consignees= new ArrayList<Consignee>();
 		this.notificador = new Notificador();
@@ -74,6 +75,8 @@ public class Terminal {
 		return naviera.duracionEntre(this, destino);
 	}
 	
+	
+	///
 	public OrdenImp generarOrdenImp(Consignee consignee, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
 		consignees.add(consignee);
 		camiones.add(camion);
@@ -142,7 +145,7 @@ public class Terminal {
 	}
 
 	public void mandarMailConsignees(Viaje viaje) {
-		for (OrdenExp orden : ordenesExp) {
+		for (Orden orden : ordenesExp) {
 			if (orden.getViaje().equals(viaje)) {
 				notificador.enviarMailDeLlegadaDeBuque(orden.getCliente(), orden);
 			}
@@ -151,41 +154,42 @@ public class Terminal {
 
 	public void darOrdenDeInicio(Buque buque) {
 		buque.iniciarFaseWorking();
-		buque.realizarDescargaYCarga(this);
+		//buque.realizarDescargaYCarga(this); No se contempla en el trabajo
 	}
 
 	public void guardarContainer(Container container) {
 		containers.add(container);
 	}
 
+	
+	public void retirarCarga(Container c) {
+		containers.remove(c);
+	}
+	
 	public boolean tieneContainer(Container container) {
 		return containers.contains(container);
 	}
 
-	public void recibirCarga(List<Container> carga, Buque buque) {
-		List<Container> cargaParaElBuque = new ArrayList<Container>(this.getContainers());
-		
-		for(Container c : carga) {
-			this.guardarContainer(c);
-		}
-		
-		this.retirarCargas(cargaParaElBuque);
-		buque.recibirCargas(cargaParaElBuque);
-	}
+	//public void recibirCarga(List<Container> carga, Buque buque) {
+	//	List<Container> cargaParaElBuque = new ArrayList<Container>(this.getContainers());
+	//	
+	//	for(Container c : carga) {
+	//		this.guardarContainer(c);
+	//	}
+	//	
+	//	this.retirarCargas(cargaParaElBuque);
+	//	buque.recibirCargas(cargaParaElBuque);
+	//}
 
-	private void retirarCargas(List<Container> cargas) {
-		for(Container c : cargas) {
-			this.retirarCarga(c);
-		}
-	}
+	//private void retirarCargas(List<Container> cargas) {
+	//	for(Container c : cargas) {
+	//		this.retirarCarga(c);
+	//	}
+	//}
 
-	private List<Container> getContainers() {
-		return containers;
-	}
-
-	public void retirarCarga(Container c) {
-		containers.remove(c);
-	}
+	//private List<Container> getContainers() {
+	//	return containers;
+	//}
 	
 
 	public List<Naviera> getNavieras(){
@@ -203,13 +207,13 @@ public class Terminal {
 		return ordenesImp.size();
 	}
 
-	public Integer cantidadChoferes(Chofer chofer) {
-		return choferes.size();
-	}
+	//public Integer cantidadChoferes(Chofer chofer) {
+	//	return choferes.size();
+	//}
 
-	public Integer cantidadCamiones(Camion camion) {
-		return camiones.size();
-	}
+	//public Integer cantidadCamiones(Camion camion) {
+	//	return camiones.size();
+	//}
 
 	public Boolean tieneRegistradoC(Consignee consignee) {
 		return consignees.contains(consignee);
@@ -247,6 +251,31 @@ public class Terminal {
 		lineas.stream().forEach(n -> circuitos.addAll(n.getCircuitosMaritimos()));
 		return circuitos;
 	}
+	
+	//Cobrar //HACER TESTS
+	public void pagoServicios(Container c) {
+		Orden orden= this.buscarOrden(c);
+		orden.getCliente().recibirMail(this.generarFactura(orden));
+
+	}
+	
+	private StringBuilder generarFactura(Orden orden) {
+		StringBuilder st = new StringBuilder();
+		st.append("Servicios Desgloce de Conceptos:\n");
+		orden.getServicios().forEach(sv -> st.append(sv.getTipo() + " : " + sv.getPrecioFijo() + "\n"));
+		
+		return st;
+	}
+
+
+
+	private Orden buscarOrden(Container c) {
+		List<Orden> ordExpImp = new ArrayList<>();
+		ordExpImp.addAll(ordenesExp);
+		ordExpImp.addAll(ordenesImp);
+		return ordExpImp.stream().filter(o -> o.getCarga() == c).findFirst().orElseThrow();
+		
+	}
 
 	//Servicios
 	public void darServicioContainer(Container c, Servicio s) {
@@ -262,7 +291,7 @@ public class Terminal {
 	}
 
 	public void mandarMailAShippersDel(Viaje viaje) {
-		for (OrdenExp orden : ordenesExp) {
+		for (Orden orden : ordenesExp) {
 			if (orden.getViaje().equals(viaje)) {
 				notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
 			}

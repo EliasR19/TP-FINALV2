@@ -15,4 +15,11 @@ public class ServicioDesconsolidado extends Servicio {
 		return this.getPrecioFijo();
 	}
 
+
+
+	@Override
+	public String getTipo() {
+		return "Desconsolidado";
+	}
+
 }
