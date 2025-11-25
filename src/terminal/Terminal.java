@@ -76,7 +76,7 @@ public class Terminal {
 	}
 	
 	
-	///
+	// Ordenes
 	public OrdenImp generarOrdenImp(Consignee consignee, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
 		consignees.add(consignee);
 		camiones.add(camion);
@@ -95,6 +95,8 @@ public class Terminal {
 		return ordenExp;
 	}
 
+	
+	//
 	public boolean respetaElTurnoExp(OrdenExp orden, LocalDateTime horario) {
 		// verifica si el camion llega a dejar la carga en un limite de 3 horas antes o despues del turno.
 		LocalDateTime limiteInferior = orden.getTurno().minusHours(3);
@@ -144,13 +146,13 @@ public class Terminal {
 		return ubicacion;
 	}
 
-	public void mandarMailConsignees(Viaje viaje) {
-		for (Orden orden : ordenesExp) {
-			if (orden.getViaje().equals(viaje)) {
-				notificador.enviarMailDeLlegadaDeBuque(orden.getCliente(), orden);
-			}
-		}
-	}
+//	public void mandarMailConsignees(Viaje viaje) {
+//		for (Orden orden : ordenesExp) {
+//			if (orden.getViaje().equals(viaje)) {
+//				notificador.enviarMailDeLlegadaDeBuque(orden.getCliente(), orden);
+//			}
+//		}
+//	}
 
 	public void darOrdenDeInicio(Buque buque) {
 		buque.iniciarFaseWorking();
@@ -253,11 +255,11 @@ public class Terminal {
 	}
 	
 	//Cobrar //HACER TESTS
-	public void pagoServicios(Container c) {
-		Orden orden= this.buscarOrden(c);
-		orden.getCliente().recibirMail(this.generarFactura(orden));
-
-	}
+	//public void pagoServicios(Container c) {
+	//	Orden orden= this.buscarOrden(c);
+	//	orden.getCliente().recibirMail(this.generarFactura(orden));
+//
+	//}
 	
 	private StringBuilder generarFactura(Orden orden) {
 		StringBuilder st = new StringBuilder();
@@ -282,6 +284,17 @@ public class Terminal {
 		c.darServicio(s);
 	}
 	
+	//Observer NotificadorMail
+	
+	public void notificarArribo(Buque buque) {
+		List<Orden> ordenesANotificar =  ordenesImp.stream().filter(ord -> ord.getBuque() == buque).collect(Collectors.toList());
+		ordenesANotificar.forEach(ord -> ord.getCliente().notificar(this.generarFactura(ord), buque));
+	}
+	
+	public void notificarSalida(Buque buque) {
+		List<Orden> ordenesANotificar =  ordenesExp.stream().filter(ord -> ord.getBuque() == buque).collect(Collectors.toList());
+		ordenesANotificar.forEach(ord -> ord.getCliente().notificar(this.generarFactura(ord), buque));
+	}
 	
 	
 	//Fases
@@ -290,13 +303,13 @@ public class Terminal {
 		buque.partidaHabilitada(this);
 	}
 
-	public void mandarMailAShippersDel(Viaje viaje) {
-		for (Orden orden : ordenesExp) {
-			if (orden.getViaje().equals(viaje)) {
-				notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
-			}
-		}
-	}
+//	public void mandarMailAShippersDel(Viaje viaje) {
+//		for (Orden orden : ordenesExp) {
+//			if (orden.getViaje().equals(viaje)) {
+//				notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
+//			}
+//		}
+//	}
 
 
 }

@@ -3,6 +3,8 @@ package clientes;
 import java.util.ArrayList;
 import java.util.List;
 
+import buque.Buque;
+
 public abstract class Cliente {
 	
 	private String nombre;
@@ -18,10 +20,7 @@ public abstract class Cliente {
 	}
 	
 
-
-	public void recibirMail(StringBuilder stringBuilder) {
-		
-	}
+	public abstract void notificar(StringBuilder desgloce, Buque buque);
 
 
 
