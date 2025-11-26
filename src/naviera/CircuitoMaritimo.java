@@ -52,9 +52,9 @@ public class CircuitoMaritimo {
 		//Por ahora se supone que las dos terminales , a y b, estan en el circuito, más adelante se debe agregar verificación.
 		//FIX LATER
 		//HACER IMPLEMENTACION MÁS PROLIJA.
+		double tiempoTotal = 0;
 		if(this.contiene(origen, destino)) {
 			
-			double tiempoTotal = 0;
 			Terminal terminalActual = origen;
 			
 			if(origen == destino) {
@@ -80,7 +80,7 @@ public class CircuitoMaritimo {
 			}
 
 		}
-		return -1;
+		return tiempoTotal;
 	}
 	
 	public int terminalesEntre(Terminal origen, Terminal destino) {

@@ -3,9 +3,13 @@ package naviera;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.mockito.internal.stubbing.answers.ThrowsException;
+
 import terminal.Terminal;
 import buque.Buque;
 import circuitos.Viaje;
+import net.bytebuddy.implementation.bytecode.Throw;
 
 public class Naviera {
 	
@@ -93,12 +97,13 @@ public class Naviera {
 	
 	private CircuitoMaritimo circuitoCon(Terminal origen, Terminal destino) {
 		//Devuelve un Circuito que contenga las dos terminales dadas
-		for(CircuitoMaritimo c : circuitos) {
-			if(c.contiene(origen, destino)) {
-				return c;
-			}
-		}
-		return null; //Error , no estan las terminales en este circuito.
+//		for(CircuitoMaritimo c : circuitos) {
+//			if(c.contiene(origen, destino)) {
+//				return c;
+//			}
+//		}
+		
+		return circuitos.stream().filter(c -> c.contiene(origen, destino)).findFirst().orElseThrow(); //Error , no estan las terminales en este circuito.
 	}
 	
 	

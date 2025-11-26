@@ -25,9 +25,9 @@ public class Buscador {
 	}
 	
 	public void agregarViajes(List<Viaje> viajes) {
-		//for(Viaje v : viajes) {
+		//Cuando se agrega una linea naviera a la temrinal, se agregan los viajes de esa naviera.
 			this.viajes.addAll(viajes);
-		//}
+		
 	}
 
 	public List<CircuitoMaritimo> buscar(){
