@@ -10,19 +10,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
+import circuitos.Viaje;
 import clientes.Consignee;
 import container.BL;
+import container.Carga;
 import container.Container;
 import container.ContainerTanque;
 import empresasTransportistas.*;
+import naviera.CircuitoMaritimo;
 import terminal.OrdenImp;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
 
 class ConsigneeTestCase {
 
-	private GPS u1;
-	private Terminal terminal;
+	private GPS ubicacionTerminal1, ubicacionTerminal2, gpsBuque;
+	private Terminal terminal1, terminal2;
 	private Consignee consignee;
 	private Container carga;
 	private BL bl;
@@ -30,14 +33,28 @@ class ConsigneeTestCase {
 	private Buque buque;
 	private Camion camion;
 	private Chofer chofer;
-	private LocalDateTime turno;
+	private LocalDateTime turno, fecInicio;
+	private CircuitoMaritimo circuito;
+	private Viaje viaje;
+	private Carga carga1, carga2, carga3;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		u1 = new GPS(-23, -25);
-		terminal = new Terminal("Argentina", u1);
+		ubicacionTerminal1 = new GPS(200, 100);
+		ubicacionTerminal2 = new GPS(300, 200);
+		terminal1 = new Terminal("A", ubicacionTerminal1);
+		terminal2 = new Terminal("B", ubicacionTerminal2);
+		
 		consignee = new Consignee("Marcos");
-		buque = new Buque();
+		
+		circuito = new CircuitoMaritimo(terminal1, terminal2);
+		circuito.agregarTramo(terminal1, terminal2, 120);
+		circuito.agregarTramo(terminal2, terminal1, 120);
+		fecInicio = LocalDateTime.of(LocalDate.of(2025,11,1), LocalTime.of(23, 0));
+		viaje = new Viaje(fecInicio, terminal1, circuito);
+		gpsBuque = new GPS(250, 150);
+		buque = new Buque(viaje, gpsBuque);
+		
 		camion = new Camion();
 		chofer = new Chofer("Maxi");
 		camion.setChofer(chofer);
@@ -47,9 +64,14 @@ class ConsigneeTestCase {
 		// se crea un BL 
 		bl = new BL();
 		
-		bl.enlistar("Agua", 500d);
-		bl.enlistar("Aceite de Oliva", 100d);
-		bl.enlistar("Gasolina", 400d);
+		carga1 = new Carga("Agua", 500d);
+		carga2 = new Carga("Aceite de Oliva", 100d);
+		carga3 = new Carga("Gasolina", 400d);
+				
+		bl = new BL();
+		bl.enlistar(carga1);
+		bl.enlistar(carga2);
+		bl.enlistar(carga3);
 		
 		carga = new ContainerTanque("azul1234567", "Tanque", 26d, 22d, 20d, bl);
 		
@@ -57,9 +79,9 @@ class ConsigneeTestCase {
 	
 	@Test
 	void testImportarCarga() {
-		ordenImp = terminal.generarOrdenImp(consignee, carga, buque, camion, chofer, turno);
+		ordenImp = terminal1.generarOrdenImp(consignee, carga, buque, camion, chofer, turno);
 		consignee.importarCarga(ordenImp, turno);
-		assertFalse(terminal.tieneContainer(carga));
+		assertFalse(terminal1.tieneContainer(carga));
 		assertEquals(carga, camion.getCarga());
 	}
 
