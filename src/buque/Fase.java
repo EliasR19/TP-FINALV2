@@ -2,27 +2,48 @@ package buque;
 
 import terminal.Terminal;
 
-public interface Fase {
+public abstract class Fase {
 
-	abstract void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino);
+	protected Buque buque;
+	protected Terminal terminal; //la terminal a la que tiene que llegar
+	
+	public Fase(Buque buque) {
+		this.buque = buque;
+		terminal = buque.getDestinoActual();
+	}
 
-	default boolean estaEnFaseOutbound() {
+	//abstract void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino);
+
+	public void cambiarSiSePuede() {
+		if(this.condicion()) {
+			this.cambiarFase();
+		}
+	}
+	
+	
+	protected abstract void cambiarFase();
+
+	protected abstract boolean condicion();
+
+	protected abstract void notificarTerminal();
+	
+	public boolean estaEnFaseOutbound() {
 		return false;
 	}
 
-	default boolean estaEnFaseInbound() {
+	public boolean estaEnFaseInbound() {
 		return false;
 	}
 
-	default boolean estaEnFaseArrived() {
+	public boolean estaEnFaseArrived() {
 		return false;
 	}
 
-	default boolean estaEnFaseWorking() {
+	public boolean estaEnFaseWorking() {
 		return false;
 	}
 
-	default boolean estaEnFaseDeparting() {
+	public boolean estaEnFaseDeparting() {
 		return false;
 	}
 	

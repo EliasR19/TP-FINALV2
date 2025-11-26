@@ -19,7 +19,7 @@ public class Buque {
 	private List<Terminal> mailsQueMandoA;
 	
 	public Buque(Viaje viaje, GPS gps) {
-		fase = new Outbound();
+		fase = new Outbound(this);
 		this.gps = gps;
 		this.asignarViaje(viaje);
 		mailsQueMandoA = new ArrayList<Terminal>();
@@ -50,8 +50,8 @@ public class Buque {
 		return viaje.getOrigenActual();
 	}
 	
-	public void actualizarPosicion(double distanciaRestante, Terminal destino) {
-	    fase.actualizarPosicion(this, distanciaRestante, destino);
+	public void actualizarPosicion() {
+	    fase.cambiarSiSePuede();
 	}
 
 	public Viaje getViaje() {
@@ -124,19 +124,10 @@ public class Buque {
 
 	public void iniciarFaseWorking() {
 		if (fase.estaEnFaseArrived()) {
-			this.setFase(new Working());
+			fase.cambiarFase();
 		}
 	}
 
-//	public void realizarDescargaYCarga(Terminal destino) { // Como no se contempla el proceso de carga y descarga 
-//														   // dejamos que se descargan todos los del buque y se
-//														   // cargan todos de la terminal
-//		List<Container> cargaParaLaTerminal = new ArrayList<>(carga);
-//		
-//		this.bajarCargas(cargaParaLaTerminal);
-//		destino.recibirCarga(cargaParaLaTerminal, this);
-//		
-//	}
 
 	private void bajarCargas(List<Container> cargas) {
 		for (Container c : cargas) {
@@ -146,7 +137,9 @@ public class Buque {
 	}
 
 	public void partidaHabilitada(Terminal terminal) {
-		this.setFase(new Departing());
+		if (fase.estaEnFaseWorking()) {
+			fase.cambiarFase();
+		}
 		gps.iniciarTimer(terminal);
 		
 	}
@@ -191,6 +184,11 @@ public class Buque {
 
 	public List<Container> getCarga() {
 		return carga;
+	}
+
+
+	public double distanciaA(Terminal t) {
+		return gps.distanciaA(t.getUbicacion());
 	}
 
 
