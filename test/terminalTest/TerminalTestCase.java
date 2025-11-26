@@ -23,7 +23,6 @@ import empresasTransportistas.Chofer;
 import naviera.CircuitoMaritimo;
 import terminal.*;
 import ubicacionGeografica.GPS;
-import ubicacionGeografica.GPS;
  
 class TerminalTestCase {
 	
@@ -50,23 +49,12 @@ class TerminalTestCase {
 	        España = new Terminal("E", new GPS(25, 33));
 	        shipper = new Shipper("Marcos");
 	        
-	        circuitoA = new CircuitoMaritimo(Argentina, España);
-	        
-	        circuitoA.agregarTramo(Argentina, Brasil, 4);
-	        circuitoA.agregarTramo(Brasil, España, 20);
-	        circuitoA.agregarTramo(España, Argentina, 22.3d);
-	        
-	        
-	        viaje = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)),Argentina, circuitoA);
-
-	        gps = new GPS(100, 200);
-	        buque = new Buque(viaje, gps);
+	        buque = new Buque(mock(Viaje.class), mock(GPS.class));
 
 	        camion = new Camion();
 	        chofer = new Chofer("Maxi");
 	        turno = LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0));
 	        
-	        bl = new BL();
 	        bl = mock(BL.class);
 	        when(bl.getPesoTotal()).thenReturn(4000d);
 	        
@@ -86,7 +74,7 @@ class TerminalTestCase {
 		
 		Argentina.generarOrdenExp(shipper, carga, buque, camion, chofer, turno);
 		
-		assertTrue(Argentina.tieneRegistradoSh(shipper));
+		assertTrue(Argentina.tieneRegistradoCliente(shipper));
 		assertTrue(Argentina.tieneRegistradoElCamion(camion));
 		assertTrue(Argentina.tieneRegistradoAlChofer(chofer));
 		assertEquals(1, Argentina.cantidadDeOrdenesExp());
@@ -98,7 +86,7 @@ class TerminalTestCase {
 		
 		Argentina.generarOrdenImp(consignee, carga, buque, camion, chofer, turno);
 		
-		assertTrue(Argentina.tieneRegistradoC(consignee));
+		assertTrue(Argentina.tieneRegistradoCliente(consignee));
 		assertTrue(Argentina.tieneRegistradoElCamion(camion));
 		assertTrue(Argentina.tieneRegistradoAlChofer(chofer));
 		assertEquals(1, Argentina.cantidadDeOrdenesImp());

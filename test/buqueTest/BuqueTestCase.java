@@ -21,18 +21,16 @@ class BuqueTestCase {
 	public void setUp() throws Exception {
 			
 		viaje = mock(Viaje.class);
-		gps = new GPS(100, 200);
+		gps = mock(GPS.class);
 		buque = new Buque(viaje, gps);
 	}
 	
 	@Test 
 	void testConstructorBuque() {
-		verify(this.buque);
+		assertEquals(viaje, buque.getViaje());
+		assertEquals(gps, buque.getGPS());
+		assertTrue(buque.getCarga().isEmpty());
+		assertTrue(buque.getMailsQueMandoA().isEmpty());
 	}
 	
-	@Test
-	void testUnBuqueConoceElViajeQueHará() {
-		assertEquals(viaje, buque.getViaje());
-	}
-
 }

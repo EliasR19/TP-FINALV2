@@ -25,8 +25,8 @@ import ubicacionGeografica.GPS;
 
 class ConsigneeTestCase {
 
-	private GPS ubicacionTerminal1, ubicacionTerminal2, gpsBuque;
-	private Terminal terminal1, terminal2;
+	private GPS ubicacionTerminal1; 
+	private Terminal terminal;
 	private Consignee consignee;
 	private Container carga;
 	private BL bl;
@@ -34,17 +34,12 @@ class ConsigneeTestCase {
 	private Buque buque;
 	private Camion camion;
 	private Chofer chofer;
-	private LocalDateTime turno, fecInicio;
-	private CircuitoMaritimo circuito;
-	private Viaje viaje;
-	private Carga carga1, carga2, carga3;
+	private LocalDateTime turno;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		ubicacionTerminal1 = new GPS(200, 100);
-		ubicacionTerminal2 = new GPS(300, 200);
-		terminal1 = new Terminal("A", ubicacionTerminal1);
-		terminal2 = new Terminal("B", ubicacionTerminal2);
+		terminal = new Terminal("A", ubicacionTerminal1);
 		
 		consignee = new Consignee("Marcos");
 		
@@ -66,9 +61,9 @@ class ConsigneeTestCase {
 	
 	@Test
 	void testImportarCarga() {
-		ordenImp = terminal1.generarOrdenImp(consignee, carga, buque, camion, chofer, turno);
+		ordenImp = terminal.generarOrdenImp(consignee, carga, buque, camion, chofer, turno);
 		consignee.importarCarga(ordenImp, turno);
-		assertFalse(terminal1.tieneContainer(carga));
+		assertFalse(terminal.tieneContainer(carga));
 		assertEquals(carga, camion.getCarga());
 		assertEquals("Marcos", consignee.getNombre());
 	}
