@@ -34,9 +34,6 @@ public class Cronograma {
 		return llegada;
 	}
 
-	public void getEntero() {
-		System.out.println(origen.getNombre() + " --> " + destino.getNombre() + " | salida: " + salida +" | llegada: " + llegada);
-	}
 
 	public boolean getLlegoADestino() {
 		return llegoADestino;

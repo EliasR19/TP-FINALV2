@@ -70,10 +70,7 @@ public class Naviera {
         buque.asignarViaje(viaje);
     }
 	
-	public void asignarViaje(Viaje viaje, Buque buque) {
-		buque.asignarViaje(viaje);
-		viaje.createCronograma();
-	}
+	
 
 	
 	
@@ -106,22 +103,8 @@ public class Naviera {
 	
 
 	
-	public void recorridos() {
-		for(Buque b : buques) {
-			System.out.println("Buque: " + b + " | FecSalida: " + b.getFecSalida());
-			b.cronograma();
-			System.out.println("\n");
-		}
-	}
+	
 
-	public void armarCronograma() {
-		for(Buque b : buques) {
-			b.cronograma();
-		}
-	}
 
-	public void showCronogramaBuque() {
-		buques.stream().forEach(b -> b.cronograma());
-	}
 	
 }

@@ -146,19 +146,11 @@ public class Buque extends ObservadoB{
 		}
 	}
 	
-	public void cronograma() {
-		viaje.createCronograma();
-	}
 	
 	public void llegoAlDestino(Terminal destino) {
 		viaje.confirmarLlegada(destino);
 	}
 	
-	public void showCronograma() {
-		for(Cronograma c : viaje.getCronograma()) {
-			c.getEntero();
-		}
-	}
 
 
 	public List<Container> getCarga() {

@@ -49,54 +49,48 @@ public class CircuitoMaritimo {
 	
 	
 	public double tiempoRecorridoEntre(Terminal origen, Terminal destino) {
-		//Por ahora se supone que las dos terminales , a y b, estan en el circuito, más adelante se debe agregar verificación.
-		//FIX LATER
-		//HACER IMPLEMENTACION MÁS PROLIJA.
-		double tiempoTotal = 0;
-		if(this.contiene(origen, destino)) {
-			
-			Terminal terminalActual = origen;
-			
-			if(origen == destino) {
-				return tramos.stream().mapToDouble(t -> t.getDuracion()).sum();
-			}
-				
-		//int tramo = 0;
-		//Tramo t = tramos.get(tramo);
-			/*
-			 * while(terminalActual != destino) { if(t.getOrigen() == terminalActual ) {
-			 *   tiempoTotal =tiempoTotal + t.getDuracion(); 
-			 *   terminalActual = t.getDestino(); } 
-			 *   tramo++;
-			 * if(tramo == tramos.size()) { tramo = 0; } t = tramos.get(tramo); }
-			 */
-			
-			for(Tramo tr : tramos) {
-				terminalActual = tr.getDestino();
-				tiempoTotal = tiempoTotal + tr.getDuracion();
-				if(terminalActual == destino) {
-					return tiempoTotal;
-				}
-			}
+	    double tiempoTotal = 0.0;
 
-		}
-		return tiempoTotal;
+	    if (this.contiene(origen, destino)) {
+	        int i = 0;
+
+	        if (origen.equals(destino)) {
+	            while (i < tramos.size()) {
+	                tiempoTotal += tramos.get(i).getDuracion();
+	                i++;
+	            }
+	            
+	        } else {
+	            while (!tramos.get(i).getOrigen().equals(origen)) {
+	                i++;
+	            }
+
+	            while (!tramos.get(i).getDestino().equals(destino)) {
+	                tiempoTotal += tramos.get(i).getDuracion();
+	                i++;
+	            }
+	            
+	            tiempoTotal += tramos.get(i).getDuracion();
+	        }
+	    }
+
+	    return tiempoTotal;
 	}
 	
 	public int terminalesEntre(Terminal origen, Terminal destino) {
-		int count = 0;
-		Terminal terminalActual = origen;
-		
-		for(Tramo tr : tramos) {
-			if(terminalActual != destino) {
-				count ++;
-			} else {
-				return count;
-			}
-			terminalActual = tr.getDestino();
-		}
-		
-		return count;
+	    int count = 0;
+	    int i = 0;
+	    
+	    while (!tramos.get(i).getOrigen().equals(origen)) {
+	    	i++;
+	    }
+	    
+	    while (!tramos.get(i).getDestino().equals(destino)) {
+	    	count++;
+	        i++;
+	    }
+	    count++;
+	    return count;
 	}
 	
 	
@@ -127,9 +121,7 @@ public class CircuitoMaritimo {
 		return origen;
 	}
 
-	public int cantidadDeTramos() {
-		return tramos.size();
-	}
+	
 	
 
 }

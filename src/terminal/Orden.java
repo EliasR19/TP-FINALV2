@@ -69,9 +69,6 @@ public abstract class Orden {
 		return viaje;
 	}
 
-	public void setTurno(LocalDateTime turno) {
-		this.turno = turno;
-	}
 
 	public List<Servicio> getServicios() {
 		return servicios;

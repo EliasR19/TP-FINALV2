@@ -247,11 +247,7 @@ public class Terminal {
 		return st;
 	}
 
-	private Orden buscarOrden(Container c) {
-		return ordenesExp.stream().filter(o -> o.getCarga() == c).findFirst().orElse(
-				ordenesImp.stream().filter(o -> o.getCarga() == c).findFirst().get());
-		
-	}
+	
 
 	public List<Orden> buscarOrdenes(List<Orden> ordenes, Buque buque) {
 		List<Orden> ordenesANotificar =  ordenes.stream().filter(o -> buque.getObservadores().contains(o.getCliente())).collect(Collectors.toList());
@@ -271,10 +267,7 @@ public class Terminal {
 			ordenesANotificar.forEach(ord -> ord.getCliente().notificar(buque));
 		}
 
-	//Servicios
-	public void darServicioContainer(Container c, Servicio s) {
-		c.darServicio(s);
-	}
+	
 	
 	
 	

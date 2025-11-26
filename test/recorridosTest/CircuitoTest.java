@@ -1,7 +1,6 @@
 package recorridosTest;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
@@ -16,7 +15,7 @@ import ubicacionGeografica.GPS;
 public class CircuitoTest {
 	
 	GPS u1, u2, u3;
-	Terminal t1, t2, t3;
+	Terminal t1, t2, t3, t4;
 	Tramo tA, tB, tC;
 	
 	CircuitoMaritimo cA;
@@ -46,19 +45,25 @@ public class CircuitoTest {
 	
 	
 	@Test
-	public void TestTerminales() {
+	public void testTerminales() {
 		assertEquals(Arrays.asList(t1,t2,t3), cA.terminalesDelCircuito());
 	}
 	
 	@Test
-	public void TestContieneTerminal() {
+	public void testContieneTerminal() {
 		assertTrue(cA.contiene(t1, t3));
 	}
 	
 	
 	@Test
-	public void TestDuracionEntreDosTerminales() {
+	public void testDuracionEntreDosTerminales() {
 		assertEquals(40d, cA.tiempoRecorridoEntre(t1, t3));
+	}
+	
+	@Test
+	public void testExcepcionTramoConOrigen() {
+		t4 = new Terminal("Chile", u1);
+		assertThrows(RuntimeException.class, () -> cA.tramoConOrigen(t4));
 	}
 	
 }

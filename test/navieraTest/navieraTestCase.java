@@ -44,6 +44,7 @@ class navieraTestCase {
 		circuito2.agregarTramo(terminal1, terminal2, 4);
         circuito2.agregarTramo(terminal2, terminal3, 20);
         circuito2.agregarTramo(terminal3, terminal1, 22.3d);
+        
 		
 	}
 	
