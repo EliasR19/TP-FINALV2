@@ -2,15 +2,37 @@ package buque;
 
 import terminal.Terminal;
 
-public class Working implements Fase {
+public class Working extends Fase {
 
-	public void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino) {
-		buque.getGPS().apagarTimer();
+
+	
+	public Working(Buque buque) {
+		super(buque);
 	}
+
+
 
 	public boolean estaEnFaseWorking() {
 		return true;
 	}
+
+	@Override
+	protected void cambiarFase() {
+		buque.setFase(new Departing(buque));
+	}
+
+	@Override
+	protected boolean condicion() {
+		return false;
+	}
+
+
+
+	@Override
+	protected void notificarTerminal() {
+		
+	}
+	
 
 
 

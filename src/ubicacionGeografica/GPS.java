@@ -78,5 +78,14 @@ public class GPS extends UbicacionGeografica {
 		timer.cancel();
         timerIniciado = false;
 	}
+	
+	
+	public double distanciaA(UbicacionGeografica ub) {
+        double x = getLatitud() - ub.getLatitud();
+        double y = getLongitud() - ub.getLongitud();
+
+        return Math.sqrt(x * x + y * y);
+    }
+
 
 	}
