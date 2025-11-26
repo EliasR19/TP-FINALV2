@@ -23,7 +23,7 @@ public class Arrived extends Fase {
 	}
 
 	@Override
-	protected void notificarTerminal() {
+	public void notificarTerminal() {
 		
 	}
 

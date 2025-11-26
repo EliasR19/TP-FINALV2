@@ -21,8 +21,13 @@ public class Departing extends Fase {
 	}
 
 	@Override
-	protected void notificarTerminal() {
-		//terminal.notificar();
+	public void notificarTerminal() {
+		terminal.notificarSalida(buque);
+	}
+	
+	@Override
+	public boolean estaEnFaseDeparting() {
+		return true;
 	}
 
 }

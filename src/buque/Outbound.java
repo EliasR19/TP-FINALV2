@@ -7,9 +7,6 @@ public class Outbound extends Fase {
 	public Outbound(Buque buque) {
 		super(buque);
 	}
-
-
-	
 	
 	@Override
 	protected void cambiarFase() {
@@ -26,8 +23,8 @@ public class Outbound extends Fase {
 	}
 
 	@Override
-	protected void notificarTerminal() {
-		
+	public void notificarTerminal() {
+		terminal.cobrarServicios(buque);
 	}
 
 }

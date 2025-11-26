@@ -10,7 +10,7 @@ import container.Container;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
 
-public class Buque {
+public class Buque extends ObservadoB{
 	
 	private Fase fase;
 	private Viaje viaje;
@@ -68,7 +68,14 @@ public class Buque {
 	
 	public void setFase(Fase nuevaFase) {
 		this.fase = nuevaFase;
+		this.notificarTerminal();
 	}
+	
+	@Override
+	public void notificarTerminal() {
+		fase.notificarTerminal();
+	}
+
 	
 	public List<Terminal> getMailsQueMandoA() {
 		return mailsQueMandoA;
@@ -87,28 +94,13 @@ public class Buque {
 		return fase.estaEnFaseInbound();
 	}
 
-	public void avisarSobreInminenteArribo(Terminal destino) {
-		if(!mailsQueMandoA.contains(destino)) {
-			destino.mandarMailConsignees(viaje);
-			mailsQueMandoA.add(destino);
-		}
-	}
+
 
 	public boolean estaEnFaseArrived() {
 		return fase.estaEnFaseArrived();
 	}
 
-//	public void iniciarViaje() {
-//		if (LocalDateTime.now().isEqual(viaje.getFecInicio())) {
-//			System.out.println("Buque iniciando viaje hacia la Terminal " + this.getDestinoActual().getNombre());
-//			mailsQueMandoA.clear();
-//			getGPS().iniciarTimer(viaje.getDestinoActual());
-//		}else if (LocalDateTime.now().isBefore(viaje.getFecInicio())){
-//			System.out.println("Aún falta para iniciar el viaje");
-//		}else if (LocalDateTime.now().isAfter(viaje.getFecInicio())){
-//			System.out.println("Se deberá arreglar un nuevo cronograma por atraso antes de salir");
-//		}
-//	}
+
 
 	public void subirCarga(Container container) {
 		carga.add(container);
@@ -144,10 +136,6 @@ public class Buque {
 		
 	}
 
-//	public void asignarDatosParaElViaje(LocalDateTime fechaSalida, Terminal origen) {
-//		gps.setLatitud(origen.getUbicacion().getLatitud());
-//		gps.setLongitud(origen.getUbicacion().getLongitud());
-//	}
 
 	public boolean estaEnFaseWorking() {
 		return fase.estaEnFaseWorking();
@@ -191,6 +179,11 @@ public class Buque {
 		return gps.distanciaA(t.getUbicacion());
 	}
 
+	public void cambiarPosicion(double lat, double lon) {
+		gps.setLatitud(lat);
+		gps.setLongitud(lon);
+		fase.cambiarSiSePuede();
+	}
 
 
 }

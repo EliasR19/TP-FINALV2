@@ -1,6 +1,7 @@
 package clientesTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -47,13 +48,7 @@ class ConsigneeTestCase {
 		
 		consignee = new Consignee("Marcos");
 		
-		circuito = new CircuitoMaritimo(terminal1, terminal2);
-		circuito.agregarTramo(terminal1, terminal2, 120);
-		circuito.agregarTramo(terminal2, terminal1, 120);
-		fecInicio = LocalDateTime.of(LocalDate.of(2025,11,1), LocalTime.of(23, 0));
-		viaje = new Viaje(fecInicio, terminal1, circuito);
-		gpsBuque = new GPS(250, 150);
-		buque = new Buque(viaje, gpsBuque);
+		buque = new Buque(mock(Viaje.class), mock(GPS.class));
 		
 		camion = new Camion();
 		chofer = new Chofer("Maxi");
@@ -61,17 +56,9 @@ class ConsigneeTestCase {
 		camion.setCarga(carga);
 		turno = LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0));
 		
+		buque = new Buque(mock(Viaje.class), mock(GPS.class));
 		// se crea un BL 
-		bl = new BL();
-		
-		carga1 = new Carga("Agua", 500d);
-		carga2 = new Carga("Aceite de Oliva", 100d);
-		carga3 = new Carga("Gasolina", 400d);
-				
-		bl = new BL();
-		bl.enlistar(carga1);
-		bl.enlistar(carga2);
-		bl.enlistar(carga3);
+		bl = mock(BL.class);
 		
 		carga = new ContainerTanque("azul1234567", "Tanque", 26d, 22d, 20d, bl);
 		
@@ -83,6 +70,7 @@ class ConsigneeTestCase {
 		consignee.importarCarga(ordenImp, turno);
 		assertFalse(terminal1.tieneContainer(carga));
 		assertEquals(carga, camion.getCarga());
+		assertEquals("Marcos", consignee.getNombre());
 	}
 
 }

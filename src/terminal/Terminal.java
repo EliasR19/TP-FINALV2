@@ -18,6 +18,7 @@ import circuitos.Viaje;
 import clientes.Cliente;
 import clientes.Consignee;
 import clientes.Shipper;
+import container.Carga;
 import container.Container;
 import empresasTransportistas.*;
 
@@ -33,8 +34,7 @@ public class Terminal {
 	private List<Chofer> choferes;
 	private List<Orden> ordenesExp;
 	private List<Orden> ordenesImp;
-	private List<Shipper> shippers;
-	private List<Consignee> consignees;
+	private List<Cliente> clientes;
 
 	
 	
@@ -50,8 +50,7 @@ public class Terminal {
 		this.choferes = new ArrayList<Chofer>();
 		this.ordenesExp = new ArrayList<Orden>();
 		this.ordenesImp = new ArrayList<Orden>();
-		this.shippers = new ArrayList<Shipper>();
-		this.consignees= new ArrayList<Consignee>();
+		this.clientes = new ArrayList<Cliente>();
 		
 		buscador = new Buscador(this);
 	}
@@ -77,20 +76,25 @@ public class Terminal {
 	
 	///
 	public OrdenImp generarOrdenImp(Consignee consignee, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
-		consignees.add(consignee);
+		clientes.add(consignee);
 		camiones.add(camion);
 		choferes.add(chofer);
 		OrdenImp ordenImp = new OrdenImp(this, consignee, carga, buque, camion, chofer, turno);
 		ordenesImp.add(ordenImp);
+		
+		buque.addObserver(consignee);
 		return ordenImp;
 	}
+
 	
 	public OrdenExp generarOrdenExp(Shipper shipper, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
-		shippers.add(shipper);
+		clientes.add(shipper);
 		camiones.add(camion);
 		choferes.add(chofer);
 		OrdenExp ordenExp = new OrdenExp(this, shipper, carga, buque, camion, chofer, turno);
 		ordenesExp.add(ordenExp);
+		
+		buque.addObserver(shipper);
 		return ordenExp;
 	}
 
@@ -134,8 +138,8 @@ public class Terminal {
 		return ordenesExp.size();
 	}
 	
-	public Boolean tieneRegistradoSh(Shipper shipper) {
-		return shippers.contains(shipper);
+	public Boolean tieneRegistradoCliente(Cliente c) {
+		return clientes.contains(c);
 	}
 		
 
@@ -143,17 +147,10 @@ public class Terminal {
 		return ubicacion;
 	}
 
-	public void mandarMailConsignees(Viaje viaje) {
-		for (Orden orden : ordenesExp) {
-			if (orden.getViaje().equals(viaje)) {
-				//notificador.enviarMailDeLlegadaDeBuque(orden.getCliente(), orden);
-			}
-		}
-	}
+
 
 	public void darOrdenDeInicio(Buque buque) {
 		buque.iniciarFaseWorking();
-		//buque.realizarDescargaYCarga(this); No se contempla en el trabajo
 	}
 
 	public void guardarContainer(Container container) {
@@ -169,26 +166,7 @@ public class Terminal {
 		return containers.contains(container);
 	}
 
-	//public void recibirCarga(List<Container> carga, Buque buque) {
-	//	List<Container> cargaParaElBuque = new ArrayList<Container>(this.getContainers());
-	//	
-	//	for(Container c : carga) {
-	//		this.guardarContainer(c);
-	//	}
-	//	
-	//	this.retirarCargas(cargaParaElBuque);
-	//	buque.recibirCargas(cargaParaElBuque);
-	//}
 
-	//private void retirarCargas(List<Container> cargas) {
-	//	for(Container c : cargas) {
-	//		this.retirarCarga(c);
-	//	}
-	//}
-
-	//private List<Container> getContainers() {
-	//	return containers;
-	//}
 	
 
 	public List<Naviera> getNavieras(){
@@ -214,9 +192,6 @@ public class Terminal {
 	//	return camiones.size();
 	//}
 
-	public Boolean tieneRegistradoC(Consignee consignee) {
-		return consignees.contains(consignee);
-	}
 	
 	//PUNTO 3
 	
@@ -251,30 +226,50 @@ public class Terminal {
 		return circuitos;
 	}
 	
-	//Cobrar //HACER TESTS
-	public void pagoServicios(Container c) {
-		Orden orden= this.buscarOrden(c);
-		orden.getCliente().recibirMail(this.generarFactura(orden));
-
+	//Factura, se manda en Outbound
+	public void cobrarServicios(Buque buque) {
+		List<Orden> ordenes= ordenesImp.stream().filter(o -> o.getBuque() == buque).collect(Collectors.toList());
+		ordenes.forEach(o -> this.mandarFactura(o));
+	}
+	
+	public void mandarFactura(Orden o) {
+		o.getCliente().recibirFactura(this.generarFactura(o));
 	}
 	
 	private StringBuilder generarFactura(Orden orden) {
 		StringBuilder st = new StringBuilder();
 		st.append("Servicios Desgloce de Conceptos:\n");
 		orden.getServicios().forEach(sv -> st.append(sv.getTipo() + " : " + sv.getPrecioFijo() + "\n"));
+		if(orden instanceof OrdenImp) {
+			st.append("Viaje: " +  orden.getBuque().getViaje().costoViaje(orden.getTerminal(), this));
+		}
 		
 		return st;
 	}
 
-
-
 	private Orden buscarOrden(Container c) {
-		List<Orden> ordExpImp = new ArrayList<>();
-		ordExpImp.addAll(ordenesExp);
-		ordExpImp.addAll(ordenesImp);
-		return ordExpImp.stream().filter(o -> o.getCarga() == c).findFirst().orElseThrow();
+		return ordenesExp.stream().filter(o -> o.getCarga() == c).findFirst().orElse(
+				ordenesImp.stream().filter(o -> o.getCarga() == c).findFirst().get());
 		
 	}
+
+	public List<Orden> buscarOrdenes(List<Orden> ordenes, Buque buque) {
+		List<Orden> ordenesANotificar =  ordenes.stream().filter(o -> buque.getObservadores().contains(o.getCliente())).collect(Collectors.toList());
+		return ordenesANotificar;
+	}
+	
+	//Observer NotificadorMail
+	
+		public void notificarArribo(Buque buque) {
+			//Notifica Consginee
+			List<Orden> ordenesANotificar =  buscarOrdenes(ordenesImp, buque);
+			ordenesANotificar.forEach(ord -> ord.getCliente().notificar( buque));
+		}
+		
+		public void notificarSalida(Buque buque) {
+			List<Orden> ordenesANotificar =  buscarOrdenes(ordenesExp, buque);
+			ordenesANotificar.forEach(ord -> ord.getCliente().notificar(buque));
+		}
 
 	//Servicios
 	public void darServicioContainer(Container c, Servicio s) {
@@ -289,13 +284,6 @@ public class Terminal {
 		buque.partidaHabilitada(this);
 	}
 
-	public void mandarMailAShippersDel(Viaje viaje) {
-		for (Orden orden : ordenesExp) {
-			if (orden.getViaje().equals(viaje)) {
-				//notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
-			}
-		}
-	}
 
 
 }
