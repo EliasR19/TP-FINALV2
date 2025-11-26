@@ -25,8 +25,8 @@ public class Inbound extends Fase {
 	}
 
 	@Override
-	protected void notificarTerminal() {
-		//temrinal.notificar();
+	public void notificarTerminal() {
+		terminal.notificarArribo(buque);
 	}
 
 }

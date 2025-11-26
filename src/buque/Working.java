@@ -27,7 +27,7 @@ public class Working extends Fase {
 
 
 	@Override
-	protected void notificarTerminal() {
+	public void notificarTerminal() {
 		
 	}
 	

@@ -2,6 +2,7 @@ package clientes;
 
 import java.time.LocalDateTime;
 
+import buque.Buque;
 import terminal.OrdenExp;
 
 public class Shipper extends Cliente {
@@ -16,6 +17,15 @@ public class Shipper extends Cliente {
 			orden.getTerminal().descargar(orden.getCamion());
 		}
 	}
+	
+	
+	@Override
+	public void notificar(Buque buque) {
+		System.out.println("El buque " + buque + " sale de la temerminal.");
+
+		seNotifico = true; //para los test
+	}
+
 
 	
 }
