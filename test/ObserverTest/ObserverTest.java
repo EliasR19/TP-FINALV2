@@ -27,6 +27,7 @@ import empresasTransportistas.Camion;
 import empresasTransportistas.Chofer;
 import naviera.CircuitoMaritimo;
 import naviera.Naviera;
+import servicios.ServicioPesado;
 import terminal.OrdenExp;
 import terminal.OrdenImp;
 import terminal.Terminal;
@@ -142,6 +143,7 @@ class ObserverTest {
 	public void RecibeFactura() {
 		Consignee cliente = new Consignee("Marcos");
 		OrdenImp orden = Argentina.generarOrdenImp(cliente, carga, bA, camion, chofer, turno);
+		carga.darServicio(new ServicioPesado());
 		cliente.importarCarga(orden, turno);
 		
 		bA.setFase(new Outbound(bA));

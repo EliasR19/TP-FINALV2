@@ -81,6 +81,8 @@ public class Terminal {
 		choferes.add(chofer);
 		OrdenImp ordenImp = new OrdenImp(this, consignee, carga, buque, camion, chofer, turno);
 		ordenesImp.add(ordenImp);
+		
+		buque.addObserver(consignee);
 		return ordenImp;
 	}
 
@@ -91,6 +93,8 @@ public class Terminal {
 		choferes.add(chofer);
 		OrdenExp ordenExp = new OrdenExp(this, shipper, carga, buque, camion, chofer, turno);
 		ordenesExp.add(ordenExp);
+		
+		buque.addObserver(shipper);
 		return ordenExp;
 	}
 
@@ -162,26 +166,7 @@ public class Terminal {
 		return containers.contains(container);
 	}
 
-	//public void recibirCarga(List<Container> carga, Buque buque) {
-	//	List<Container> cargaParaElBuque = new ArrayList<Container>(this.getContainers());
-	//	
-	//	for(Container c : carga) {
-	//		this.guardarContainer(c);
-	//	}
-	//	
-	//	this.retirarCargas(cargaParaElBuque);
-	//	buque.recibirCargas(cargaParaElBuque);
-	//}
 
-	//private void retirarCargas(List<Container> cargas) {
-	//	for(Container c : cargas) {
-	//		this.retirarCarga(c);
-	//	}
-	//}
-
-	//private List<Container> getContainers() {
-	//	return containers;
-	//}
 	
 
 	public List<Naviera> getNavieras(){
@@ -269,13 +254,14 @@ public class Terminal {
 	}
 
 	public List<Orden> buscarOrdenes(List<Orden> ordenes, Buque buque) {
-		List<Orden> ordenesANotificar =  ordenes.stream().filter(ord -> ord.getBuque() == buque).collect(Collectors.toList());
+		List<Orden> ordenesANotificar =  ordenes.stream().filter(o -> buque.getObservadores().contains(o.getCliente())).collect(Collectors.toList());
 		return ordenesANotificar;
 	}
 	
 	//Observer NotificadorMail
 	
 		public void notificarArribo(Buque buque) {
+			//Notifica Consginee
 			List<Orden> ordenesANotificar =  buscarOrdenes(ordenesImp, buque);
 			ordenesANotificar.forEach(ord -> ord.getCliente().notificar( buque));
 		}

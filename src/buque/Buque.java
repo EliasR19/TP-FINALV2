@@ -10,7 +10,7 @@ import container.Container;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
 
-public class Buque {
+public class Buque extends ObservadoB{
 	
 	private Fase fase;
 	private Viaje viaje;
@@ -68,8 +68,14 @@ public class Buque {
 	
 	public void setFase(Fase nuevaFase) {
 		this.fase = nuevaFase;
+		this.notificarTerminal();
+	}
+	
+	@Override
+	public void notificarTerminal() {
 		fase.notificarTerminal();
 	}
+
 	
 	public List<Terminal> getMailsQueMandoA() {
 		return mailsQueMandoA;
@@ -88,12 +94,7 @@ public class Buque {
 		return fase.estaEnFaseInbound();
 	}
 
-	public void avisarSobreInminenteArribo(Terminal destino) {
-		if(!mailsQueMandoA.contains(destino)) {
-			destino.mandarMailConsignees(viaje);
-			mailsQueMandoA.add(destino);
-		}
-	}
+
 
 	public boolean estaEnFaseArrived() {
 		return fase.estaEnFaseArrived();
@@ -183,5 +184,6 @@ public class Buque {
 		gps.setLongitud(lon);
 		fase.cambiarSiSePuede();
 	}
+
 
 }
