@@ -292,7 +292,7 @@ public class Terminal {
 	public void mandarMailAShippersDel(Viaje viaje) {
 		for (Orden orden : ordenesExp) {
 			if (orden.getViaje().equals(viaje)) {
-				notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
+				//notificador.enviarMailDeSalidaDeBuque(orden.getCliente(), orden);
 			}
 		}
 	}

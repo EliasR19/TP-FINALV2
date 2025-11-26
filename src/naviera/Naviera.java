@@ -64,7 +64,7 @@ public class Naviera {
 	 */
 	public void asignarViaje(Buque buque, CircuitoMaritimo circuito, LocalDateTime fechaSalida) {
         //Asigna un viaje a un buque
-        buque.asignarDatosParaElViaje(fechaSalida, circuito.getOrigen());
+       // buque.asignarDatosParaElViaje(fechaSalida, circuito.getOrigen());
         Viaje viaje = new Viaje(fechaSalida, circuito.getOrigen(), circuito);
         viaje.createCronograma();
         buque.asignarViaje(viaje);
