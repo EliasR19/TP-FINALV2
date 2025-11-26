@@ -19,7 +19,7 @@ import terminal.Terminal;
 import ubicacionGeografica.*;
 
 public class BuqueFasesHastaArrivedTestCase {
-	private UbicacionGeografica u1, u2, u3;
+	private GPS u1, u2, u3;
 	private Terminal t1, t2, t3;
 	private CircuitoMaritimo circuitoA;
 	private LocalDateTime fechaSalida;
@@ -31,9 +31,9 @@ public class BuqueFasesHastaArrivedTestCase {
 	
 	@BeforeEach
 	public void setUp() {
-		u1 = new UbicacionGeografica(-23, -25);
-		u2 = new UbicacionGeografica(-22.91, -43.17);
-		u2 = new UbicacionGeografica(100, 200);
+		u1 = new GPS(-23, -25);
+		u2 = new GPS(-22.91, -43.17);
+		u2 = new GPS(100, 200);
 		t1 = new Terminal("Argentina", u1);
 		t2 = new Terminal("Brasil", u2);
 		t3 = new Terminal("España", u3);
@@ -43,7 +43,7 @@ public class BuqueFasesHastaArrivedTestCase {
         circuito.agregarTramo(t3, t1, 22.3d);
 		
 		viaje = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)), t1, circuito);
-		gps = new GPS(100, 200, buque);
+		gps = new GPS(100, 200);
 		buque = new Buque(viaje, gps);
 		n1 = new Naviera();
 		circuitoA = new CircuitoMaritimo(t1, t2);

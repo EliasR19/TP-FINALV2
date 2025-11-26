@@ -18,7 +18,7 @@ import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.GPS;
 
 public class FecSalidaTest {
 	
@@ -49,10 +49,10 @@ public class FecSalidaTest {
 
 	@BeforeEach
 	public void setUp() {
-		Argentina = new Terminal("Argentina", new UbicacionGeografica(0, 0));
-		Brasil = new Terminal("Brasil", new UbicacionGeografica(0, 0));
-		España = new Terminal("España", new UbicacionGeografica(0, 0));
-		China = new Terminal("China", new UbicacionGeografica(0, 0));
+		Argentina = new Terminal("Argentina", new GPS(0, 0));
+		Brasil = new Terminal("Brasil", new GPS(0, 0));
+		España = new Terminal("España", new GPS(0, 0));
+		China = new Terminal("China", new GPS(0, 0));
 		
 		lineaA = new Naviera();
 		

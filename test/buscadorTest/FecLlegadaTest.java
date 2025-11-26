@@ -18,7 +18,7 @@ import naviera.CircuitoMaritimo;
 import naviera.Naviera;
 import terminal.Terminal;
 import ubicacionGeografica.GPS;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.GPS;
 
 public class FecLlegadaTest {
 	
@@ -51,10 +51,10 @@ public class FecLlegadaTest {
 
 	@BeforeEach
 	public void setUp() {
-		Argentina = new Terminal("Argentina", new UbicacionGeografica(0, 0));
-		Brasil = new Terminal("Brasil", new UbicacionGeografica(0, 0));
-		España = new Terminal("España", new UbicacionGeografica(0, 0));
-		China = new Terminal("China", new UbicacionGeografica(0, 0));
+		Argentina = new Terminal("Argentina", new GPS(0, 0));
+		Brasil = new Terminal("Brasil", new GPS(0, 0));
+		España = new Terminal("España", new GPS(0, 0));
+		China = new Terminal("China", new GPS(0, 0));
 		
 		lineaA = new Naviera();
 		
@@ -76,8 +76,8 @@ public class FecLlegadaTest {
 		
 		dummyGPS = mock(GPS.class);
 		
-		bA = new Buque(vA, new GPS(100d,200d, bA));
-		bB = new Buque(vB,new GPS(100d,200d, bB));
+		bA = new Buque(vA, new GPS(100d,200d));
+		bB = new Buque(vB,new GPS(100d,200d));
 
 
 		lineaA.agregarCircuitoMaritimo(circuitoA);

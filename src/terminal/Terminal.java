@@ -25,7 +25,7 @@ import empresasTransportistas.*;
 public class Terminal {
 	
 	private String nombre;
-	private UbicacionGeografica ubicacion;
+	private GPS ubicacion;
 	private List<Naviera> lineas;
 	private List<Container> containers;
 	private List<EmpresaTransportista> empresasTransportistas;
@@ -35,12 +35,12 @@ public class Terminal {
 	private List<Orden> ordenesImp;
 	private List<Shipper> shippers;
 	private List<Consignee> consignees;
-	private Notificador notificador;
+
 	
 	
 	private Buscador buscador;
 	
-	public Terminal(String nombre, UbicacionGeografica ubicacion) {
+	public Terminal(String nombre, GPS ubicacion) {
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
 		this.lineas = new ArrayList<Naviera>();
@@ -52,7 +52,6 @@ public class Terminal {
 		this.ordenesImp = new ArrayList<Orden>();
 		this.shippers = new ArrayList<Shipper>();
 		this.consignees= new ArrayList<Consignee>();
-		this.notificador = new Notificador();
 		
 		buscador = new Buscador(this);
 	}
@@ -140,14 +139,14 @@ public class Terminal {
 	}
 		
 
-	public UbicacionGeografica getUbicacion() {
+	public GPS getUbicacion() {
 		return ubicacion;
 	}
 
 	public void mandarMailConsignees(Viaje viaje) {
 		for (Orden orden : ordenesExp) {
 			if (orden.getViaje().equals(viaje)) {
-				notificador.enviarMailDeLlegadaDeBuque(orden.getCliente(), orden);
+				//notificador.enviarMailDeLlegadaDeBuque(orden.getCliente(), orden);
 			}
 		}
 	}

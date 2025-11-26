@@ -11,11 +11,11 @@ import org.junit.jupiter.api.Test;
 import circuitos.Tramo;
 import naviera.*;
 import terminal.Terminal;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.GPS;
 
 public class CircuitoTest {
 	
-	UbicacionGeografica u1, u2, u3;
+	GPS u1, u2, u3;
 	Terminal t1, t2, t3;
 	Tramo tA, tB, tC;
 	
@@ -23,9 +23,9 @@ public class CircuitoTest {
 	
 	@BeforeEach
 	public void setup() {
-		u1 = new UbicacionGeografica(-23, -25);
-		u2 = new UbicacionGeografica(-22.91, -43.17);
-		u3 = new UbicacionGeografica(-5, 2000);
+		u1 = new GPS(-23, -25);
+		u2 = new GPS(-22.91, -43.17);
+		u3 = new GPS(-5, 2000);
 		t1 = new Terminal("Argentina", u1);
 		t2 = new Terminal("Brasil", u2);
 		t3 = new Terminal("Francia", u3);;
