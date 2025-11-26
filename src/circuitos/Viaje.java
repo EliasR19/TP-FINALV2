@@ -54,12 +54,7 @@ public class Viaje {
 
 
 	public Terminal getDestinoActual() {
-	    for (Cronograma c : cronograma) {
-	        if (!c.getLlegoADestino()) {
-	            return c.getDestino();
-	        }
-	    }
-	    return origen; 
+	    return circuito.getTramos().getLast().getDestino();
 	}// Ya llegó a todos los destinos
 	
 	
@@ -108,4 +103,7 @@ public class Viaje {
 		this.circuito = circuito;
 	}
 
+	public double costoViaje(Terminal origen, Terminal desntino) {
+		return circuito.precioTotalEntre(origen, desntino);
+	}
 }

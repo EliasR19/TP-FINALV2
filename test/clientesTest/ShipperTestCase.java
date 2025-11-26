@@ -1,6 +1,7 @@
 package clientesTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import buque.Buque;
+import circuitos.Viaje;
 import clientes.Shipper;
 import container.BL;
 import container.*;
@@ -35,7 +37,7 @@ class ShipperTestCase {
 		u1 = new GPS(-23, -25);
 		terminal = new Terminal("Argentina", u1);
 		shipper = new Shipper("Marcos");
-		buque = new Buque();
+		buque = new Buque(mock(Viaje.class), mock(GPS.class));
 		camion = new Camion();
 		chofer = new Chofer("Maxi");
 		camion.setChofer(chofer);
@@ -43,11 +45,7 @@ class ShipperTestCase {
 		turno = LocalDateTime.of(LocalDate.of(2025,12,1), LocalTime.of(23, 0));
 		
 		// se crea un BL 
-		bl = new BL();
-		
-		bl.enlistar("Agua", 500d);
-		bl.enlistar("Aceite de Oliva", 100d);
-		bl.enlistar("Gasolina", 400d);
+		bl = mock(BL.class);
 		
 		carga = new ContainerTanque("azul1234567", "Tanque", 26d, 22d, 20d, bl);
 		
@@ -59,6 +57,7 @@ class ShipperTestCase {
 		shipper.exportarCarga(ordenExp, turno);
 		assertTrue(terminal.tieneContainer(carga));
 		assertEquals(null, camion.getCarga());
+		assertEquals("Marcos", shipper.getNombre());
 	}
 
 }

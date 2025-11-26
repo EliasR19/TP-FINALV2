@@ -25,7 +25,7 @@ public abstract class Fase {
 
 	protected abstract boolean condicion();
 
-	protected abstract void notificarTerminal();
+	public abstract void notificarTerminal();
 	
 	public boolean estaEnFaseOutbound() {
 		return false;
