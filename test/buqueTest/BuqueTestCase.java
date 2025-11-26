@@ -21,7 +21,7 @@ class BuqueTestCase {
 	public void setUp() throws Exception {
 			
 		viaje = mock(Viaje.class);
-		gps = new GPS(100, 200, buque);
+		gps = new GPS(100, 200);
 		buque = new Buque(viaje, gps);
 	}
 	

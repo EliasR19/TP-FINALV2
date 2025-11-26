@@ -24,7 +24,7 @@ import terminal.Terminal;
 import ubicacionGeografica.*;
 
 public class BuqueFasesRestantesTestCase {
-	private UbicacionGeografica u1, u2, u3;
+	private GPS u1, u2, u3;
 	private Terminal t1, t2, t3;
 	private CircuitoMaritimo circuitoA;
 	private LocalDateTime fechaSalida;
@@ -39,9 +39,9 @@ public class BuqueFasesRestantesTestCase {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		u1 = new UbicacionGeografica(-23, -25);
-		u2 = new UbicacionGeografica(-22.91, -43.17);
-		u3 = new UbicacionGeografica(-10, -20);
+		u1 = new GPS(-23, -25);
+		u2 = new GPS(-22.91, -43.17);
+		u3 = new GPS(-10, -20);
 		t1 = new Terminal("Argentina", u1);
 		t2 = new Terminal("Brasil", u2);
 		t3 = new Terminal("Angora", u3);
@@ -52,7 +52,7 @@ public class BuqueFasesRestantesTestCase {
         circuito1.agregarTramo(t3, t1, 22.3d);
 		
 		viaje = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)), t1, circuito1);
-		gps = new GPS(100, 200, buque);
+		gps = new GPS(100, 200);
 		buque = new Buque(viaje, gps);
 		n1 = new Naviera();
 		circuitoA = new CircuitoMaritimo(t1, t2);
@@ -141,7 +141,7 @@ public class BuqueFasesRestantesTestCase {
 	@Test
 	void testUnBuqueEnFaseDepartingCuandoEstáAlejado1KilometroOMasVuelveAPasarAFaseOutboundYLaTerminalLeAvisaALosShippers() {
 		
-		UbicacionGeografica ubicacionTerminal = t2.getUbicacion();
+		GPS ubicacionTerminal = t2.getUbicacion();
 		
 		t2.darOrdenDeInicio(buque);
 		t2.darOrdenDeDepart(buque);

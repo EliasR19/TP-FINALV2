@@ -23,11 +23,11 @@ import empresasTransportistas.Chofer;
 import naviera.CircuitoMaritimo;
 import terminal.*;
 import ubicacionGeografica.GPS;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.GPS;
  
 class TerminalTestCase {
 	
-	 private UbicacionGeografica ubicacionTerminal;
+	 private GPS ubicacionTerminal;
 	    private Terminal Argentina, Brasil, España;
 	    private Consignee consignee;
 	    private Shipper shipper;
@@ -44,10 +44,10 @@ class TerminalTestCase {
 	    
 	        @BeforeEach
 	        void setUp() throws Exception {
-	        ubicacionTerminal = new UbicacionGeografica(200, 100);
+	        ubicacionTerminal = new GPS(200, 100);
 	        Argentina = new Terminal("A", ubicacionTerminal);
-	        Brasil = new Terminal("B", new UbicacionGeografica(4150, 255));
-	        España = new Terminal("E", new UbicacionGeografica(25, 33));
+	        Brasil = new Terminal("B", new GPS(4150, 255));
+	        España = new Terminal("E", new GPS(25, 33));
 	        shipper = new Shipper("Marcos");
 	        
 	        circuitoA = new CircuitoMaritimo(Argentina, España);
@@ -59,7 +59,7 @@ class TerminalTestCase {
 	        
 	        viaje = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)),Argentina, circuitoA);
 
-	        gps = new GPS(100, 200, buque);
+	        gps = new GPS(100, 200);
 	        buque = new Buque(viaje, gps);
 
 	        camion = new Camion();
@@ -75,7 +75,7 @@ class TerminalTestCase {
 	
 	@Test
 	void testLaTerminalEstaUbicadaEn200X100Y() {
-		UbicacionGeografica ubicacion = Argentina.getUbicacion();
+		GPS ubicacion = Argentina.getUbicacion();
 		assertEquals(200, ubicacion.getLatitud());
 		assertEquals(100, ubicacion.getLongitud());
 	}

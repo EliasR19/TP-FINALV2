@@ -15,11 +15,11 @@ import container.BL;
 import container.*;
 import empresasTransportistas.*;
 import terminal.*;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.GPS;
 
 class ShipperTestCase {
 
-	private UbicacionGeografica u1;
+	private GPS u1;
 	private Terminal terminal;
 	private Shipper shipper;
 	private Container carga;
@@ -32,7 +32,7 @@ class ShipperTestCase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		u1 = new UbicacionGeografica(-23, -25);
+		u1 = new GPS(-23, -25);
 		terminal = new Terminal("Argentina", u1);
 		shipper = new Shipper("Marcos");
 		buque = new Buque();

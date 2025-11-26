@@ -17,11 +17,11 @@ import container.ContainerTanque;
 import empresasTransportistas.*;
 import terminal.OrdenImp;
 import terminal.Terminal;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.GPS;
 
 class ConsigneeTestCase {
 
-	private UbicacionGeografica u1;
+	private GPS u1;
 	private Terminal terminal;
 	private Consignee consignee;
 	private Container carga;
@@ -34,7 +34,7 @@ class ConsigneeTestCase {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		u1 = new UbicacionGeografica(-23, -25);
+		u1 = new GPS(-23, -25);
 		terminal = new Terminal("Argentina", u1);
 		consignee = new Consignee("Marcos");
 		buque = new Buque();

@@ -14,13 +14,13 @@ import circuitos.Viaje;
 import naviera.*;
 import terminal.*;
 import ubicacionGeografica.GPS;
-import ubicacionGeografica.UbicacionGeografica;
+import ubicacionGeografica.GPS;
 
 class navieraTestCase {
 
 	private Naviera naviera;
 	private Buque buque1, buque2;
-	private UbicacionGeografica u1, u2, u3;
+	private GPS u1, u2, u3;
 	private Terminal terminal1, terminal2, terminal3;
 	private CircuitoMaritimo circuito1, circuito2;
 	private Viaje viaje1, viaje2;
@@ -29,8 +29,8 @@ class navieraTestCase {
 	@BeforeEach
 	public void setUp() {
 		naviera = new Naviera();
-		u1 = new UbicacionGeografica(-23, -25);
-		u2 = new UbicacionGeografica(-22.91, -43.17);
+		u1 = new GPS(-23, -25);
+		u2 = new GPS(-22.91, -43.17);
 		terminal1 = new Terminal("Argentina", u1);
 		terminal2 = new Terminal("Brasil", u2);
 		terminal3 = new Terminal("España", u3);		
@@ -53,8 +53,8 @@ class navieraTestCase {
 		viaje1 = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)), terminal1, circuito1);
 		viaje2 = new Viaje(LocalDateTime.of(LocalDate.of(2025,10,31), LocalTime.of(1, 0)), terminal2, circuito2);
 
-        gps1 = new GPS(100, 200, buque1);
-        gps2 = new GPS(200, 100, buque2);
+        gps1 = new GPS(100, 200);
+        gps2 = new GPS(200, 100);
 		
 		buque1 = new Buque(viaje1, gps1);
 		buque2 = new Buque(viaje2, gps2);
