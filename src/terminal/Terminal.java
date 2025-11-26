@@ -83,9 +83,7 @@ public class Terminal {
 		ordenesImp.add(ordenImp);
 		return ordenImp;
 	}
-	public void guardarOrdenImp(Orden ord) { //Solo para los test
-		ordenesImp.add(ord);
-	}
+
 	
 	public OrdenExp generarOrdenExp(Shipper shipper, Container carga, Buque buque, Camion camion, Chofer chofer, LocalDateTime turno) {
 		clientes.add(shipper);
@@ -145,17 +143,10 @@ public class Terminal {
 		return ubicacion;
 	}
 
-	public void mandarMailConsignees(Viaje viaje) {
-		for (Orden orden : ordenesExp) {
-			if (orden.getViaje().equals(viaje)) {
-				//notificador.enviarMailDeLlegadaDeBuque(orden.getCliente(), orden);
-			}
-		}
-	}
+
 
 	public void darOrdenDeInicio(Buque buque) {
 		buque.iniciarFaseWorking();
-		//buque.realizarDescargaYCarga(this); No se contempla en el trabajo
 	}
 
 	public void guardarContainer(Container container) {
