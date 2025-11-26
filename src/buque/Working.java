@@ -10,8 +10,6 @@ public class Working extends Fase {
 		super(buque);
 	}
 
-
-
 	public boolean estaEnFaseWorking() {
 		return true;
 	}

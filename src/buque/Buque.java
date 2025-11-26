@@ -19,11 +19,11 @@ public class Buque {
 	private List<Terminal> mailsQueMandoA;
 	
 	public Buque(Viaje viaje, GPS gps) {
-		fase = new Outbound(this);
 		this.gps = gps;
 		this.asignarViaje(viaje);
 		mailsQueMandoA = new ArrayList<Terminal>();
 		carga = new ArrayList<Container>();
+		fase = new Outbound(this);
 	}
 	
 	

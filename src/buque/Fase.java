@@ -12,7 +12,7 @@ public abstract class Fase {
 		terminal = buque.getDestinoActual();
 	}
 
-	//abstract void actualizarPosicion(Buque buque, double distanciaRestante, Terminal destino);
+
 
 	public void cambiarSiSePuede() {
 		if(this.condicion()) {
