@@ -93,12 +93,12 @@ public class Naviera {
 	
 	private CircuitoMaritimo circuitoCon(Terminal origen, Terminal destino) {
 		//Devuelve un Circuito que contenga las dos terminales dadas
-		for(CircuitoMaritimo c : circuitos) {
-			if(c.contiene(origen, destino)) {
-				return c;
-			}
-		}
-		return null; //Error , no estan las terminales en este circuito.
+//		for(CircuitoMaritimo c : circuitos) {
+//			if(c.contiene(origen, destino)) {
+//				return c;
+//			}
+//		}
+		 return circuitos.stream().filter(c -> c.contiene(origen, destino)).findFirst().orElseThrow();
 	}
 	
 	

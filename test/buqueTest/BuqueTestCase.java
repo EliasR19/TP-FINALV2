@@ -30,7 +30,6 @@ class BuqueTestCase {
 		assertEquals(viaje, buque.getViaje());
 		assertEquals(gps, buque.getGPS());
 		assertTrue(buque.getCarga().isEmpty());
-		assertTrue(buque.getMailsQueMandoA().isEmpty());
 	}
 	
 }

@@ -16,12 +16,12 @@ public class Buque extends ObservadoB{
 	private Viaje viaje;
 	private GPS gps;
 	private List<Container> carga;
-	private List<Terminal> mailsQueMandoA;
+
 	
 	public Buque(Viaje viaje, GPS gps) {
 		this.gps = gps;
 		this.asignarViaje(viaje);
-		mailsQueMandoA = new ArrayList<Terminal>();
+
 		carga = new ArrayList<Container>();
 		fase = new Outbound(this);
 	}
@@ -76,15 +76,6 @@ public class Buque extends ObservadoB{
 		fase.notificarTerminal();
 	}
 
-	
-	public List<Terminal> getMailsQueMandoA() {
-		return mailsQueMandoA;
-	}
-	
-	
-	public void setMailsQueMandoA(List<Terminal> mailsQueMandoA) {
-		this.mailsQueMandoA = mailsQueMandoA;
-	}
 
 	public boolean estaEnFaseOutbound() {
 		return fase.estaEnFaseOutbound();
