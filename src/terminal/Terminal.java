@@ -12,7 +12,7 @@ import ubicacionGeografica.*;
 import buque.Buque;
 import buscador.Buscador;
 import buscador.Filtro;
-import buscadorMejorCircuito.BuscadorMejorC;
+import buscadorMejorCircuito.ConceptoBusquedaDestino;
 import buscadorMejorCircuito.MenorCantidadTerminales;
 import circuitos.Viaje;
 import clientes.Cliente;
@@ -59,7 +59,7 @@ public class Terminal {
 		lineas.add(l);
 		//Le va agregando los viajes al buscador a medida que se le agregan 
 		//las navieras con los buques(que son los que tienen los viajes)
-		buscador.agregarViajes(this.getViajes());
+		//buscador.agregarViajes(this.getViajes());
 	}
 
 	public String getNombre() {
@@ -196,18 +196,18 @@ public class Terminal {
 	//PUNTO 3
 	
 		//Buscador Mejor CM [Unico]
-	public void setBuscadorCirMaritimo(BuscadorMejorC mejorC) {
+	public void setBuscadorCirMaritimo(ConceptoBusquedaDestino mejorC) {
 		buscador.setMejorBuscadorCirMaritimo(mejorC);
 	}
 	
 	public CircuitoMaritimo buscarMejorC(Terminal destino) {
-		return buscador.buscarMejorCirMaritimo(this, destino);
+		return buscador.buscarMejorCirMaritimo(this.getViajes(), this, destino);
 	}
 	
 	
 		//Buscador Mejores Rutas [List CM]
 	public List<CircuitoMaritimo> buscarMejoresRutas(){
-		return buscador.buscar();
+		return buscador.buscar(this.getViajes());
 	}
 	
 	public void setFiltroBuscadorMejoresCM(Filtro filtro) {
@@ -267,7 +267,6 @@ public class Terminal {
 			ordenesANotificar.forEach(ord -> ord.getCliente().notificar(buque));
 		}
 
-	
 	
 	
 	

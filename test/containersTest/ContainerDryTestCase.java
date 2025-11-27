@@ -49,6 +49,7 @@ class ContainerDryTestCase {
 		assertEquals(26d, containerD.getAncho());
 		assertEquals(22d, containerD.getLargo());
 		assertEquals(20d, containerD.getAltura());
+		assertEquals(blEspecial, containerD.getBl());
 	}
 	
 	@Test
@@ -63,6 +64,11 @@ class ContainerDryTestCase {
 		
 		assertEquals(2100d, containerD.getPesoTotal());
 		
+	}
+	
+	@Test
+	void cargaNombre() {
+		assertEquals("Agua", carga1.getNombre());
 	}
 
 }

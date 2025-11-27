@@ -107,7 +107,7 @@ class MenorTiempoTotalTest {
 		
 	@Test
 	public void MenorTiempoTotalTest() {
-		BuscadorMejorC mejorRuta = new MenorTiempoRecorrido();
+		ConceptoBusquedaDestino mejorRuta = new MenorTiempoRecorrido();
 		Argentina.setBuscadorCirMaritimo(mejorRuta);
 		assertEquals(circuitoB, Argentina.buscarMejorC(España));
 	}
