@@ -201,13 +201,13 @@ public class Terminal {
 	}
 	
 	public CircuitoMaritimo buscarMejorC(Terminal destino) {
-		return buscador.buscarMejorCirMaritimo(this, destino);
+		return buscador.buscarMejorCirMaritimo(this.getViajes(), this, destino);
 	}
 	
 	
 		//Buscador Mejores Rutas [List CM]
 	public List<CircuitoMaritimo> buscarMejoresRutas(){
-		return buscador.buscar();
+		return buscador.buscar(this.getViajes());
 	}
 	
 	public void setFiltroBuscadorMejoresCM(Filtro filtro) {
