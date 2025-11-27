@@ -36,9 +36,13 @@ class ContainerReeferTestCase {
 	void testContainerReeferCreación() {
 		
 		assertEquals("azul1234567", container.getId());
+		assertTrue(container.EsRefeer());
 		assertEquals(26d, container.getAncho());
 		assertEquals(22d, container.getLargo());
 		assertEquals(20d, container.getAltura());
+		assertEquals(bl, container.getBl());
+		assertFalse(container.tieneBLEspecial());
+		assertEquals(20d, container.getKwPoreHora());
 	}
 	
 	@Test

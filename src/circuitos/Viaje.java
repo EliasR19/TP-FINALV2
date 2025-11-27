@@ -43,9 +43,9 @@ public class Viaje {
 		
 	}
 	
-	public List<Cronograma> getCronograma(){
-		return cronograma;
-	}
+//	public List<Cronograma> getCronograma(){
+//		return cronograma;
+//	}
 
 	public LocalDateTime getFecInicio() {
 		return fecInicio;
@@ -99,9 +99,9 @@ public class Viaje {
 		return circuito;
 	}
 
-	public void setCircuito(CircuitoMaritimo circuito) {
-		this.circuito = circuito;
-	}
+//	public void setCircuito(CircuitoMaritimo circuito) {
+//		this.circuito = circuito;
+//	}
 
 	public double costoViaje(Terminal origen, Terminal desntino) {
 		return circuito.precioTotalEntre(origen, desntino);

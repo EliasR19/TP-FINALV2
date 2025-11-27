@@ -270,7 +270,6 @@ public class Terminal {
 	
 	
 	
-	
 	//Fases
 	public void darOrdenDeDepart(Buque buque) {
 		buque.llegoAlDestino(this);
