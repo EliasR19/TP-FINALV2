@@ -101,9 +101,7 @@ public class Buque extends ObservadoB{
 		return carga.contains(container);
 	}
 
-	public int cargaTotal() {
-		return carga.size();
-	}
+	
 
 	public void iniciarFaseWorking() {
 		if (fase.estaEnFaseArrived()) {
@@ -112,12 +110,7 @@ public class Buque extends ObservadoB{
 	}
 
 
-	private void bajarCargas(List<Container> cargas) {
-		for (Container c : cargas) {
-			this.bajarCarga(c);
-		}
-		
-	}
+
 
 	public void partidaHabilitada(Terminal terminal) {
 		if (fase.estaEnFaseWorking()) {
@@ -140,11 +133,7 @@ public class Buque extends ObservadoB{
 		carga.remove(c);
 	}
 
-	public void recibirCargas(List<Container> cargas) {
-		for(Container c : cargas) {
-			this.subirCarga(c);
-		}
-	}
+	
 	
 	
 	public void llegoAlDestino(Terminal destino) {

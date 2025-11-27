@@ -46,6 +46,7 @@ class ServiciosContainersTestCase {
 		servicioLavado = new ServicioLavado();
 		servicioElectricidad = new ServicioElectricidad(inicio, fin);
 		servicioPesado = new ServicioPesado();
+		servicioDesconsolidado = new ServicioDesconsolidado();
 		//servicioDesconsolidado = new ServicioDesconsolidado(3000d);
 		
 
@@ -66,7 +67,14 @@ class ServiciosContainersTestCase {
 		refeer = new ContainerReefer("azul5555555", "Reefer", 7d, 25d, 3d, bl, 20d);
 		
 	}
-
+	
+	@Test
+	void testConstructorServicios() {
+		assertEquals("Desconsolidado", servicioDesconsolidado.getTipo());
+		assertEquals("Lavado", servicioLavado.getTipo());
+		assertEquals("Electricidad", servicioElectricidad.getTipo());
+	}
+	
 	@Test
 	void ServicioLavadoDosMedidas() {
 		
@@ -115,9 +123,11 @@ class ServiciosContainersTestCase {
 	
 	@Test
 	void ServicioDescolidado() {
-		//Ya lo tiene porque se le agrega en el cosnstructor cuando el bl es Especial
+		//Ya lo tiene porque se le agrega en el constructor cuando el bl es Especial
 		assertEquals(200d, dryEspecial.precioFinal());
 	}
+	
+	
 	
 
 

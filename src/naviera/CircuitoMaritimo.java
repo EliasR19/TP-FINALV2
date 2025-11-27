@@ -18,11 +18,12 @@ public class CircuitoMaritimo {
 		this.tramos = new ArrayList<Tramo>();
 	}
 
-	public Terminal getTerminalOrigen() {
+
+	public Terminal getOrigen() {
 		return origen;
 	}
-
-	public Terminal getTerminalDestino() {
+	
+	public Terminal getDestino() {
 		return destino;
 	}
 	
@@ -117,9 +118,6 @@ public class CircuitoMaritimo {
 		return tramos;
 	}
 	
-	public Terminal getOrigen() {
-		return origen;
-	}
 
 	
 	

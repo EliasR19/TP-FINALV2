@@ -45,6 +45,12 @@ public class CircuitoTest {
 	
 	
 	@Test
+	void testConstructorCircuitoMaritimo() {
+		assertEquals(t1, cA.getOrigen());
+		assertEquals(t3, cA.getDestino());
+	}
+	
+	@Test
 	public void testTerminales() {
 		assertEquals(Arrays.asList(t1,t2,t3), cA.terminalesDelCircuito());
 	}
