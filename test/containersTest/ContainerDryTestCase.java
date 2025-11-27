@@ -2,6 +2,9 @@ package containersTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -57,6 +60,24 @@ class ContainerDryTestCase {
 		
 		assertEquals(1000d, container.getPesoTotal());
 		
+	}
+	
+	@Test
+	void testGetCargaBL() {
+		List<Carga> cargas = new ArrayList<Carga>();
+		cargas.add(carga1);
+		cargas.add(carga2);
+		cargas.add(carga3);
+		assertEquals(bl1.getCarga(), cargas);
+	}
+	
+	@Test
+	void testGetCargaBLEspecial() {
+		List<Carga> cargas = new ArrayList<Carga>();
+		cargas.add(carga1);
+		cargas.add(carga2);
+		cargas.add(carga3);
+		assertTrue(blEspecial.getCarga().containsAll(cargas));
 	}
 	
 	@Test

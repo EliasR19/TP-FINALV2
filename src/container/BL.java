@@ -17,7 +17,12 @@ public class BL implements BillOfLading {
 	public double getPesoTotal() {
 		return cargas.stream().mapToDouble(c -> c.getPeso()).sum();
 	}
-
+	
+	@Override
+	public List<Carga> getCarga(){
+		return cargas;
+	}
+	
 	public boolean esEspecial() {
 		return false;
 	}

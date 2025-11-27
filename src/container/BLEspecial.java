@@ -11,6 +11,15 @@ public class BLEspecial implements BillOfLading {
 		blEspecial.add(bl);
 	}
 	
+	@Override
+	public List<Carga> getCarga(){
+		List<Carga> cargas = new ArrayList<Carga>();
+		for(BL bl : blEspecial) {
+			cargas.addAll(bl.getCarga());
+		}
+		return cargas;
+	}
+	
 	public double getPesoTotal() {
 		return blEspecial.stream().mapToDouble(bl -> bl.getPesoTotal()).sum();
 	}
