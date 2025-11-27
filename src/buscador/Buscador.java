@@ -3,17 +3,17 @@ package buscador;
 import java.util.ArrayList;
 import java.util.List;
 
-import buscadorMejorCircuito.BuscadorMejorC;
+import buscadorMejorCircuito.ConceptoBusquedaDestino;
 import buscadorMejorCircuito.MenorCantidadTerminales;
 import circuitos.*;
 import naviera.CircuitoMaritimo;
 import terminal.Terminal;
 	
-public class Buscador {
+public class Buscador  {
 	private Filtro filtro;
+	private ConceptoBusquedaDestino mejorCirMaritimo;
 	private List<Viaje> viajes;
 	private Terminal terminal;  // Terminal de Origen. Desde donde se busca.
-	private BuscadorMejorC mejorCirMaritimo;
 
 	
 	public Buscador(Terminal terminal) {
@@ -39,13 +39,15 @@ public class Buscador {
 		filtro = f;
 	}
 
-	public void setMejorBuscadorCirMaritimo(BuscadorMejorC mejorC) {
+	public void setMejorBuscadorCirMaritimo(ConceptoBusquedaDestino mejorC) {
 		mejorCirMaritimo = mejorC;
 	}
 
-	public CircuitoMaritimo buscarMejorCirMaritimo(Terminal origen, Terminal destino) {
-		return mejorCirMaritimo.buscarMejorC(origen, destino);
+	public CircuitoMaritimo buscarMejorCirMaritimo(Terminal origen,Terminal destino) {
+		return mejorCirMaritimo.buscarMejorC(viajes, origen, destino);
 	}
+
+
 
 	
 	

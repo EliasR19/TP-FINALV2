@@ -11,10 +11,7 @@ public class BL implements BillOfLading {
 		cargas = new ArrayList<>();
 	}
 
-
-	public void agregarCarga(Carga c) {
-		cargas.add(c);
-	}
+	
 	
 	@Override
 	public double getPesoTotal() {

@@ -14,7 +14,7 @@ import buque.Buque;
 import buscador.Buscador;
 import buscador.Filtro;
 import buscador.Operador;
-import buscadorMejorCircuito.BuscadorMejorC;
+import buscadorMejorCircuito.ConceptoBusquedaDestino;
 import buscadorMejorCircuito.MenorPrecioTotal;
 import buscadorMejorCircuito.MenorTiempoRecorrido;
 import circuitos.Viaje;
@@ -108,7 +108,7 @@ public class MenorPrecioTotalTest {
 		
 	@Test
 	public void MenorTiempoTotalTest() {
-		BuscadorMejorC mejorRuta = new MenorPrecioTotal();
+		ConceptoBusquedaDestino mejorRuta = new MenorPrecioTotal();
 		Argentina.setBuscadorCirMaritimo(mejorRuta);
 		assertEquals(circuitoB, Argentina.buscarMejorC(España));
 	}

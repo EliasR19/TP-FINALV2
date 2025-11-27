@@ -12,7 +12,7 @@ import ubicacionGeografica.*;
 import buque.Buque;
 import buscador.Buscador;
 import buscador.Filtro;
-import buscadorMejorCircuito.BuscadorMejorC;
+import buscadorMejorCircuito.ConceptoBusquedaDestino;
 import buscadorMejorCircuito.MenorCantidadTerminales;
 import circuitos.Viaje;
 import clientes.Cliente;
@@ -196,7 +196,7 @@ public class Terminal {
 	//PUNTO 3
 	
 		//Buscador Mejor CM [Unico]
-	public void setBuscadorCirMaritimo(BuscadorMejorC mejorC) {
+	public void setBuscadorCirMaritimo(ConceptoBusquedaDestino mejorC) {
 		buscador.setMejorBuscadorCirMaritimo(mejorC);
 	}
 	

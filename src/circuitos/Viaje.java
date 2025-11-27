@@ -106,4 +106,13 @@ public class Viaje {
 	public double costoViaje(Terminal origen, Terminal desntino) {
 		return circuito.precioTotalEntre(origen, desntino);
 	}
+	
+	
+	//Buscador
+	public int terminalesEntre(Terminal origen, Terminal destino) {
+		return circuito.terminalesEntre(origen, destino);
+	}
+	public double duracionEntre(Terminal origen, Terminal destino) {
+		return circuito.tiempoRecorridoEntre(origen, destino);
+	}
 }
